@@ -49,6 +49,22 @@ docker compose -f docker-compose.dev.yml up --build
 ======================================================================
 ```
 
+### How to Keep the Exact Same Ngrok Public URL Every Time (Permanent Static Domain):
+
+By default, ngrok generates a new random URL every time you restart Docker. To make the URL **permanent and never change**:
+
+1. Log into your ngrok account at **[https://dashboard.ngrok.com/domains](https://dashboard.ngrok.com/domains)**.
+2. Click **"New Domain"** or copy your **1 Free Static Domain** (e.g. `your-domain.ngrok-free.app`).
+3. Open [.env](file:///home/agami-l55/j-soft/Vast-Culture/.env) and set your domain:
+   ```bash
+   NGROK_DOMAIN=your-domain.ngrok-free.app
+   ```
+4. Start Docker again:
+   ```bash
+   docker compose -f docker-compose.dev.yml up
+   ```
+   Ngrok will now use that exact same permanent URL every single time!
+
 ### Inspecting Ngrok Traffic:
 - Open **`http://localhost:4041`** in your browser to inspect incoming HTTP requests, headers, and responses in real-time.
 

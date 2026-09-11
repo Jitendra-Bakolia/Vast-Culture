@@ -32,13 +32,20 @@ services:
     container_name: vast-culture-ngrok-dev
     image: ngrok/ngrok:latest
     restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c"]
     command:
-      - "http"
-      - "client:3000"
-      - "--log=stdout"
-      - "--log-format=logfmt"
+      - |
+        if [ -n "$$NGROK_DOMAIN" ]; then
+          TARGET_URL=$$(echo "$$NGROK_DOMAIN" | sed 's~^https\?://~~')
+          echo "Starting ngrok with permanent static domain: https://$${TARGET_URL}"
+          exec ngrok --config=/var/lib/ngrok/ngrok.yml http client:3000 --url="https://$${TARGET_URL}" --log=stdout --log-format=logfmt
+        else
+          echo "Starting ngrok with dynamic random domain (Tip: set NGROK_DOMAIN in .env for permanent static URL)"
+          exec ngrok --config=/var/lib/ngrok/ngrok.yml http client:3000 --log=stdout --log-format=logfmt
+        fi
     environment:
       - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN:-2S3ER37dEVIkIX99wU8bt29CXDS_44tLxwfiYBduQKMWpthDY}
+      - NGROK_DOMAIN=${NGROK_DOMAIN:-georgene-fameless-subflexuously.ngrok-free.dev}
     ports:
       - "${NGROK_WEB_PORT:-4041}:4040"
     depends_on:
