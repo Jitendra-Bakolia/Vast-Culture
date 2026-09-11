@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, ChevronRight, Heart, Sparkles, Phone, Mail, LogOut } from 'lucide-react';
+import logo from '../../src/img/logo.png';
 
 export const MobileNavDrawer = ({
   isOpen,
@@ -33,14 +34,23 @@ export const MobileNavDrawer = ({
                 onNavigateToHome();
                 onClose();
               }}
-              className="flex flex-col leading-none cursor-pointer"
+              className="flex items-center gap-2.5 leading-none cursor-pointer group select-none"
             >
-              <span className="font-cinzel-luxury text-[17px] tracking-[0.28em] font-semibold text-[#D8B26E]">
-                VAST
-              </span>
-              <span className="font-cinzel-luxury text-[11px] tracking-[0.42em] font-medium text-[#C49E59] -mt-0.5">
-                CULTURE
-              </span>
+              <div className="relative flex-shrink-0 flex items-center justify-center">
+                <img
+                  src={logo}
+                  alt="Vast Culture"
+                  className="w-8 h-8 object-contain drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)]"
+                />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="font-cinzel-luxury text-[16px] tracking-[0.24em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors">
+                  VAST
+                </span>
+                <span className="font-cinzel-luxury text-[9px] tracking-[0.42em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors mt-0.5">
+                  CULTURE
+                </span>
+              </div>
             </div>
             <button
               onClick={onClose}
@@ -66,6 +76,10 @@ export const MobileNavDrawer = ({
                     <img
                       src={currentUser.avatar}
                       alt={currentUser.name}
+                      loading="lazy"
+                      decoding="async"
+                      width="36"
+                      height="36"
                       className="w-9 h-9 rounded-full object-cover border border-[#D8B26E] shrink-0"
                     />
                   ) : (

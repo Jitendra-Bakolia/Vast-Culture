@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Instagram, Facebook, Youtube, Check, ChevronDown } from 'lucide-react';
+import logo from '../img/logo.png';
 
 const PinterestIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -44,14 +45,23 @@ export const Footer = ({
           <div className="lg:col-span-5 flex flex-col items-start lg:pr-6">
             <div 
               onClick={onNavigateToHome}
-              className="cursor-pointer mb-5 flex flex-col leading-none select-none"
+              className="cursor-pointer mb-5 flex items-center gap-3 leading-none select-none group"
             >
-              <span className="font-cinzel-luxury text-[20px] sm:text-[22px] tracking-[0.32em] font-semibold text-[#D8B26E]">
-                VAST
-              </span>
-              <span className="font-cinzel-luxury text-[13px] sm:text-[14px] tracking-[0.48em] font-medium text-[#C49E59] -mt-0.5">
-                CULTURE
-              </span>
+              <div className="relative flex-shrink-0 flex items-center justify-center">
+                <img
+                  src={logo}
+                  alt="Vast Culture"
+                  className="w-10 h-10 object-contain drop-shadow-[0_1px_8px_rgba(216,178,110,0.35)] group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="font-cinzel-luxury text-[20px] sm:text-[22px] tracking-[0.24em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors">
+                  VAST
+                </span>
+                <span className="font-cinzel-luxury text-[11px] sm:text-[12px] tracking-[0.44em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors mt-0.5">
+                  CULTURE
+                </span>
+              </div>
             </div>
 
             <div className="font-serif-luxury text-sm sm:text-base text-[#D4CDC3] leading-relaxed mb-6 sm:mb-7 italic space-y-0.5">

@@ -10,7 +10,7 @@ export const BestsellersSection = ({
   onViewAllCollections,
 }) => {
   return (
-    <section 
+    <section
       id="bestsellers"
       aria-label="Our Bestsellers"
       className="w-full bg-[#FAF7F2] text-[#1E1B18] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
@@ -21,7 +21,7 @@ export const BestsellersSection = ({
           <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-sans font-semibold uppercase text-[#9E7A32] block mb-1.5 sm:mb-2">
             Signature Statements
           </span>
-          <h2 
+          <h2
             id="bestsellers-heading"
             className="font-serif-luxury text-[#121110] font-normal tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
           >
@@ -42,19 +42,21 @@ export const BestsellersSection = ({
               <div
                 key={product.id}
                 id={`product-card-${product.id}`}
-                className="group flex flex-col bg-white border border-[#E8DFC8] overflow-hidden hover:border-[#D8B26E] hover:shadow-lg transition-all duration-300 relative"
+                className="group flex flex-col bg-white border border-[#E8DFC8] overflow-hidden relative luxury-card-hover"
               >
                 {/* Image Container */}
                 <div className="relative w-full aspect-[4/5] bg-[#F5EFEB] overflow-hidden cursor-pointer" onClick={() => onQuickView(product)}>
                   <img
                     src={product.image}
                     alt={product.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   />
 
                   {/* Badge */}
                   {product.tag && (
-                    <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-[#121110]/90 backdrop-blur-xs text-[#EBD5A0] text-[8px] sm:text-[9px] uppercase font-sans font-semibold tracking-wider px-1.5 sm:px-2 py-0.5 border border-[#D8B26E]/40">
+                    <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-[#121110]/95 backdrop-blur-xs text-[#EBD5A0] text-[8px] sm:text-[9px] uppercase font-sans font-semibold tracking-wider px-2 py-0.5 border border-[#D8B26E]/50 shadow-sm">
                       {product.tag}
                     </span>
                   )}
@@ -67,28 +69,27 @@ export const BestsellersSection = ({
                       onToggleWishlist(product);
                     }}
                     aria-label={`Add ${product.name} to wishlist`}
-                    className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer z-10 ${
-                      isWishlisted 
-                        ? 'bg-[#D8B26E] text-black shadow-md' 
-                        : 'bg-white/85 hover:bg-white text-[#4A453E] hover:text-[#121110]'
-                    }`}
+                    className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer z-10 tap-bounce ${isWishlisted
+                        ? 'bg-[#D8B26E] text-black shadow-md heart-pop-anim'
+                        : 'bg-white/90 hover:bg-white text-[#4A453E] hover:text-[#121110] hover:scale-110'
+                      }`}
                   >
-                    <Heart 
-                      size={14} 
-                      fill={isWishlisted ? '#0D0D0D' : 'none'} 
-                      strokeWidth={1.7} 
+                    <Heart
+                      size={14}
+                      fill={isWishlisted ? '#0D0D0D' : 'none'}
+                      strokeWidth={1.7}
                     />
                   </button>
 
                   {/* Quick Action Overlay on larger screens */}
-                  <div className="hidden md:flex absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center gap-2">
+                  <div className="hidden md:flex absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent items-center justify-center gap-2 card-quick-actions">
                     <button
                       id={`btn-quick-view-${product.id}`}
                       onClick={(e) => {
                         e.stopPropagation();
                         onQuickView(product);
                       }}
-                      className="px-3 py-1.5 bg-white/90 hover:bg-white text-[#121110] text-[11px] font-sans font-medium uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="px-3 py-1.5 bg-white/95 hover:bg-white text-[#121110] text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm hover:scale-105 cursor-pointer"
                     >
                       <Eye size={13} />
                       <span>Quick View</span>
@@ -99,7 +100,7 @@ export const BestsellersSection = ({
                         e.stopPropagation();
                         onAddToCart(product);
                       }}
-                      className="px-3 py-1.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-black text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer"
+                      className="px-3 py-1.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md hover:scale-105 cursor-pointer luxury-shimmer-btn"
                     >
                       <ShoppingBag size={13} />
                       <span>Add</span>
@@ -128,7 +129,7 @@ export const BestsellersSection = ({
                     </div>
 
                     {/* Product Name */}
-                    <h3 
+                    <h3
                       onClick={() => onQuickView(product)}
                       className="font-serif-luxury text-xs sm:text-sm md:text-base text-[#141210] font-normal leading-snug hover:text-[#9E7A32] transition-colors line-clamp-1 cursor-pointer"
                     >
@@ -178,10 +179,10 @@ export const BestsellersSection = ({
           <button
             id="btn-view-all-collections"
             onClick={onViewAllCollections}
-            className="px-8 sm:px-10 py-3 sm:py-3.5 bg-[#0D0D0D] hover:bg-[#D8B26E] text-[#FAF7F2] hover:text-black font-sans font-semibold text-[11px] sm:text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-md hover:shadow-lg inline-flex items-center gap-2 cursor-pointer"
+            className="px-8 sm:px-10 py-3 sm:py-3.5 bg-[#0D0D0D] hover:bg-[#D8B26E] text-[#FAF7F2] hover:text-black font-sans font-semibold text-[11px] sm:text-xs tracking-[0.2em] uppercase shadow-md inline-flex items-center gap-2 cursor-pointer luxury-shimmer-btn group"
           >
             <span>VIEW ALL PIECES</span>
-            <ArrowRight size={14} />
+            <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
           </button>
         </div>
       </div>

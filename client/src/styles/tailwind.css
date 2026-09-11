@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --font-cinzel: 'Cinzel', serif;
+    --font-playfair: 'Playfair Display', serif;
+    --color-gold: #D8B26E;
+    --color-gold-light: #EBD5A0;
+    --color-gold-dark: #A98239;
+    --color-cream: #FAF6EE;
+    --color-cream-dark: #14120F;
+    --color-black-luxury: #0A0908;
+    --color-black-surface: #14120F;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #0E0D0B;
+    color: #FAF6EE;
+    overflow-x: hidden;
+  }
+}

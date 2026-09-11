@@ -18,6 +18,8 @@ import { CheckoutModal } from './components/CheckoutModal';
 import { AuthModal } from './components/AuthModal';
 import { UserProfileModal } from './components/UserProfileModal';
 import { ShopPage } from './components/ShopPage';
+import { MobileBottomBar } from './components/MobileBottomBar';
+import { MainLoader } from './components/MainLoader';
 import { CheckCircle } from 'lucide-react';
 
 export default function App() {
@@ -31,6 +33,9 @@ export default function App() {
   });
 
   const [shopCategory, setShopCategory] = useState('All');
+
+  // Main App Initial Luxury Loader State
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   // Announcement bar visibility
   const [showAnnouncement, setShowAnnouncement] = useState(true);
@@ -252,7 +257,14 @@ export default function App() {
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="w-full min-h-screen bg-[#0D0D0D] text-[#1A1A1A] relative selection:bg-[#D8B26E] selection:text-black">
+    <div className="w-full min-h-screen bg-[#0E0D0B] text-[#FAF6EE] relative selection:bg-[#D8B26E] selection:text-black has-mobile-bottom-bar">
+      {/* 0. MAIN LUXURY PRELOADER & SPLASH SCREEN */}
+      <MainLoader
+        isLoading={isInitialLoading}
+        onFinish={() => setIsInitialLoading(false)}
+        minDuration={2200}
+      />
+
       {/* 1. TOP ANNOUNCEMENT BAR */}
       <AnnouncementBar
         visible={showAnnouncement}
@@ -332,7 +344,7 @@ export default function App() {
       {toastMessage && (
         <div 
           id="toast-notification"
-          className="fixed bottom-6 right-6 z-50 bg-[#141210] border border-[#D8B26E] text-[#FAF7F2] px-4 py-3 shadow-2xl flex items-center gap-3 text-xs font-sans animate-in fade-in slide-in-from-bottom-3 duration-200 rounded-xs"
+          className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-50 bg-[#141210]/95 backdrop-blur-md border border-[#D8B26E] text-[#FAF7F2] px-4 py-3 shadow-2xl flex items-center gap-3 text-xs font-sans rounded-xs toast-animated-entrance badge-glowing"
         >
           <CheckCircle size={16} className="text-[#D8B26E]" />
           <span>{toastMessage}</span>
@@ -440,6 +452,26 @@ export default function App() {
           setCartItems([]);
           showToast('Order confirmed! A confirmation SMS and email have been dispatched.');
         }}
+      />
+
+      {/* 5. NATIVE MOBILE APP BOTTOM NAVIGATION BAR */}
+      <MobileBottomBar
+        currentPage={currentPage}
+        cartCount={totalCartCount}
+        wishlistCount={wishlistIds.length}
+        currentUser={currentUser}
+        isWishlistOpen={isWishlistOpen}
+        isCartOpen={isCartOpen}
+        onNavigateToHome={handleNavigateToHome}
+        onNavigateToShop={handleNavigateToShop}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenAuth={(mode = 'login') => {
+          setAuthIntent('general');
+          setAuthInitialMode(mode);
+          setIsAuthOpen(true);
+        }}
+        onOpenProfile={() => setIsProfileOpen(true)}
       />
     </div>
   );

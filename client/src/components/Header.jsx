@@ -21,7 +21,7 @@ export const Header = ({
   return (
     <header
       id="main-header"
-      className="w-full bg-[#0D0D0D] border-b border-[#23201B] text-[#FAF7F2] sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 transition-all"
+      className="w-full bg-[#0D0D0D]/90 backdrop-blur-md border-b border-[#23201B]/80 text-[#FAF7F2] sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 transition-all"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Mobile Left: Hamburger Menu Button */}
@@ -36,46 +36,49 @@ export const Header = ({
           </button>
         </div>
 
-        {/* Brand Logo (Clicking logo always redirects to Home Page) */}
-        {/* <div 
-          id="brand-logo"
-          onClick={onNavigateToHome}
-          className="cursor-pointer group flex flex-col leading-none select-none text-center md:text-left"
-        >
-          <span className="font-cinzel-luxury text-[17px] sm:text-[19px] md:text-[21px] tracking-[0.32em] font-semibold text-[#D8B26E] group-hover:text-[#EBD5A0] transition-colors">
-            VAST
-          </span>
-          <span className="font-cinzel-luxury text-[11px] sm:text-[12px] md:text-[13px] tracking-[0.48em] font-medium text-[#C49E59] group-hover:text-[#EBD5A0] transition-colors -mt-0.5">
-            CULTURE
-          </span>
-        </div> */}
-
+        {/* Brand Logo Lockup: Authentic Maison Emblem + Sculpted Typography */}
         <div
           id="brand-logo"
           onClick={onNavigateToHome}
-          className="cursor-pointer group flex items-center select-none"
+          className="cursor-pointer group flex items-center gap-2.5 sm:gap-3 select-none py-0.5"
+          role="button"
+          tabIndex={0}
+          aria-label="Vast Culture Home"
         >
-          <img
-            src={logo}
-            alt="Vast Culture"
-            className="
-      w-[75px] sm:w-[85px] md:w-[95px]
-      h-auto
-      object-contain
-      brightness-90
-      contrast-125
-      saturate-125
-      transition-all
-      duration-300
-      group-hover:brightness-105
-      group-hover:contrast-125
-      group-hover:scale-105
-    "
-          />
+          {/* Authentic Brand Emblem with Golden Aura */}
+          <div className="relative flex-shrink-0 flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full bg-[#D8B26E]/20 blur-sm scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 pointer-events-none" />
+            <img
+              src={logo}
+              alt="Vast Culture"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="
+                relative z-10
+                w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11
+                object-contain
+                drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)]
+                group-hover:drop-shadow-[0_2px_12px_rgba(216,178,110,0.6)]
+                group-hover:scale-105
+                transition-all duration-300
+              "
+            />
+          </div>
+
+          {/* Haute Joaillerie Typography */}
+          <div className="flex flex-col leading-none">
+            <span className="font-cinzel-luxury text-[15px] sm:text-[17px] md:text-[19px] tracking-[0.24em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors duration-300">
+              VAST
+            </span>
+            <span className="font-cinzel-luxury text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.44em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors duration-300 mt-0.5">
+              CULTURE
+            </span>
+          </div>
         </div>
 
         {/* Center: Desktop Navigation Links */}
-        <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center space-x-7 lg:space-x-9">
+        <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center space-x-6 lg:space-x-8">
           {/* Home Tab */}
           <button
             id="nav-link-home"
@@ -91,7 +94,7 @@ export const Header = ({
           {/* Shop / All Collections Tab (Redirects to dedicated Shop Page) */}
           <button
             id="nav-link-shop"
-            onClick={() => onNavigateToShop()}
+            onClick={() => onNavigateToShop('All')}
             className={`text-xs lg:text-[13px] tracking-[0.14em] uppercase font-sans transition-colors relative py-1 cursor-pointer ${currentPage === 'shop'
               ? 'text-[#D8B26E] font-semibold after:w-full'
               : 'text-[#E5DFD5] hover:text-[#D8B26E]'
@@ -101,15 +104,6 @@ export const Header = ({
             <span className="bg-[#D8B26E]/20 text-[#EBD5A0] text-[9px] px-1.5 py-0.2 rounded-xs border border-[#D8B26E]/40">
               Vault
             </span>
-          </button>
-
-          {/* Collections Shortcut */}
-          <button
-            id="nav-link-collections"
-            onClick={() => onNavigateToShop()}
-            className="text-xs lg:text-[13px] tracking-[0.14em] uppercase font-sans text-[#E5DFD5] hover:text-[#D8B26E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
-          >
-            Collections
           </button>
 
           {/* About Us */}
@@ -161,7 +155,7 @@ export const Header = ({
           >
             <Heart size={19} strokeWidth={1.5} />
             {wishlistCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-[#D8B26E] text-[#0D0D0D] font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-0.5 -right-0.5 bg-[#D8B26E] text-[#0D0D0D] font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center badge-bounce-anim">
                 {wishlistCount}
               </span>
             )}
@@ -179,6 +173,10 @@ export const Header = ({
                 <img
                   src={currentUser.avatar}
                   alt={currentUser.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="24"
+                  height="24"
                   className="w-6 h-6 rounded-full object-cover border border-[#D8B26E]"
                 />
               ) : (
@@ -186,7 +184,7 @@ export const Header = ({
                   {currentUser.name.charAt(0)}
                 </div>
               )}
-              <span className="hidden lg:inline-block text-xs font-sans font-medium text-[#EBD5A0] max-w-[90px] truncate">
+              <span className="text-xs font-sans max-w-[85px] truncate hidden xl:inline">
                 {currentUser.name.split(' ')[0]}
               </span>
             </button>
@@ -195,7 +193,7 @@ export const Header = ({
               id="btn-account-login"
               onClick={() => onOpenAuth('login')}
               aria-label="Sign In / Register"
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xs border border-[#3D3528] bg-[#141210] hover:border-[#D8B26E] text-[#EBD5A0] hover:text-white transition-all text-xs font-sans uppercase tracking-wider cursor-pointer"
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-xs border border-[#3D3528] bg-[#141210] text-[#EBD5A0] text-[11px] font-sans uppercase tracking-wider cursor-pointer luxury-outline-btn"
             >
               <UserIcon size={14} className="text-[#D8B26E]" />
               <span>Sign In</span>
@@ -211,7 +209,7 @@ export const Header = ({
           >
             <ShoppingBag size={19} strokeWidth={1.5} />
             {cartCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-[#D8B26E] text-[#0D0D0D] font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-0.5 -right-0.5 bg-[#D8B26E] text-[#0D0D0D] font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center badge-bounce-anim">
                 {cartCount}
               </span>
             )}

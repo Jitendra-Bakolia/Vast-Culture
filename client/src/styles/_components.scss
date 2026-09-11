@@ -1,0 +1,110 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+// ==========================================
+// Typography Classes
+// ==========================================
+.font-serif-luxury {
+  font-family: $font-serif;
+}
+
+.font-cinzel-luxury {
+  font-family: $font-cinzel;
+}
+
+.font-playfair-luxury {
+  font-family: $font-playfair;
+}
+
+.font-sans-luxury {
+  font-family: $font-sans;
+}
+
+// ==========================================
+// Shipping Progress Bar (Zero Inline Styles)
+// ==========================================
+.shipping-progress-track {
+  width: 100%;
+  height: 6px;
+  background-color: #2C251C;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.shipping-progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, $color-gold, $color-gold-light);
+  border-radius: 9999px;
+  transition: width $transition-smooth;
+}
+
+// Generate width steps 0% to 100% in 5% increments
+@for $i from 0 through 20 {
+  .progress-#{$i * 5} {
+    width: #{$i * 5%};
+  }
+}
+
+// ==========================================
+// Presentation Canvas Scale Classes (Zero Inline Styles)
+// ==========================================
+.zoom-scale-100 {
+  transform: scale(1);
+  transform-origin: top center;
+}
+.zoom-scale-90 {
+  transform: scale(0.9);
+  transform-origin: top center;
+}
+.zoom-scale-85 {
+  transform: scale(0.85);
+  transform-origin: top center;
+}
+.zoom-scale-80 {
+  transform: scale(0.8);
+  transform-origin: top center;
+}
+.zoom-scale-75 {
+  transform: scale(0.75);
+  transform-origin: top center;
+}
+.zoom-scale-65 {
+  transform: scale(0.65);
+  transform-origin: top center;
+}
+.zoom-scale-50 {
+  transform: scale(0.5);
+  transform-origin: top center;
+}
+
+// ==========================================
+// Custom Luxury Scrollbar
+// ==========================================
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-black-surface;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3A352E;
+  border-radius: 3px;
+
+  &:hover {
+    background: $color-gold;
+  }
+}
+
+// ==========================================
+// Device Frame Shadows
+// ==========================================
+.mobile-frame-shadow {
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(216, 178, 110, 0.25);
+}
+
+.desktop-frame-shadow {
+  box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(216, 178, 110, 0.2);
+}

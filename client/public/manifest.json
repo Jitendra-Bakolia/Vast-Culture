@@ -1,0 +1,22 @@
+{
+  "name": "VAST CULTURE — Luxury Jewellery",
+  "short_name": "Vast Culture",
+  "description": "Artisan-crafted 18k gold vermeil, authentic freshwater pearls, and modern statement jewellery.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#0D0D0D",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

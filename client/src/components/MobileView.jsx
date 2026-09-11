@@ -27,7 +27,7 @@ export const MobileView = ({
   onNavigateHome,
 }) => {
   return (
-    <div id="vast-culture-mobile-app" className="w-full bg-[#0D0D0D] min-h-screen text-[#1A1A1A]">
+    <div id="vast-culture-mobile-app" className="w-full bg-[#0E0D0B] min-h-screen text-[#FAF6EE]">
       {/* 1. TOP ANNOUNCEMENT BAR */}
       <AnnouncementBar
         visible={showAnnouncement}

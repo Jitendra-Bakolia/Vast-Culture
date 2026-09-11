@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Heart, User, ShoppingBag } from 'lucide-react';
+import logo from '../img/logo.png';
 
 export const DesktopHeader = ({
   cartCount,
@@ -19,25 +20,37 @@ export const DesktopHeader = ({
       className="w-full bg-[#0D0D0D] border-b border-[#23201B] text-[#FAF7F2] sticky top-0 z-40 px-8 py-4 transition-all"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Left: Brand Logo */}
+        {/* Left: Brand Logo Lockup */}
         <div 
           id="brand-logo-desktop"
           onClick={() => onNavigate?.('hero')}
-          className="cursor-pointer group flex flex-col leading-none"
+          className="cursor-pointer group flex items-center gap-3 select-none py-0.5"
+          role="button"
+          tabIndex={0}
+          aria-label="Vast Culture Home"
         >
-          <span className="font-cinzel-luxury text-[20px] tracking-[0.32em] font-semibold text-[#D8B26E] group-hover:text-[#EBD5A0] transition-colors">
-            VAST
-          </span>
-          <span className="font-cinzel-luxury text-[13px] tracking-[0.48em] font-medium text-[#C49E59] group-hover:text-[#EBD5A0] transition-colors -mt-0.5">
-            CULTURE
-          </span>
+          <div className="relative flex-shrink-0 flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full bg-[#D8B26E]/20 blur-sm scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-none" />
+            <img
+              src={logo}
+              alt="Vast Culture"
+              className="relative z-10 w-10 h-10 object-contain drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)] group-hover:scale-105 transition-all duration-300"
+            />
+          </div>
+          <div className="flex flex-col leading-none">
+            <span className="font-cinzel-luxury text-[19px] tracking-[0.24em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors duration-300">
+              VAST
+            </span>
+            <span className="font-cinzel-luxury text-[11px] tracking-[0.44em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors duration-300 mt-0.5">
+              CULTURE
+            </span>
+          </div>
         </div>
 
         {/* Center: Navigation Links */}
         <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center space-x-9">
           {[
             { label: 'Home', action: () => onNavigate?.('hero') },
-            { label: 'Collections', action: onShopClick || (() => onNavigate?.('bestsellers')) },
             { label: 'Shop', action: onShopClick || (() => onNavigate?.('bestsellers')) },
             { label: 'About Us', action: () => onNavigate?.('our-story') },
             { label: 'Contact', action: () => onNavigate?.('footer') },
@@ -90,6 +103,10 @@ export const DesktopHeader = ({
                 <img
                   src={currentUser.avatar}
                   alt={currentUser.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="20"
+                  height="20"
                   className="w-5 h-5 rounded-full object-cover border border-[#D8B26E]"
                 />
               ) : (

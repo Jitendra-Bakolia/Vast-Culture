@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, ShieldCheck, Tag } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, ShieldCheck, Tag, Lock, Truck, CheckCircle2 } from 'lucide-react';
 
 export const CartDrawer = ({
   isOpen,
@@ -27,6 +27,8 @@ export const CartDrawer = ({
   const shippingFee = subtotal >= freeShippingThreshold || items.length === 0 ? 0 : 99;
   const finalTotal = subtotal - discount + shippingFee;
 
+  const progressStep = Math.min(100, Math.max(0, Math.round(progressToFreeShipping / 5) * 5));
+
   const handleApplyCoupon = (e) => {
     e.preventDefault();
     if (couponCode.toUpperCase().trim() === 'VAST10') {
@@ -39,11 +41,11 @@ export const CartDrawer = ({
   };
 
   return (
-    <div 
+    <div
       id="cart-drawer-backdrop"
       className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex justify-end transition-opacity duration-300"
     >
-      <div 
+      <div
         id="cart-drawer-panel"
         className="w-full max-w-md bg-[#FAF7F2] h-full flex flex-col shadow-2xl text-[#1E1B18] border-l border-[#E2D8C6] animate-in slide-in-from-right duration-300"
       >
@@ -66,22 +68,24 @@ export const CartDrawer = ({
         </div>
 
         {/* Free Shipping Progress Bar */}
-        <div className="px-5 py-3 bg-[#F2EAE0] border-b border-[#E8DFC8]">
-          <p className="text-xs font-sans text-[#4A4337] mb-1.5 font-medium">
+        <div className="px-5 py-3.5 bg-gradient-to-r from-[#FAF7F2] via-[#F4EDE2] to-[#FAF7F2] border-b border-[#E8DFC8]">
+          <div className="flex items-center justify-between text-xs font-sans mb-1.5">
             {subtotal >= freeShippingThreshold ? (
-              <span className="text-[#2F663B] font-semibold flex items-center gap-1">
-                ✓ You unlocked FREE Express Shipping!
+              <span className="text-[#2F663B] font-semibold flex items-center gap-1.5">
+                <CheckCircle2 size={13} className="text-[#2F663B]" />
+                You unlocked FREE Express Shipping!
               </span>
             ) : (
-              <span>
-                Add <strong className="text-[#9E7A32]">₹{remainingForFreeShipping}</strong> more to unlock <strong>FREE Shipping</strong>
+              <span className="text-[#4A4337] flex items-center gap-1.5 font-medium">
+                <Truck size={13} className="text-[#9E7A32]" />
+                <span>Add <strong className="text-[#9E7A32] font-semibold">₹{remainingForFreeShipping}</strong> more for <strong>FREE Shipping</strong></span>
               </span>
             )}
-          </p>
-          <div className="w-full h-1.5 bg-[#E0D4C0] rounded-full overflow-hidden">
+            <span className="text-[11px] font-sans font-semibold text-[#9E7A32]">{progressStep}%</span>
+          </div>
+          <div className="shipping-progress-track">
             <div
-              className="h-full bg-[#D8B26E] transition-all duration-500 rounded-full"
-              style={{ width: `${progressToFreeShipping}%` }}
+              className={`shipping-progress-bar progress-${progressStep} progress-bar-shimmer`}
             />
           </div>
         </div>
@@ -113,6 +117,10 @@ export const CartDrawer = ({
                 <img
                   src={item.product.image}
                   alt={item.product.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="80"
+                  height="80"
                   className="w-20 h-20 object-cover bg-[#F5EFEB] shrink-0"
                 />
 
@@ -222,10 +230,10 @@ export const CartDrawer = ({
             <button
               id="btn-cart-checkout"
               onClick={onCheckout}
-              className="w-full py-3.5 bg-[#0D0D0D] hover:bg-[#D8B26E] hover:text-black text-[#FAF7F2] font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-md cursor-pointer"
+              className="w-full py-3.5 bg-[#0D0D0D] hover:bg-[#D8B26E] hover:text-black text-[#FAF7F2] font-sans font-semibold text-xs tracking-[0.2em] uppercase flex items-center justify-center gap-2 cursor-pointer luxury-shimmer-btn group"
             >
-              <span>PROCEED TO CHECKOUT</span>
-              <ArrowRight size={14} />
+              <Lock size={14} className="text-[#D8B26E] group-hover:text-black group-hover:scale-110 transition-transform duration-300" />
+              <span>PROCEED TO SECURE CHECKOUT</span>
             </button>
 
             <div className="flex items-center justify-center gap-1.5 text-[10px] text-[#7A7163] font-sans text-center">

@@ -10,7 +10,7 @@ export const MobileHero = ({
   const currentSlide = HERO_SLIDES[activeSlideIndex] || HERO_SLIDES[0];
 
   return (
-    <section 
+    <section
       id="mobile-hero"
       aria-label="Mobile Hero"
       className="relative w-full bg-[#0E0D0C] overflow-hidden text-white pt-10 pb-8 px-5 flex flex-col justify-between"
@@ -21,6 +21,9 @@ export const MobileHero = ({
           id="mobile-hero-bg"
           src={currentSlide.image}
           alt="Luxury jewellery lifestyle"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-[#0E0D0C]" />
@@ -29,9 +32,9 @@ export const MobileHero = ({
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-start pt-2 mb-6">
         {/* Label Badge */}
-        <div 
+        <div
           id="mobile-hero-badge"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#1F1C18]/90 border border-[#D8B26E]/40 mb-4"
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1F1C18]/90 border border-[#D8B26E]/50 mb-4 badge-glowing"
         >
           <Sparkles size={11} className="text-[#D8B26E]" />
           <span className="text-[10px] tracking-[0.2em] uppercase font-sans font-medium text-[#EBD5A0]">
@@ -40,7 +43,7 @@ export const MobileHero = ({
         </div>
 
         {/* Headline */}
-        <h1 
+        <h1
           id="mobile-hero-headline"
           className="font-serif-luxury text-3xl sm:text-4xl font-normal leading-[1.12] tracking-tight mb-3 text-white"
         >
@@ -51,7 +54,7 @@ export const MobileHero = ({
         </h1>
 
         {/* Short Description */}
-        <p 
+        <p
           id="mobile-hero-description"
           className="text-[#D8D1C7] text-xs sm:text-sm leading-relaxed mb-6 font-sans font-light"
         >
@@ -63,7 +66,7 @@ export const MobileHero = ({
           <button
             id="btn-mobile-hero-shop"
             onClick={onShopClick}
-            className="w-full py-3.5 bg-[#D8B26E] active:bg-[#C49E59] text-[#0D0D0D] font-sans font-semibold text-xs tracking-[0.16em] uppercase flex items-center justify-center gap-2 shadow-md cursor-pointer"
+            className="w-full py-3.5 bg-[#D8B26E] text-[#0D0D0D] font-sans font-semibold text-xs tracking-[0.16em] uppercase flex items-center justify-center gap-2 cursor-pointer luxury-shimmer-btn"
           >
             <span>SHOP COLLECTION</span>
             <ArrowRight size={14} />
@@ -72,7 +75,7 @@ export const MobileHero = ({
           <button
             id="btn-mobile-hero-explore"
             onClick={onExploreClick}
-            className="w-full py-3 bg-transparent active:bg-white/10 text-[#FAF7F2] border border-[#FAF7F2]/40 font-sans font-medium text-xs tracking-[0.16em] uppercase text-center cursor-pointer"
+            className="w-full py-3 bg-transparent text-[#FAF7F2] border border-[#FAF7F2]/40 font-sans font-medium text-xs tracking-[0.16em] uppercase text-center cursor-pointer luxury-outline-btn"
           >
             EXPLORE VAST CULTURE
           </button>
@@ -80,19 +83,14 @@ export const MobileHero = ({
       </div>
 
       {/* 3 Small Image Thumbnails Horizontally Underneath */}
-      <div className="relative z-10 w-full pt-2 border-t border-white/15">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[9px] uppercase tracking-[0.18em] text-[#C4B7A6] font-sans">
-            Curated Showcase
-          </span>
-          <span className="text-[9px] text-[#D8B26E] font-sans tracking-widest">
-            0{activeSlideIndex + 1} / 03
-          </span>
+      <div
+        id="mobile-hero-thumbnails"
+        className="relative z-10 w-full pt-4 border-t border-white/10"
+      >
+        <div className="text-[10px] uppercase tracking-[0.2em] text-[#C4B7A6] font-sans mb-2">
+          Curated Sets
         </div>
-        <div 
-          id="mobile-hero-thumbnails"
-          className="grid grid-cols-3 gap-2.5"
-        >
+        <div className="grid grid-cols-3 gap-2.5">
           {HERO_THUMBNAILS.map((thumb, index) => {
             const isActive = activeSlideIndex === index;
             return (
@@ -101,15 +99,16 @@ export const MobileHero = ({
                 id={`mobile-thumb-${index + 1}`}
                 onClick={() => setActiveSlideIndex(index)}
                 aria-label={`View set ${index + 1}`}
-                className={`relative h-18 rounded-xs overflow-hidden transition-all duration-200 cursor-pointer ${
-                  isActive 
-                    ? 'ring-2 ring-[#D8B26E] opacity-100 scale-100' 
+                className={`relative h-18 rounded-xs overflow-hidden transition-all duration-200 cursor-pointer ${isActive
+                    ? 'ring-2 ring-[#D8B26E] opacity-100 scale-100 badge-glowing'
                     : 'opacity-60 ring-1 ring-white/20'
-                }`}
+                  }`}
               >
                 <img
                   src={thumb.image}
                   alt={thumb.label}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

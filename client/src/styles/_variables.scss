@@ -1,0 +1,51 @@
+// ==========================================
+// Vast Culture — Luxury Design Tokens (SCSS)
+// ==========================================
+
+// Color Palette
+$color-gold: #D8B26E;
+$color-gold-light: #EBD5A0;
+$color-gold-dark: #A98239;
+$color-gold-glow: rgba(216, 178, 110, 0.35);
+
+$color-black-luxury: #0A0908;
+$color-black-obsidian: #0E0D0B;
+$color-black-surface: #14120F;
+$color-black-elevated: #181512;
+$color-black-border: #262018;
+
+$color-cream: #FAF6EE;
+$color-cream-dark: #14120F;
+$color-parchment: #C5BCAD;
+$color-parchment-border: #2E271D;
+
+$color-text-dark: #FAF6EE;
+$color-text-muted: #A89F91;
+$color-text-light: #FAF6EE;
+
+// Typography Stacks
+$font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+$font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-cinzel: 'Cinzel', Georgia, serif;
+$font-playfair: 'Playfair Display', Georgia, serif;
+
+// Breakpoints
+$bp-xs: 375px;
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1536px;
+
+// Z-Index Scale
+$z-dropdown: 30;
+$z-sticky-header: 40;
+$z-mobile-bar: 45;
+$z-modal-backdrop: 50;
+$z-modal-content: 55;
+$z-toast: 60;
+
+// Transitions & Timing
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-smooth: 500ms cubic-bezier(0.16, 1, 0.3, 1);

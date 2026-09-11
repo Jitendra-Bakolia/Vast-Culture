@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Minus, ArrowRight, Instagram, Facebook, Youtube, Check } from 'lucide-react';
+import logo from '../img/logo.png';
 
 const PinterestIcon = ({ size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -33,14 +34,23 @@ export const MobileFooter = ({ onShopClick }) => {
       aria-label="Mobile Footer"
       className="w-full bg-[#0D0D0D] border-t border-[#23201B] text-[#FAF7F2] pt-12 pb-8 px-5"
     >
-      {/* Centered Brand Logo */}
-      <div className="flex flex-col items-center justify-center mb-3">
-        <span className="font-cinzel-luxury text-[19px] tracking-[0.32em] font-semibold text-[#D8B26E]">
-          VAST
-        </span>
-        <span className="font-cinzel-luxury text-[12px] tracking-[0.48em] font-medium text-[#C49E59] -mt-0.5">
-          CULTURE
-        </span>
+      {/* Centered Brand Logo Lockup */}
+      <div className="flex items-center justify-center gap-2.5 mb-4 select-none">
+        <div className="relative flex-shrink-0 flex items-center justify-center">
+          <img
+            src={logo}
+            alt="Vast Culture"
+            className="w-9 h-9 object-contain drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)]"
+          />
+        </div>
+        <div className="flex flex-col leading-none">
+          <span className="font-cinzel-luxury text-[18px] tracking-[0.24em] font-semibold text-[#F5E8D0]">
+            VAST
+          </span>
+          <span className="font-cinzel-luxury text-[10px] tracking-[0.42em] font-medium text-[#D8B26E] mt-0.5">
+            CULTURE
+          </span>
+        </div>
       </div>
 
       {/* Short Brand Statement */}

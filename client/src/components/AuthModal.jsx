@@ -164,14 +164,14 @@ export const AuthModal = ({
     >
       <div 
         id="auth-modal-container"
-        className="bg-[#FAF7F2] border border-[#D8CEBA] w-full max-w-md max-h-[92vh] overflow-y-auto shadow-2xl relative p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200"
+        className="bg-[#12100E] border border-[#2E271D] w-full max-w-md max-h-[92vh] overflow-y-auto shadow-2xl relative p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200 text-[#FAF6EE]"
       >
         {/* Close Button */}
         <button
           id="btn-close-auth"
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-4 right-4 text-[#6B6152] hover:text-black p-1.5 rounded-full hover:bg-[#EBE2D0] transition-colors cursor-pointer"
+          className="absolute top-4 right-4 text-[#A89F91] hover:text-[#FAF6EE] p-1.5 rounded-full hover:bg-[#1E1A15] transition-colors cursor-pointer"
         >
           <X size={19} />
         </button>
@@ -180,11 +180,11 @@ export const AuthModal = ({
         {(intent === 'checkout' || intent === 'buy-now') && (
           <div 
             id="auth-intent-banner"
-            className="mb-5 p-3 bg-[#FAF2E1] border border-[#D8B26E] text-[#634816] rounded-xs flex items-start gap-2.5 shadow-xs"
+            className="mb-5 p-3 bg-[#1C1813] border border-[#D8B26E]/40 text-[#E5C378] rounded-xs flex items-start gap-2.5 shadow-xs"
           >
-            <ShieldCheck size={18} className="text-[#B88E3E] shrink-0 mt-0.5" />
-            <div className="text-xs font-sans leading-relaxed">
-              <strong className="font-semibold text-[#3D2D0C] block">
+            <ShieldCheck size={18} className="text-[#D8B26E] shrink-0 mt-0.5" />
+            <div className="text-xs font-sans leading-relaxed text-[#FAF6EE]">
+              <strong className="font-semibold text-[#E5C378] block">
                 {intent === 'checkout' ? 'Sign In Required for Checkout' : 'Sign In Required to Buy'}
               </strong>
               Please sign in or create an account to securely finalize your luxury jewellery order.
@@ -198,17 +198,17 @@ export const AuthModal = ({
             <span className="font-cinzel-luxury text-[17px] sm:text-[19px] tracking-[0.32em] font-semibold text-[#D8B26E]">
               VAST
             </span>
-            <span className="font-cinzel-luxury text-[11px] sm:text-[12px] tracking-[0.48em] font-medium text-[#A08044] -mt-0.5">
+            <span className="font-cinzel-luxury text-[11px] sm:text-[12px] tracking-[0.48em] font-medium text-[#C49E59] -mt-0.5">
               CULTURE
             </span>
           </div>
 
-          <h2 className="font-serif-luxury text-2xl sm:text-3xl text-[#141210] font-normal">
+          <h2 className="font-serif-luxury text-2xl sm:text-3xl text-[#FAF6EE] font-normal">
             {mode === 'login' && 'Welcome Back'}
             {mode === 'register' && 'Create Your Account'}
             {mode === 'forgot' && 'Reset Password'}
           </h2>
-          <p className="text-xs text-[#706759] font-sans mt-1">
+          <p className="text-xs text-[#A89F91] font-sans mt-1">
             {mode === 'login' && 'Access your private vault, orders & curated wishlist'}
             {mode === 'register' && 'Join the Vast Society for exclusive access & luxury rewards'}
             {mode === 'forgot' && 'Enter your email to receive recovery instructions'}
@@ -217,7 +217,7 @@ export const AuthModal = ({
 
         {/* Tabs: Sign In / Register (hidden during forgot password) */}
         {mode !== 'forgot' && (
-          <div className="grid grid-cols-2 p-1 bg-[#EFE7D8] border border-[#DCD1BC] rounded-xs mb-5 text-xs font-sans font-medium">
+          <div className="grid grid-cols-2 p-1 bg-[#181512] border border-[#2C251C] rounded-xs mb-5 text-xs font-sans font-medium">
             <button
               id="tab-auth-login"
               type="button"
@@ -227,8 +227,8 @@ export const AuthModal = ({
               }}
               className={`py-2 text-center transition-all rounded-xs cursor-pointer ${
                 mode === 'login'
-                  ? 'bg-[#0D0D0D] text-[#FAF7F2] font-semibold shadow-xs'
-                  : 'text-[#5C5447] hover:text-black'
+                  ? 'bg-[#D8B26E] text-black font-semibold shadow-xs'
+                  : 'text-[#A89F91] hover:text-[#FAF6EE]'
               }`}
             >
               Sign In
@@ -242,8 +242,8 @@ export const AuthModal = ({
               }}
               className={`py-2 text-center transition-all rounded-xs cursor-pointer ${
                 mode === 'register'
-                  ? 'bg-[#0D0D0D] text-[#FAF7F2] font-semibold shadow-xs'
-                  : 'text-[#5C5447] hover:text-black'
+                  ? 'bg-[#D8B26E] text-black font-semibold shadow-xs'
+                  : 'text-[#A89F91] hover:text-[#FAF6EE]'
               }`}
             >
               Create Account
@@ -253,12 +253,12 @@ export const AuthModal = ({
 
         {/* Error / Success Notifications */}
         {errorMessage && (
-          <div className="mb-4 p-2.5 bg-[#FDEDEC] border border-[#E6B0AA] text-[#922B21] text-xs font-sans rounded-xs">
+          <div className="mb-4 p-2.5 bg-[#2C1818] border border-[#7A2E2E] text-[#F87171] text-xs font-sans rounded-xs">
             {errorMessage}
           </div>
         )}
         {successMessage && (
-          <div className="mb-4 p-2.5 bg-[#E8F8F5] border border-[#A2D9CE] text-[#117A65] text-xs font-sans rounded-xs flex items-center gap-2">
+          <div className="mb-4 p-2.5 bg-[#14261B] border border-[#235E35] text-[#4ADE80] text-xs font-sans rounded-xs flex items-center gap-2">
             <CheckCircle2 size={15} />
             <span>{successMessage}</span>
           </div>
@@ -273,7 +273,7 @@ export const AuthModal = ({
               type="button"
               disabled={loadingProvider !== null}
               onClick={() => handleSocialLogin('google')}
-              className="w-full py-2.5 px-4 bg-white border border-[#D5C9B7] hover:border-[#1A1A1A] text-[#2C2720] text-xs font-sans font-medium rounded-xs flex items-center justify-center gap-3 transition-colors shadow-xs hover:bg-[#FAF7F2] cursor-pointer"
+              className="w-full py-2.5 px-4 bg-[#181512] border border-[#2C251C] hover:border-[#D8B26E]/60 text-[#FAF6EE] text-xs font-sans font-medium rounded-xs flex items-center justify-center gap-3 transition-colors shadow-xs hover:bg-[#1E1A15] cursor-pointer"
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path
@@ -316,7 +316,7 @@ export const AuthModal = ({
               type="button"
               disabled={loadingProvider !== null}
               onClick={() => handleSocialLogin('apple')}
-              className="w-full py-2.5 px-4 bg-[#0D0D0D] hover:bg-[#262626] text-white text-xs font-sans font-medium rounded-xs flex items-center justify-center gap-3 transition-colors shadow-xs cursor-pointer"
+              className="w-full py-2.5 px-4 bg-[#181512] hover:bg-[#1E1A15] border border-[#2C251C] hover:border-[#D8B26E]/60 text-[#FAF6EE] text-xs font-sans font-medium rounded-xs flex items-center justify-center gap-3 transition-colors shadow-xs cursor-pointer"
             >
               <svg className="w-4 h-4 shrink-0 fill-current" viewBox="0 0 24 24">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.88c.64-.78 1.08-1.86.96-2.88-.93.04-2.05.62-2.71 1.4-.58.67-1.09 1.76-.95 2.81 1.03.08 2.06-.55 2.7-1.33z" />
@@ -329,11 +329,11 @@ export const AuthModal = ({
         {/* Divider */}
         {mode !== 'forgot' && (
           <div className="relative flex items-center justify-center mb-5">
-            <div className="border-t border-[#DED4C2] w-full" />
-            <span className="bg-[#FAF7F2] px-3 text-[10px] uppercase font-sans tracking-widest text-[#8A8072] shrink-0">
+            <div className="border-t border-[#2C251C] w-full" />
+            <span className="bg-[#12100E] px-3 text-[10px] uppercase font-sans tracking-widest text-[#8A8072] shrink-0">
               or with email
             </span>
-            <div className="border-t border-[#DED4C2] w-full" />
+            <div className="border-t border-[#2C251C] w-full" />
           </div>
         )}
 
@@ -342,7 +342,7 @@ export const AuthModal = ({
           {/* Register: Full Name */}
           {mode === 'register' && (
             <div>
-              <label className="block text-[#4A4337] font-medium mb-1">Full Name</label>
+              <label className="block text-[#C5BCAD] font-medium mb-1">Full Name</label>
               <div className="relative flex items-center">
                 <UserIcon size={14} className="absolute left-3 text-[#8A8072]" />
                 <input
@@ -352,7 +352,7 @@ export const AuthModal = ({
                   placeholder="e.g. Priyanka Verma"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-white border border-[#D5C9B7] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#1A1A1A] outline-none rounded-xs font-sans"
+                  className="w-full bg-[#181512] border border-[#2C251C] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#FAF6EE] placeholder-[#706759] outline-none rounded-xs font-sans transition-colors"
                 />
               </div>
             </div>
@@ -360,7 +360,7 @@ export const AuthModal = ({
 
           {/* Email Address */}
           <div>
-            <label className="block text-[#4A4337] font-medium mb-1">Email Address</label>
+            <label className="block text-[#C5BCAD] font-medium mb-1">Email Address</label>
             <div className="relative flex items-center">
               <Mail size={14} className="absolute left-3 text-[#8A8072]" />
               <input
@@ -370,7 +370,7 @@ export const AuthModal = ({
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white border border-[#D5C9B7] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#1A1A1A] outline-none rounded-xs font-sans"
+                className="w-full bg-[#181512] border border-[#2C251C] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#FAF6EE] placeholder-[#706759] outline-none rounded-xs font-sans transition-colors"
               />
             </div>
           </div>
@@ -378,7 +378,7 @@ export const AuthModal = ({
           {/* Register: Phone Number (Optional) */}
           {mode === 'register' && (
             <div>
-              <label className="block text-[#4A4337] font-medium mb-1">
+              <label className="block text-[#C5BCAD] font-medium mb-1">
                 Phone Number <span className="text-[#8A8072] font-normal">(for delivery SMS updates)</span>
               </label>
               <div className="relative flex items-center">
@@ -389,7 +389,7 @@ export const AuthModal = ({
                   placeholder="+91 98765 43210"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-white border border-[#D5C9B7] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#1A1A1A] outline-none rounded-xs font-sans"
+                  className="w-full bg-[#181512] border border-[#2C251C] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#FAF6EE] placeholder-[#706759] outline-none rounded-xs font-sans transition-colors"
                 />
               </div>
             </div>
@@ -399,7 +399,7 @@ export const AuthModal = ({
           {mode !== 'forgot' && (
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="block text-[#4A4337] font-medium">Password</label>
+                <label className="block text-[#C5BCAD] font-medium">Password</label>
                 {mode === 'login' && (
                   <button
                     type="button"
@@ -407,7 +407,7 @@ export const AuthModal = ({
                       setMode('forgot');
                       setErrorMessage(null);
                     }}
-                    className="text-[11px] text-[#9E7A32] hover:underline cursor-pointer"
+                    className="text-[11px] text-[#D8B26E] hover:underline cursor-pointer"
                   >
                     Forgot Password?
                   </button>
@@ -422,12 +422,12 @@ export const AuthModal = ({
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white border border-[#D5C9B7] focus:border-[#D8B26E] pl-9 pr-9 py-2 text-[#1A1A1A] outline-none rounded-xs font-sans"
+                  className="w-full bg-[#181512] border border-[#2C251C] focus:border-[#D8B26E] pl-9 pr-9 py-2 text-[#FAF6EE] placeholder-[#706759] outline-none rounded-xs font-sans transition-colors"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 text-[#8A8072] hover:text-black cursor-pointer"
+                  className="absolute right-3 text-[#8A8072] hover:text-[#FAF6EE] cursor-pointer"
                 >
                   {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
                 </button>
@@ -438,7 +438,7 @@ export const AuthModal = ({
           {/* Register: Confirm Password */}
           {mode === 'register' && (
             <div>
-              <label className="block text-[#4A4337] font-medium mb-1">Confirm Password</label>
+              <label className="block text-[#C5BCAD] font-medium mb-1">Confirm Password</label>
               <div className="relative flex items-center">
                 <Lock size={14} className="absolute left-3 text-[#8A8072]" />
                 <input
@@ -448,7 +448,7 @@ export const AuthModal = ({
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full bg-white border border-[#D5C9B7] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#1A1A1A] outline-none rounded-xs font-sans"
+                  className="w-full bg-[#181512] border border-[#2C251C] focus:border-[#D8B26E] pl-9 pr-3 py-2 text-[#FAF6EE] placeholder-[#706759] outline-none rounded-xs font-sans transition-colors"
                 />
               </div>
             </div>
@@ -464,7 +464,7 @@ export const AuthModal = ({
                 onChange={(e) => setAgreeTerms(e.target.checked)}
                 className="mt-0.5 accent-[#D8B26E]"
               />
-              <label htmlFor="checkbox-terms" className="text-[11px] text-[#635B4E] leading-tight">
+              <label htmlFor="checkbox-terms" className="text-[11px] text-[#A89F91] leading-tight">
                 I agree to the <span className="underline">Terms of Service</span> & <span className="underline">Privacy Policy</span>.
               </label>
             </div>
@@ -475,7 +475,7 @@ export const AuthModal = ({
             id="btn-auth-submit"
             type="submit"
             disabled={loadingProvider !== null}
-            className="w-full py-3 bg-[#0D0D0D] hover:bg-[#D8B26E] hover:text-black text-[#FAF7F2] font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
+            className="w-full py-3 bg-gradient-to-r from-[#D8B26E] to-[#C89D52] hover:from-[#E5C378] hover:to-[#D8B26E] text-black font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
           >
             {loadingProvider === 'email' ? (
               <span>Authenticating...</span>
@@ -502,7 +502,7 @@ export const AuthModal = ({
                 setMode('login');
                 setErrorMessage(null);
               }}
-              className="w-full py-2 text-center text-xs text-[#635B4E] hover:text-black font-medium cursor-pointer"
+              className="w-full py-2 text-center text-xs text-[#A89F91] hover:text-[#FAF6EE] font-medium cursor-pointer"
             >
               ← Back to Sign In
             </button>
@@ -510,16 +510,16 @@ export const AuthModal = ({
         </form>
 
         {/* Demo Fast Login Box for seamless testing */}
-        <div className="mt-5 pt-4 border-t border-[#E5DEC9] bg-[#FAF2E1] p-3 rounded-xs flex items-center justify-between">
-          <div className="flex items-center gap-2 text-[11px] text-[#634816]">
-            <Sparkles size={14} className="text-[#9E7A32] shrink-0" />
-            <span>Instant Demo Profile: <strong>Priyanka Verma</strong></span>
+        <div className="mt-5 pt-4 border-t border-[#262018] bg-[#181512] p-3 rounded-xs flex items-center justify-between">
+          <div className="flex items-center gap-2 text-[11px] text-[#D8B26E]">
+            <Sparkles size={14} className="text-[#D8B26E] shrink-0" />
+            <span>Instant Demo Profile: <strong className="text-[#FAF6EE]">Priyanka Verma</strong></span>
           </div>
           <button
             id="btn-demo-quick-login"
             type="button"
             onClick={handleQuickDemoLogin}
-            className="px-2.5 py-1 bg-[#1A1815] hover:bg-[#D8B26E] hover:text-black text-[#FAF7F2] text-[10px] font-sans uppercase tracking-wider font-semibold rounded-xs transition-colors cursor-pointer"
+            className="px-2.5 py-1 bg-[#241F18] border border-[#3D3325] hover:bg-[#D8B26E] hover:text-black text-[#FAF6EE] text-[10px] font-sans uppercase tracking-wider font-semibold rounded-xs transition-colors cursor-pointer"
           >
             One-Click Login
           </button>

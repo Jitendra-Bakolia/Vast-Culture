@@ -28,11 +28,11 @@ export const QuickViewModal = ({
   };
 
   return (
-    <div 
+    <div
       id="quickview-modal-backdrop"
       className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4"
     >
-      <div 
+      <div
         id="quickview-modal-content"
         className="bg-[#FAF7F2] border border-[#D8CEBA] w-full max-w-3xl overflow-hidden shadow-2xl relative animate-in fade-in zoom-in-95 duration-200"
       >
@@ -51,6 +51,8 @@ export const QuickViewModal = ({
             <img
               src={product.image}
               alt={product.name}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center"
             />
             {product.tag && (
@@ -140,11 +142,10 @@ export const QuickViewModal = ({
                 <button
                   id="btn-quickview-add-bag"
                   onClick={handleAdd}
-                  className={`flex-1 h-11 font-sans text-xs uppercase tracking-[0.14em] font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                    addedAnimation
+                  className={`flex-1 h-11 font-sans text-xs uppercase tracking-[0.14em] font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${addedAnimation
                       ? 'bg-[#2F663B] text-white'
                       : 'bg-white border border-[#141210] hover:bg-[#141210] hover:text-[#FAF7F2] text-[#141210]'
-                  }`}
+                    }`}
                 >
                   {addedAnimation ? (
                     <>
@@ -164,11 +165,10 @@ export const QuickViewModal = ({
                   id="btn-quickview-wishlist"
                   onClick={() => onToggleWishlist(product)}
                   aria-label="Toggle wishlist"
-                  className={`w-11 h-11 border flex items-center justify-center transition-colors shrink-0 cursor-pointer ${
-                    isWishlisted
+                  className={`w-11 h-11 border flex items-center justify-center transition-colors shrink-0 cursor-pointer ${isWishlisted
                       ? 'bg-[#D8B26E] border-[#D8B26E] text-black'
                       : 'border-[#DCD3C0] bg-white hover:border-black text-[#524B3F]'
-                  }`}
+                    }`}
                 >
                   <Heart size={17} fill={isWishlisted ? '#0D0D0D' : 'none'} />
                 </button>

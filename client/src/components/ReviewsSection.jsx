@@ -16,7 +16,7 @@ export const ReviewsSection = () => {
   const currentMobileReview = REVIEWS_LIST[mobileIndex];
 
   return (
-    <section 
+    <section
       id="customer-reviews"
       aria-label="Customer Testimonials"
       className="w-full bg-[#FAF7F2] border-t border-[#EAE2D2] text-[#1E1B18] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
@@ -27,7 +27,7 @@ export const ReviewsSection = () => {
           <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-sans font-semibold uppercase text-[#9E7A32] block mb-1.5 sm:mb-2">
             Client Impressions
           </span>
-          <h2 
+          <h2
             id="reviews-heading"
             className="font-serif-luxury text-[#121110] font-normal tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
           >
@@ -71,6 +71,10 @@ export const ReviewsSection = () => {
                 <img
                   src={review.avatar}
                   alt={review.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="44"
+                  height="44"
                   className="w-10 h-10 lg:w-11 lg:h-11 rounded-full object-cover border border-[#D8B26E]"
                 />
                 <div>
@@ -111,6 +115,10 @@ export const ReviewsSection = () => {
                 <img
                   src={currentMobileReview.avatar}
                   alt={currentMobileReview.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="36"
+                  height="36"
                   className="w-9 h-9 rounded-full object-cover border border-[#D8B26E]"
                 />
                 <div>
@@ -155,9 +163,8 @@ export const ReviewsSection = () => {
                 key={i}
                 onClick={() => setMobileIndex(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  mobileIndex === i ? 'w-5 bg-[#D8B26E]' : 'w-1.5 bg-[#D5CABB]'
-                }`}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${mobileIndex === i ? 'w-5 bg-[#D8B26E]' : 'w-1.5 bg-[#D5CABB]'
+                  }`}
               />
             ))}
           </div>

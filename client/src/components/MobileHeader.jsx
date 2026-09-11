@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Search, ShoppingBag, User } from 'lucide-react';
+import logo from '../img/logo.png';
 
 export const MobileHeader = ({
   cartCount,
@@ -14,7 +15,7 @@ export const MobileHeader = ({
   return (
     <header 
       id="mobile-header"
-      className="w-full bg-[#0D0D0D] border-b border-[#23201B] text-[#FAF7F2] sticky top-0 z-40 px-4 py-3.5 flex items-center justify-between"
+      className="w-full bg-[#0D0D0D] border-b border-[#23201B] text-[#FAF7F2] sticky top-0 z-40 px-4 py-3 flex items-center justify-between"
     >
       {/* Left: Hamburger Menu */}
       <button
@@ -26,18 +27,30 @@ export const MobileHeader = ({
         <Menu size={22} strokeWidth={1.5} />
       </button>
 
-      {/* Center: Brand Logo */}
+      {/* Center: Brand Logo Lockup */}
       <div 
         id="brand-logo-mobile"
         onClick={onNavigateHome}
-        className="cursor-pointer flex flex-col items-center leading-none"
+        className="cursor-pointer flex items-center gap-2.5 leading-none select-none py-0.5"
+        role="button"
+        tabIndex={0}
+        aria-label="Vast Culture Home"
       >
-        <span className="font-cinzel-luxury text-[17px] tracking-[0.28em] font-semibold text-[#D8B26E]">
-          VAST
-        </span>
-        <span className="font-cinzel-luxury text-[11px] tracking-[0.42em] font-medium text-[#C49E59] -mt-0.5">
-          CULTURE
-        </span>
+        <div className="relative flex-shrink-0 flex items-center justify-center">
+          <img
+            src={logo}
+            alt="Vast Culture"
+            className="w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)]"
+          />
+        </div>
+        <div className="flex flex-col leading-none">
+          <span className="font-cinzel-luxury text-[15px] sm:text-[17px] tracking-[0.24em] font-semibold text-[#F5E8D0]">
+            VAST
+          </span>
+          <span className="font-cinzel-luxury text-[9px] sm:text-[10px] tracking-[0.42em] font-medium text-[#D8B26E] mt-0.5">
+            CULTURE
+          </span>
+        </div>
       </div>
 
       {/* Right: User / Search & Shopping Bag */}
@@ -62,6 +75,10 @@ export const MobileHeader = ({
               <img
                 src={currentUser.avatar}
                 alt={currentUser.name}
+                loading="lazy"
+                decoding="async"
+                width="20"
+                height="20"
                 className="w-5 h-5 rounded-full object-cover border border-[#D8B26E]"
               />
             ) : (

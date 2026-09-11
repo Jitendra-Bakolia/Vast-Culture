@@ -1,19 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import { ALL_COLLECTION_PRODUCTS } from '../data/mockData';
-import { 
-  Star, 
-  Heart, 
-  Eye, 
-  ShoppingBag, 
-  Search, 
-  SlidersHorizontal, 
-  ArrowLeft, 
-  X, 
-  Sparkles, 
-  ShieldCheck, 
-  Truck, 
-  RotateCcw, 
-  Zap, 
+import {
+  Star,
+  Heart,
+  Eye,
+  ShoppingBag,
+  Search,
+  SlidersHorizontal,
+  ArrowLeft,
+  X,
+  Sparkles,
+  ShieldCheck,
+  Truck,
+  RotateCcw,
+  Zap,
   ChevronRight
 } from 'lucide-react';
 
@@ -89,7 +89,7 @@ export const ShopPage = ({
       <div className="bg-[#0D0D0D] border-b border-[#24201A] text-[#FAF7F2] py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Subtle decorative glow */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#D8B26E]/5 rounded-full blur-3xl pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Breadcrumb row */}
           <div className="flex items-center gap-2 text-xs font-sans text-[#8C8375] mb-4">
@@ -150,11 +150,10 @@ export const ShopPage = ({
                   key={cat}
                   id={`tab-category-${cat.toLowerCase()}`}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-sans tracking-wider uppercase transition-all whitespace-nowrap cursor-pointer ${
-                    isActive
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-sans tracking-wider uppercase transition-all whitespace-nowrap cursor-pointer ${isActive
                       ? 'bg-[#0D0D0D] text-[#FAF7F2] font-semibold shadow-xs'
                       : 'bg-white border border-[#DCD3C0] text-[#595247] hover:border-[#0D0D0D] hover:text-[#0D0D0D]'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
@@ -205,9 +204,8 @@ export const ShopPage = ({
             <button
               id="btn-toggle-shop-filters"
               onClick={() => setIsFilterDrawerOpen(!isFilterDrawerOpen)}
-              className={`p-1.5 md:hidden border rounded-xs transition-colors cursor-pointer ${
-                hasActiveFilters ? 'bg-[#D8B26E] border-[#D8B26E] text-black' : 'bg-white border-[#D5C9B7] text-[#2C2720]'
-              }`}
+              className={`p-1.5 md:hidden border rounded-xs transition-colors cursor-pointer ${hasActiveFilters ? 'bg-[#D8B26E] border-[#D8B26E] text-black' : 'bg-white border-[#D5C9B7] text-[#2C2720]'
+                }`}
             >
               <SlidersHorizontal size={15} />
             </button>
@@ -228,11 +226,10 @@ export const ShopPage = ({
               <button
                 key={p.id}
                 onClick={() => setPriceFilter(p.id)}
-                className={`px-2.5 py-1 text-[11px] rounded-xs transition-colors cursor-pointer ${
-                  priceFilter === p.id
+                className={`px-2.5 py-1 text-[11px] rounded-xs transition-colors cursor-pointer ${priceFilter === p.id
                     ? 'bg-[#E5DAC6] text-[#1A1A1A] font-semibold'
                     : 'text-[#696052] hover:text-black hover:bg-[#F2ECE0]'
-                }`}
+                  }`}
               >
                 {p.label}
               </button>
@@ -246,11 +243,10 @@ export const ShopPage = ({
               <button
                 key={t}
                 onClick={() => setSelectedTag(t)}
-                className={`px-2.5 py-1 text-[11px] rounded-xs capitalize transition-colors cursor-pointer ${
-                  selectedTag === t
+                className={`px-2.5 py-1 text-[11px] rounded-xs capitalize transition-colors cursor-pointer ${selectedTag === t
                     ? 'bg-[#E5DAC6] text-[#1A1A1A] font-semibold'
                     : 'text-[#696052] hover:text-black hover:bg-[#F2ECE0]'
-                }`}
+                  }`}
               >
                 {t === 'all' ? 'All Tags' : t}
               </button>
@@ -284,11 +280,10 @@ export const ShopPage = ({
                   <button
                     key={p.id}
                     onClick={() => setPriceFilter(p.id)}
-                    className={`py-1.5 px-2 text-xs rounded-xs border text-left cursor-pointer ${
-                      priceFilter === p.id
+                    className={`py-1.5 px-2 text-xs rounded-xs border text-left cursor-pointer ${priceFilter === p.id
                         ? 'bg-[#0D0D0D] text-white border-[#0D0D0D]'
                         : 'bg-[#FAF7F2] border-[#DCD3C0] text-[#3D372E]'
-                    }`}
+                      }`}
                   >
                     {p.label}
                   </button>
@@ -305,11 +300,10 @@ export const ShopPage = ({
                   <button
                     key={t}
                     onClick={() => setSelectedTag(t)}
-                    className={`py-1 px-2.5 text-xs rounded-xs border capitalize cursor-pointer ${
-                      selectedTag === t
+                    className={`py-1 px-2.5 text-xs rounded-xs border capitalize cursor-pointer ${selectedTag === t
                         ? 'bg-[#0D0D0D] text-white border-[#0D0D0D]'
                         : 'bg-[#FAF7F2] border-[#DCD3C0] text-[#3D372E]'
-                    }`}
+                      }`}
                   >
                     {t === 'all' ? 'All' : t}
                   </button>
@@ -353,7 +347,7 @@ export const ShopPage = ({
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
             {filteredProducts.map((product) => {
               const isWishlisted = (wishlistIds || []).includes(product.id);
-              const discountPercent = product.originalPrice 
+              const discountPercent = product.originalPrice
                 ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
                 : 0;
 
@@ -361,31 +355,34 @@ export const ShopPage = ({
                 <div
                   key={product.id}
                   id={`shop-product-card-${product.id}`}
-                  className="group flex flex-col bg-white border border-[#E5DEC9] overflow-hidden hover:border-[#D8B26E] hover:shadow-xl transition-all duration-300 relative"
+                  className="group flex flex-col bg-white border border-[#E5DEC9] overflow-hidden relative luxury-card-hover"
                 >
                   {/* Image Container with Hover Swap */}
-                  <div 
+                  <div
                     className="relative w-full aspect-[4/5] bg-[#F5EFEB] overflow-hidden cursor-pointer"
                     onClick={() => onQuickView(product)}
                   >
                     <img
                       src={product.image}
                       alt={product.name}
-                      className={`w-full h-full object-cover object-center transition-all duration-700 ease-out ${
-                        product.hoverImage ? 'group-hover:opacity-0 group-hover:scale-105' : 'group-hover:scale-105'
-                      }`}
+                      loading="lazy"
+                      decoding="async"
+                      className={`w-full h-full object-cover object-center transition-all duration-700 ease-out ${product.hoverImage ? 'group-hover:opacity-0 group-hover:scale-105' : 'group-hover:scale-105'
+                        }`}
                     />
                     {product.hoverImage && (
                       <img
                         src={product.hoverImage}
                         alt={`${product.name} alternate angle`}
+                        loading="lazy"
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover object-center opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
                       />
                     )}
 
                     {/* Tag / Badge */}
                     {product.tag && (
-                      <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-[#121110]/90 backdrop-blur-xs text-[#EBD5A0] text-[8px] sm:text-[9px] uppercase font-sans font-semibold tracking-wider px-1.5 sm:px-2 py-0.5 border border-[#D8B26E]/40 z-10">
+                      <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-[#121110]/95 backdrop-blur-xs text-[#EBD5A0] text-[8px] sm:text-[9px] uppercase font-sans font-semibold tracking-wider px-2 py-0.5 border border-[#D8B26E]/50 shadow-xs z-10">
                         {product.tag}
                       </span>
                     )}
@@ -405,27 +402,26 @@ export const ShopPage = ({
                         onToggleWishlist(product);
                       }}
                       aria-label={`Toggle wishlist for ${product.name}`}
-                      className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer z-20 ${
-                        isWishlisted 
-                          ? 'bg-[#D8B26E] text-black shadow-md' 
-                          : 'bg-white/85 hover:bg-white text-[#4A453E] hover:text-[#121110]'
-                      }`}
+                      className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer z-20 tap-bounce ${isWishlisted
+                          ? 'bg-[#D8B26E] text-black shadow-md heart-pop-anim'
+                          : 'bg-white/90 hover:bg-white text-[#4A453E] hover:text-[#121110] hover:scale-110'
+                        }`}
                     >
-                      <Heart 
-                        size={14} 
-                        fill={isWishlisted ? '#0D0D0D' : 'none'} 
-                        strokeWidth={1.7} 
+                      <Heart
+                        size={14}
+                        fill={isWishlisted ? '#0D0D0D' : 'none'}
+                        strokeWidth={1.7}
                       />
                     </button>
 
                     {/* Desktop Overlay Quick Actions */}
-                    <div className="hidden md:flex absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/45 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center gap-2 z-20">
+                    <div className="hidden md:flex absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent items-center justify-center gap-2 z-20 card-quick-actions">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           onQuickView(product);
                         }}
-                        className="px-2.5 py-1.5 bg-white text-[#121110] hover:bg-[#FAF7F2] text-[11px] font-sans font-medium uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer"
+                        className="px-2.5 py-1.5 bg-white text-[#121110] hover:bg-[#FAF7F2] text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm hover:scale-105 cursor-pointer"
                       >
                         <Eye size={13} />
                         <span>Quick View</span>
@@ -435,10 +431,10 @@ export const ShopPage = ({
                           e.stopPropagation();
                           onAddToCart(product);
                         }}
-                        className="px-2.5 py-1.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-black text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer"
+                        className="px-2.5 py-1.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md hover:scale-105 cursor-pointer luxury-shimmer-btn"
                       >
                         <ShoppingBag size={13} />
-                        <span>Add to Bag</span>
+                        <span>Add</span>
                       </button>
                     </div>
                   </div>
@@ -464,7 +460,7 @@ export const ShopPage = ({
                       </div>
 
                       {/* Product Name */}
-                      <h3 
+                      <h3
                         onClick={() => onQuickView(product)}
                         className="font-serif-luxury text-xs sm:text-sm md:text-base text-[#141210] font-normal leading-snug hover:text-[#9E7A32] transition-colors line-clamp-1 cursor-pointer"
                       >

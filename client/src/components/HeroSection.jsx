@@ -21,6 +21,9 @@ export const HeroSection = ({
           id="hero-bg-image"
           src={currentSlide.image}
           alt="Luxury gold and pearl jewellery editorial"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-center scale-100 transition-transform duration-1000 ease-out"
         />
         {/* Subtle Dark Gradient Overlay for optimal legibility & moody luxury contrast */}
@@ -35,7 +38,7 @@ export const HeroSection = ({
           {/* Small Label Badge */}
           <div 
             id="hero-badge"
-            className="inline-flex items-center gap-2 px-3 py-1 sm:py-1.5 rounded-full bg-[#1F1C18]/85 border border-[#D8B26E]/40 backdrop-blur-md mb-4 sm:mb-6"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1F1C18]/85 border border-[#D8B26E]/50 backdrop-blur-md mb-4 sm:mb-6 badge-glowing"
           >
             <Sparkles size={12} className="text-[#D8B26E]" />
             <span className="text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-sans font-medium text-[#EBD5A0]">
@@ -44,9 +47,10 @@ export const HeroSection = ({
           </div>
 
           {/* Large Responsive Headline */}
+          {/* Large Responsive Headline with Royal Champagne Gold & Ivory */}
           <h1 
             id="hero-headline"
-            className="font-serif-luxury text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-5"
+            className="font-serif-luxury text-transparent bg-clip-text bg-gradient-to-r from-[#FFFDF8] via-[#F5E7C6] to-[#E5C378] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-5 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
           >
             Crafted with Purpose
             <span className="block italic text-[#E5C378] font-light mt-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
@@ -67,16 +71,16 @@ export const HeroSection = ({
             <button
               id="btn-hero-shop-collection"
               onClick={onShopClick}
-              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] font-sans font-semibold text-[11px] sm:text-xs tracking-[0.18em] uppercase transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-1px] flex items-center gap-2 group cursor-pointer"
+              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] font-sans font-semibold text-[11px] sm:text-xs tracking-[0.18em] uppercase flex items-center gap-2 group cursor-pointer luxury-shimmer-btn shadow-lg"
             >
               <span>SHOP COLLECTION</span>
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
             </button>
 
             <button
               id="btn-hero-explore-vast-culture"
               onClick={onExploreClick}
-              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-transparent hover:bg-white/10 text-[#FAF7F2] border border-[#FAF7F2]/40 hover:border-[#D8B26E] font-sans font-medium text-[11px] sm:text-xs tracking-[0.18em] uppercase transition-all duration-300 backdrop-blur-sm cursor-pointer"
+              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-black/40 text-[#F5E8D0] border border-[#D8B26E]/50 hover:bg-[#D8B26E]/10 hover:border-[#D8B26E] font-sans font-medium text-[11px] sm:text-xs tracking-[0.18em] uppercase backdrop-blur-sm cursor-pointer transition-all duration-300"
             >
               EXPLORE OUR STORY
             </button>
@@ -86,7 +90,7 @@ export const HeroSection = ({
         {/* Curated Set Thumbnails Selector */}
         <div 
           id="hero-curated-thumbnails"
-          className="w-full md:w-auto flex md:flex-col gap-3 sm:gap-4 pt-4 md:pt-0 md:pl-8 border-t border-white/10 md:border-t-0"
+          className="w-full md:w-auto flex md:flex-col gap-3 sm:gap-4 pt-4 md:pt-0 md:pl-8 border-t border-[#D8B26E]/20 md:border-t-0"
         >
           <div className="text-[10px] uppercase tracking-[0.2em] text-[#C4B7A6] font-sans text-left md:text-right hidden sm:block mb-0.5">
             Curated Sets
@@ -102,17 +106,19 @@ export const HeroSection = ({
                   aria-label={`View set ${index + 1}: ${thumb.label}`}
                   className={`relative shrink-0 w-16 h-20 sm:w-20 sm:h-24 lg:w-22 lg:h-28 rounded-xs overflow-hidden transition-all duration-300 group cursor-pointer ${
                     isActive 
-                      ? 'ring-2 ring-[#D8B26E] ring-offset-2 ring-offset-black scale-105 opacity-100 shadow-xl' 
-                      : 'opacity-65 hover:opacity-100 hover:scale-102 ring-1 ring-white/20'
+                      ? 'ring-2 ring-[#D8B26E] ring-offset-2 ring-offset-black scale-105 opacity-100 shadow-xl badge-glowing' 
+                      : 'opacity-65 hover:opacity-100 hover:scale-105 ring-1 ring-[#D8B26E]/30'
                   }`}
                 >
                   <img
                     src={thumb.image}
                     alt={thumb.label}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <span className="absolute bottom-1 left-1 right-1 text-[8px] sm:text-[9px] font-sans tracking-wider text-white text-center truncate px-0.5">
+                  <span className="absolute bottom-1 left-1 right-1 text-[8px] sm:text-[9px] font-sans tracking-wider text-[#FAF6EE] text-center truncate px-0.5">
                     0{index + 1}
                   </span>
                 </button>
@@ -121,6 +127,9 @@ export const HeroSection = ({
           </div>
         </div>
       </div>
+
+      {/* Seamless bottom vignette to Atelier Obsidian (#0E0D0B) */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0E0D0B] to-transparent pointer-events-none z-10" />
     </section>
   );
 };
