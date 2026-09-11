@@ -183,6 +183,7 @@ export const BestsellersSection = ({
           >
             <span>VIEW ALL PIECES</span>
             <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+          </button>
         </div>
       </div>
     </section>
