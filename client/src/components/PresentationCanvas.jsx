@@ -14,7 +14,7 @@ export const PresentationCanvas = (props) => {
   ];
 
   return (
-    <div 
+    <div
       id="presentation-canvas-workbench"
       className="w-full bg-[#0A0908] min-h-screen text-[#FAF7F2] flex flex-col items-center justify-start pb-24 select-none"
     >
@@ -44,10 +44,10 @@ export const PresentationCanvas = (props) => {
             Palette:
           </span>
           <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded-full bg-[#0A0908] border border-[#D8B26E]/40" title="Atelier Caviar Noir (#0A0908)" />
-            <span className="w-3.5 h-3.5 rounded-full bg-[#14120F] border border-[#262018]" title="Velvet Obsidian (#14120F)" />
-            <span className="w-3.5 h-3.5 rounded-full bg-[#D8B26E] border border-black/20" title="18K Solid Gold Vermeil (#D8B26E)" />
-            <span className="w-3.5 h-3.5 rounded-full bg-[#FAF6EE] border border-[#D8B26E]/40" title="Royal Ivory (#FAF6EE)" />
+            <span className="w-3.5 h-3.5 rounded-full bg-[#0D0D0D] border border-white/30" title="Deep Luxury Black (#0D0D0D)" />
+            <span className="w-3.5 h-3.5 rounded-full bg-[#FAF7F2] border border-black/30" title="Warm Ivory Cream (#FAF7F2)" />
+            <span className="w-3.5 h-3.5 rounded-full bg-[#D8B26E] border border-black/20" title="Champagne Gold (#D8B26E)" />
+            <span className="w-3.5 h-3.5 rounded-full bg-[#F2ECE1] border border-black/20" title="Subtle Warm Beige (#F2ECE1)" />
           </div>
         </div>
 
@@ -59,11 +59,10 @@ export const PresentationCanvas = (props) => {
               <button
                 key={opt.label}
                 onClick={() => setZoomLevel(opt.value)}
-                className={`px-2.5 py-1 text-[11px] font-sans font-medium rounded-xs transition-colors cursor-pointer ${
-                  zoomLevel === opt.value
+                className={`px-2.5 py-1 text-[11px] font-sans font-medium rounded-xs transition-colors cursor-pointer ${zoomLevel === opt.value
                     ? 'bg-[#D8B26E] text-black font-semibold shadow-xs'
                     : 'text-[#C7BBAA] hover:text-white'
-                }`}
+                  }`}
               >
                 {opt.label}
               </button>
@@ -75,7 +74,7 @@ export const PresentationCanvas = (props) => {
 
       {/* Side-by-Side Artboards Container */}
       <div className="w-full overflow-x-auto px-4 sm:px-8 py-10 flex justify-center items-start">
-        <div 
+        <div
           className={`flex flex-col xl:flex-row items-start justify-center gap-12 lg:gap-16 transition-all duration-300 origin-top zoom-scale-${Math.round(zoomLevel * 100)}`}
         >
           {/* ========================================================= */}

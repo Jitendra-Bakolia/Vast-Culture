@@ -257,7 +257,7 @@ export default function App() {
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="w-full min-h-screen bg-[#0E0D0B] text-[#FAF6EE] relative selection:bg-[#D8B26E] selection:text-black has-mobile-bottom-bar">
+    <div className="w-full min-h-screen bg-[#0D0D0D] text-[#1A1A1A] relative selection:bg-[#D8B26E] selection:text-black has-mobile-bottom-bar">
       {/* 0. MAIN LUXURY PRELOADER & SPLASH SCREEN */}
       <MainLoader
         isLoading={isInitialLoading}
@@ -342,7 +342,7 @@ export default function App() {
 
       {/* Floating Toast Feedback */}
       {toastMessage && (
-        <div 
+        <div
           id="toast-notification"
           className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-50 bg-[#141210]/95 backdrop-blur-md border border-[#D8B26E] text-[#FAF7F2] px-4 py-3 shadow-2xl flex items-center gap-3 text-xs font-sans rounded-xs toast-animated-entrance badge-glowing"
         >

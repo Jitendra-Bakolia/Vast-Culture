@@ -50,37 +50,37 @@ export const CheckoutModal = ({
   };
 
   return (
-    <div 
+    <div
       id="checkout-modal-backdrop"
       className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xs flex items-center justify-center p-4"
     >
-      <div 
+      <div
         id="checkout-modal-content"
-        className="bg-[#12100E] border border-[#2E271D] w-full max-w-xl shadow-2xl relative p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200 text-[#FAF6EE]"
+        className="bg-[#FAF7F2] border border-[#D8CEBA] w-full max-w-xl shadow-2xl relative p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200"
       >
         <button
           onClick={onClose}
           aria-label="Close checkout"
-          className="absolute top-4 right-4 text-[#A89F91] hover:text-[#FAF6EE] p-1 cursor-pointer"
+          className="absolute top-4 right-4 text-[#6B6152] hover:text-black p-1 cursor-pointer"
         >
           <X size={20} />
         </button>
 
         {orderSuccess ? (
           <div className="py-10 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#14261B] border border-[#235E35] text-[#4ADE80] flex items-center justify-center mx-auto shadow-md">
+            <div className="w-16 h-16 rounded-full bg-[#1C2E21] border border-[#3E6547] text-[#9FE3AC] flex items-center justify-center mx-auto shadow-md">
               <Check size={32} />
             </div>
-            <span className="text-[10px] tracking-[0.3em] font-sans font-semibold uppercase text-[#D8B26E] block">
+            <span className="text-[10px] tracking-[0.3em] font-sans font-semibold uppercase text-[#9E7A32] block">
               VAST CULTURE ORDER CONFIRMED
             </span>
-            <h2 className="font-serif-luxury text-3xl text-[#FAF6EE]">
+            <h2 className="font-serif-luxury text-3xl text-[#121110]">
               Thank You for Your Order!
             </h2>
-            <p className="text-xs sm:text-sm text-[#C5BCAD] font-sans max-w-sm mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#524B3F] font-sans max-w-sm mx-auto leading-relaxed">
               Order #VC-2025-8842 has been placed successfully. A bespoke velvet keepsake box is being prepared for you.
             </p>
-            <div className="pt-2 text-xs font-sans text-[#A89F91]">
+            <div className="pt-2 text-xs font-sans text-[#8A7E6D]">
               Estimated delivery: 2-3 business days.
             </div>
           </div>
@@ -88,22 +88,22 @@ export const CheckoutModal = ({
           <div>
             <div className="mb-5">
               <div className="flex items-center gap-2">
-                <span className="font-cinzel-luxury text-xs tracking-[0.25em] font-semibold text-[#D8B26E]">
+                <span className="font-cinzel-luxury text-xs tracking-[0.25em] font-semibold text-[#9E7A32]">
                   VAST CULTURE
                 </span>
-                <span className="text-xs text-[#A89F91]">• Secure Checkout</span>
+                <span className="text-xs text-[#8A7E6D]">• Secure Checkout</span>
               </div>
-              <h2 className="font-serif-luxury text-2xl sm:text-3xl text-[#FAF6EE] mt-1">
+              <h2 className="font-serif-luxury text-2xl sm:text-3xl text-[#121110] mt-1">
                 Complete Your Order
               </h2>
 
               {currentUser && (
-                <div className="mt-3 p-2.5 bg-[#181512] border border-[#2C251C] rounded-xs flex items-center justify-between text-xs font-sans">
-                  <div className="flex items-center gap-2 text-[#FAF6EE]">
-                    <UserCheck size={15} className="text-[#D8B26E] shrink-0" />
+                <div className="mt-3 p-2.5 bg-[#F4EDE0] border border-[#D5CABB] rounded-xs flex items-center justify-between text-xs font-sans">
+                  <div className="flex items-center gap-2 text-[#3D3528]">
+                    <UserCheck size={15} className="text-[#9E7A32] shrink-0" />
                     <span>Logged in as <strong>{currentUser.name}</strong> ({currentUser.email})</span>
                   </div>
-                  <span className="text-[10px] text-[#D8B26E] uppercase font-bold tracking-wider">
+                  <span className="text-[10px] text-[#9E7A32] uppercase font-bold tracking-wider">
                     Verified
                   </span>
                 </div>
@@ -113,64 +113,64 @@ export const CheckoutModal = ({
             <form onSubmit={handleSubmit} className="space-y-4 text-xs font-sans">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[#C5BCAD] font-medium mb-1">Full Name</label>
+                  <label className="block text-[#4A4337] font-medium mb-1">Full Name</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-[#181512] border border-[#2C251C] px-3 py-2 text-[#FAF6EE] outline-none focus:border-[#D8B26E] rounded-xs"
+                    className="w-full bg-white border border-[#D5CABB] px-3 py-2 text-[#1A1A1A] outline-none focus:border-[#D8B26E]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#C5BCAD] font-medium mb-1">Phone Number</label>
+                  <label className="block text-[#4A4337] font-medium mb-1">Phone Number</label>
                   <input
                     type="text"
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-[#181512] border border-[#2C251C] px-3 py-2 text-[#FAF6EE] outline-none focus:border-[#D8B26E] rounded-xs"
+                    className="w-full bg-white border border-[#D5CABB] px-3 py-2 text-[#1A1A1A] outline-none focus:border-[#D8B26E]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[#C5BCAD] font-medium mb-1">Delivery Address</label>
+                <label className="block text-[#4A4337] font-medium mb-1">Delivery Address</label>
                 <input
                   type="text"
                   required
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full bg-[#181512] border border-[#2C251C] px-3 py-2 text-[#FAF6EE] outline-none focus:border-[#D8B26E] rounded-xs"
+                  className="w-full bg-white border border-[#D5CABB] px-3 py-2 text-[#1A1A1A] outline-none focus:border-[#D8B26E]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[#C5BCAD] font-medium mb-1">City</label>
+                  <label className="block text-[#4A4337] font-medium mb-1">City</label>
                   <input
                     type="text"
                     required
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full bg-[#181512] border border-[#2C251C] px-3 py-2 text-[#FAF6EE] outline-none focus:border-[#D8B26E] rounded-xs"
+                    className="w-full bg-white border border-[#D5CABB] px-3 py-2 text-[#1A1A1A] outline-none focus:border-[#D8B26E]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#C5BCAD] font-medium mb-1">PIN Code</label>
+                  <label className="block text-[#4A4337] font-medium mb-1">PIN Code</label>
                   <input
                     type="text"
                     required
                     value={formData.pincode}
                     onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                    className="w-full bg-[#181512] border border-[#2C251C] px-3 py-2 text-[#FAF6EE] outline-none focus:border-[#D8B26E] rounded-xs"
+                    className="w-full bg-white border border-[#D5CABB] px-3 py-2 text-[#1A1A1A] outline-none focus:border-[#D8B26E]"
                   />
                 </div>
               </div>
 
               {/* Payment selection */}
               <div>
-                <label className="block text-[#C5BCAD] font-medium mb-1.5">Payment Method</label>
+                <label className="block text-[#4A4337] font-medium mb-1.5">Payment Method</label>
                 <div className="grid grid-cols-3 gap-2">
                   {[
                     { id: 'upi', label: 'UPI / GPay' },
@@ -181,11 +181,10 @@ export const CheckoutModal = ({
                       key={method.id}
                       type="button"
                       onClick={() => setFormData({ ...formData, paymentMethod: method.id })}
-                      className={`p-2 border text-center rounded-xs transition-colors cursor-pointer ${
-                        formData.paymentMethod === method.id
-                          ? 'border-[#D8B26E] bg-[#1E1A15] text-[#D8B26E] font-semibold'
-                          : 'border-[#2C251C] bg-[#181512] text-[#A89F91] hover:text-[#FAF6EE]'
-                      }`}
+                      className={`p-2 border text-center rounded-xs transition-colors cursor-pointer ${formData.paymentMethod === method.id
+                          ? 'border-[#D8B26E] bg-[#FAF4EB] text-black font-semibold'
+                          : 'border-[#D5CABB] bg-white text-[#5C5548]'
+                        }`}
                     >
                       {method.label}
                     </button>
@@ -194,25 +193,25 @@ export const CheckoutModal = ({
               </div>
 
               {/* Order summary mini-box */}
-              <div className="bg-[#181512] p-3 border border-[#2C251C] flex items-center justify-between text-xs font-sans rounded-xs">
+              <div className="bg-[#FAF4EB] p-3 border border-[#E8DFC8] flex items-center justify-between text-xs font-sans">
                 <div>
-                  <span className="font-semibold text-[#FAF6EE]">
+                  <span className="font-semibold text-[#1A1A1A]">
                     Total ({(items || []).reduce((sum, i) => sum + i.quantity, 0)} items):
                   </span>
-                  <span className="text-[#A89F91] block text-[10px]">Free Luxury Velvet Packaging Included</span>
+                  <span className="text-[#6B6152] block text-[10px]">Free Luxury Velvet Packaging Included</span>
                 </div>
-                <span className="text-base font-bold text-[#E5C378]">₹{total}</span>
+                <span className="text-base font-bold text-[#141210]">₹{total}</span>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-gradient-to-r from-[#D8B26E] to-[#C89D52] hover:from-[#E5C378] hover:to-[#D8B26E] text-black font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-md cursor-pointer"
+                className="w-full py-3.5 bg-[#0D0D0D] hover:bg-[#D8B26E] hover:text-black text-[#FAF7F2] font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-md cursor-pointer"
               >
                 PLACE ORDER (₹{total})
               </button>
 
-              <div className="flex items-center justify-center gap-1.5 text-[10px] text-[#A89F91] text-center">
-                <ShieldCheck size={13} className="text-[#D8B26E]" />
+              <div className="flex items-center justify-center gap-1.5 text-[10px] text-[#7A7163] text-center">
+                <ShieldCheck size={13} className="text-[#9E7A32]" />
                 <span>SSL 256-Bit Encrypted Payment Security</span>
               </div>
             </form>

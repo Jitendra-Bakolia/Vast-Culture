@@ -10,7 +10,7 @@ export const HeroSection = ({
   const currentSlide = HERO_SLIDES[activeSlideIndex] || HERO_SLIDES[0];
 
   return (
-    <section 
+    <section
       id="hero"
       aria-label="Hero Showcase"
       className="relative w-full min-h-[580px] sm:min-h-[640px] md:h-[680px] lg:h-[720px] xl:h-[760px] bg-[#0E0D0C] overflow-hidden select-none flex items-center"
@@ -36,7 +36,7 @@ export const HeroSection = ({
         {/* Left / Main Column: Typography & CTAs */}
         <div className="max-w-2xl text-left">
           {/* Small Label Badge */}
-          <div 
+          <div
             id="hero-badge"
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1F1C18]/85 border border-[#D8B26E]/50 backdrop-blur-md mb-4 sm:mb-6 badge-glowing"
           >
@@ -47,10 +47,9 @@ export const HeroSection = ({
           </div>
 
           {/* Large Responsive Headline */}
-          {/* Large Responsive Headline with Royal Champagne Gold & Ivory */}
-          <h1 
+          <h1
             id="hero-headline"
-            className="font-serif-luxury text-transparent bg-clip-text bg-gradient-to-r from-[#FFFDF8] via-[#F5E7C6] to-[#E5C378] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-5 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
+            className="font-serif-luxury text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-5"
           >
             Crafted with Purpose
             <span className="block italic text-[#E5C378] font-light mt-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
@@ -59,7 +58,7 @@ export const HeroSection = ({
           </h1>
 
           {/* Responsive Description */}
-          <p 
+          <p
             id="hero-description"
             className="text-[#E0D8CE] text-xs sm:text-sm md:text-base lg:text-lg font-light leading-relaxed max-w-lg mb-6 sm:mb-8 font-sans"
           >
@@ -71,7 +70,7 @@ export const HeroSection = ({
             <button
               id="btn-hero-shop-collection"
               onClick={onShopClick}
-              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] font-sans font-semibold text-[11px] sm:text-xs tracking-[0.18em] uppercase flex items-center gap-2 group cursor-pointer luxury-shimmer-btn shadow-lg"
+              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] font-sans font-semibold text-[11px] sm:text-xs tracking-[0.18em] uppercase flex items-center gap-2 group cursor-pointer luxury-shimmer-btn"
             >
               <span>SHOP COLLECTION</span>
               <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
@@ -80,7 +79,7 @@ export const HeroSection = ({
             <button
               id="btn-hero-explore-vast-culture"
               onClick={onExploreClick}
-              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-black/40 text-[#F5E8D0] border border-[#D8B26E]/50 hover:bg-[#D8B26E]/10 hover:border-[#D8B26E] font-sans font-medium text-[11px] sm:text-xs tracking-[0.18em] uppercase backdrop-blur-sm cursor-pointer transition-all duration-300"
+              className="px-6 sm:px-8 py-3 sm:py-3.5 bg-transparent text-[#FAF7F2] border border-[#FAF7F2]/40 font-sans font-medium text-[11px] sm:text-xs tracking-[0.18em] uppercase backdrop-blur-sm cursor-pointer luxury-outline-btn"
             >
               EXPLORE OUR STORY
             </button>
@@ -88,9 +87,9 @@ export const HeroSection = ({
         </div>
 
         {/* Curated Set Thumbnails Selector */}
-        <div 
+        <div
           id="hero-curated-thumbnails"
-          className="w-full md:w-auto flex md:flex-col gap-3 sm:gap-4 pt-4 md:pt-0 md:pl-8 border-t border-[#D8B26E]/20 md:border-t-0"
+          className="w-full md:w-auto flex md:flex-col gap-3 sm:gap-4 pt-4 md:pt-0 md:pl-8 border-t border-white/10 md:border-t-0"
         >
           <div className="text-[10px] uppercase tracking-[0.2em] text-[#C4B7A6] font-sans text-left md:text-right hidden sm:block mb-0.5">
             Curated Sets
@@ -104,11 +103,10 @@ export const HeroSection = ({
                   id={`hero-thumb-${index + 1}`}
                   onClick={() => setActiveSlideIndex(index)}
                   aria-label={`View set ${index + 1}: ${thumb.label}`}
-                  className={`relative shrink-0 w-16 h-20 sm:w-20 sm:h-24 lg:w-22 lg:h-28 rounded-xs overflow-hidden transition-all duration-300 group cursor-pointer ${
-                    isActive 
-                      ? 'ring-2 ring-[#D8B26E] ring-offset-2 ring-offset-black scale-105 opacity-100 shadow-xl badge-glowing' 
-                      : 'opacity-65 hover:opacity-100 hover:scale-105 ring-1 ring-[#D8B26E]/30'
-                  }`}
+                  className={`relative shrink-0 w-16 h-20 sm:w-20 sm:h-24 lg:w-22 lg:h-28 rounded-xs overflow-hidden transition-all duration-300 group cursor-pointer ${isActive
+                      ? 'ring-2 ring-[#D8B26E] ring-offset-2 ring-offset-black scale-105 opacity-100 shadow-xl badge-glowing'
+                      : 'opacity-65 hover:opacity-100 hover:scale-105 ring-1 ring-white/20'
+                    }`}
                 >
                   <img
                     src={thumb.image}
@@ -118,7 +116,7 @@ export const HeroSection = ({
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <span className="absolute bottom-1 left-1 right-1 text-[8px] sm:text-[9px] font-sans tracking-wider text-[#FAF6EE] text-center truncate px-0.5">
+                  <span className="absolute bottom-1 left-1 right-1 text-[8px] sm:text-[9px] font-sans tracking-wider text-white text-center truncate px-0.5">
                     0{index + 1}
                   </span>
                 </button>
@@ -127,9 +125,6 @@ export const HeroSection = ({
           </div>
         </div>
       </div>
-
-      {/* Seamless bottom vignette to Atelier Obsidian (#0E0D0B) */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0E0D0B] to-transparent pointer-events-none z-10" />
     </section>
   );
 };

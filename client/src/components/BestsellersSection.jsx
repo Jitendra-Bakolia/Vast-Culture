@@ -13,21 +13,21 @@ export const BestsellersSection = ({
     <section
       id="bestsellers"
       aria-label="Our Bestsellers"
-      className="w-full bg-[#FAF7F2] text-[#1E1B18] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
+      className="w-full bg-[#0E0D0B] text-[#FAF6EE] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-t border-[#262018]"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <div className="text-center max-w-xl mx-auto mb-10 sm:mb-14">
-          <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-sans font-semibold uppercase text-[#9E7A32] block mb-1.5 sm:mb-2">
+          <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-sans font-semibold uppercase text-[#D8B26E] block mb-1.5 sm:mb-2">
             Signature Statements
           </span>
           <h2
             id="bestsellers-heading"
-            className="font-serif-luxury text-[#121110] font-normal tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+            className="font-serif-luxury text-[#FAF6EE] font-normal tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
           >
             Our Bestsellers
           </h2>
-          <p className="text-xs sm:text-sm text-[#6B6357] font-sans font-light mt-2 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-[#C5BCAD] font-sans font-light mt-2 max-w-md mx-auto">
             Timeless silhouettes adored by our community. Hand-finished in limited artisan batches.
           </p>
           <div className="w-12 h-[1px] bg-[#D8B26E] mx-auto mt-3.5 sm:mt-4" />
@@ -42,10 +42,10 @@ export const BestsellersSection = ({
               <div
                 key={product.id}
                 id={`product-card-${product.id}`}
-                className="group flex flex-col bg-white border border-[#E8DFC8] overflow-hidden relative luxury-card-hover"
+                className="group flex flex-col bg-[#14120F] border border-[#262018] overflow-hidden relative luxury-card-hover hover:border-[#D8B26E]/70 transition-all rounded-xs"
               >
                 {/* Image Container */}
-                <div className="relative w-full aspect-[4/5] bg-[#F5EFEB] overflow-hidden cursor-pointer" onClick={() => onQuickView(product)}>
+                <div className="relative w-full aspect-[4/5] bg-[#1A1713] overflow-hidden cursor-pointer" onClick={() => onQuickView(product)}>
                   <img
                     src={product.image}
                     alt={product.name}
@@ -56,7 +56,7 @@ export const BestsellersSection = ({
 
                   {/* Badge */}
                   {product.tag && (
-                    <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-[#121110]/95 backdrop-blur-xs text-[#EBD5A0] text-[8px] sm:text-[9px] uppercase font-sans font-semibold tracking-wider px-2 py-0.5 border border-[#D8B26E]/50 shadow-sm">
+                    <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-[#0A0908]/95 backdrop-blur-xs text-[#EBD5A0] text-[8px] sm:text-[9px] uppercase font-sans font-semibold tracking-wider px-2 py-0.5 border border-[#D8B26E]/50 shadow-sm">
                       {product.tag}
                     </span>
                   )}
@@ -71,7 +71,7 @@ export const BestsellersSection = ({
                     aria-label={`Add ${product.name} to wishlist`}
                     className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer z-10 tap-bounce ${isWishlisted
                         ? 'bg-[#D8B26E] text-black shadow-md heart-pop-anim'
-                        : 'bg-white/90 hover:bg-white text-[#4A453E] hover:text-[#121110] hover:scale-110'
+                        : 'bg-[#181512]/90 hover:bg-[#241F18] text-[#C5BCAD] hover:text-[#FAF6EE] hover:scale-110 border border-[#2C251C]'
                       }`}
                   >
                     <Heart
@@ -82,14 +82,14 @@ export const BestsellersSection = ({
                   </button>
 
                   {/* Quick Action Overlay on larger screens */}
-                  <div className="hidden md:flex absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent items-center justify-center gap-2 card-quick-actions">
+                  <div className="hidden md:flex absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent items-center justify-center gap-2 card-quick-actions">
                     <button
                       id={`btn-quick-view-${product.id}`}
                       onClick={(e) => {
                         e.stopPropagation();
                         onQuickView(product);
                       }}
-                      className="px-3 py-1.5 bg-white/95 hover:bg-white text-[#121110] text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm hover:scale-105 cursor-pointer"
+                      className="px-3 py-1.5 bg-[#1E1A15] hover:bg-[#2A231C] text-[#FAF6EE] border border-[#2C251C] text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-sm hover:scale-105 cursor-pointer"
                     >
                       <Eye size={13} />
                       <span>Quick View</span>
@@ -100,7 +100,7 @@ export const BestsellersSection = ({
                         e.stopPropagation();
                         onAddToCart(product);
                       }}
-                      className="px-3 py-1.5 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md hover:scale-105 cursor-pointer luxury-shimmer-btn"
+                      className="px-3 py-1.5 bg-gradient-to-r from-[#D8B26E] to-[#C89D52] hover:from-[#E5C378] hover:to-[#D8B26E] text-black text-[11px] font-sans font-semibold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md hover:scale-105 cursor-pointer"
                     >
                       <ShoppingBag size={13} />
                       <span>Add</span>
@@ -123,7 +123,7 @@ export const BestsellersSection = ({
                           />
                         ))}
                       </div>
-                      <span className="text-[9px] sm:text-[10px] text-[#7A7165] font-sans">
+                      <span className="text-[9px] sm:text-[10px] text-[#A89F91] font-sans">
                         {product.rating} ({product.reviewCount})
                       </span>
                     </div>
@@ -131,20 +131,20 @@ export const BestsellersSection = ({
                     {/* Product Name */}
                     <h3
                       onClick={() => onQuickView(product)}
-                      className="font-serif-luxury text-xs sm:text-sm md:text-base text-[#141210] font-normal leading-snug hover:text-[#9E7A32] transition-colors line-clamp-1 cursor-pointer"
+                      className="font-serif-luxury text-xs sm:text-sm md:text-base text-[#FAF6EE] font-normal leading-snug hover:text-[#D8B26E] transition-colors line-clamp-1 cursor-pointer"
                     >
                       {product.name}
                     </h3>
                   </div>
 
                   {/* Price & Action Row */}
-                  <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-[#F2ECE1] flex items-center justify-between">
+                  <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-[#262018] flex items-center justify-between">
                     <div>
-                      <span className="font-sans font-semibold text-xs sm:text-sm text-[#141210]">
+                      <span className="font-sans font-semibold text-xs sm:text-sm text-[#E5C378]">
                         ₹{product.price}
                       </span>
                       {product.originalPrice && (
-                        <span className="ml-1.5 text-[10px] sm:text-[11px] text-[#9E9486] line-through font-sans">
+                        <span className="ml-1.5 text-[10px] sm:text-[11px] text-[#7A7163] line-through font-sans">
                           ₹{product.originalPrice}
                         </span>
                       )}
@@ -155,14 +155,14 @@ export const BestsellersSection = ({
                       <button
                         onClick={() => onQuickView(product)}
                         aria-label="Quick View"
-                        className="p-1 sm:p-1.5 bg-[#FAF7F2] border border-[#D5CABB] text-black hover:bg-[#EBD5A0] transition-colors rounded-xs"
+                        className="p-1 sm:p-1.5 bg-[#1E1A15] border border-[#2C251C] text-[#FAF6EE] hover:bg-[#D8B26E] hover:text-black transition-colors rounded-xs"
                       >
                         <Eye size={12} />
                       </button>
                       <button
                         onClick={() => onAddToCart(product)}
                         aria-label="Add to bag"
-                        className="px-2 py-1 bg-[#0D0D0D] hover:bg-[#D8B26E] text-white hover:text-black text-[10px] font-sans uppercase font-medium tracking-wider transition-colors rounded-xs"
+                        className="px-2 py-1 bg-gradient-to-r from-[#D8B26E] to-[#C89D52] hover:from-[#E5C378] hover:to-[#D8B26E] text-black text-[10px] font-sans uppercase font-semibold tracking-wider transition-colors rounded-xs"
                       >
                         Add
                       </button>
@@ -179,7 +179,7 @@ export const BestsellersSection = ({
           <button
             id="btn-view-all-collections"
             onClick={onViewAllCollections}
-            className="px-8 sm:px-10 py-3 sm:py-3.5 bg-[#0D0D0D] hover:bg-[#D8B26E] text-[#FAF7F2] hover:text-black font-sans font-semibold text-[11px] sm:text-xs tracking-[0.2em] uppercase shadow-md inline-flex items-center gap-2 cursor-pointer luxury-shimmer-btn group"
+            className="px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-[#D8B26E] to-[#C89D52] hover:from-[#E5C378] hover:to-[#D8B26E] text-black font-sans font-semibold text-[11px] sm:text-xs tracking-[0.2em] uppercase shadow-xl inline-flex items-center gap-2 cursor-pointer group rounded-xs transition-all duration-300"
           >
             <span>VIEW ALL PIECES</span>
             <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />

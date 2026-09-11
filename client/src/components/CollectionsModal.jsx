@@ -31,46 +31,45 @@ export const CollectionsModal = ({
   }
 
   return (
-    <div 
+    <div
       id="collections-modal-backdrop"
       className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6"
     >
-      <div 
+      <div
         id="collections-modal-content"
-        className="bg-[#12100E] border border-[#2E271D] w-full max-w-5xl h-[90vh] flex flex-col shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 text-[#FAF6EE]"
+        className="bg-[#FAF7F2] border border-[#D8CEBA] w-full max-w-5xl h-[90vh] flex flex-col shadow-2xl relative animate-in fade-in zoom-in-95 duration-200"
       >
         {/* Modal Header */}
-        <div className="p-5 sm:p-6 border-b border-[#2C251C] bg-[#161310] flex items-center justify-between">
+        <div className="p-5 sm:p-6 border-b border-[#E8DFC8] bg-[#FAF4EB] flex items-center justify-between">
           <div>
-            <span className="text-[10px] uppercase font-sans tracking-[0.3em] text-[#D8B26E] font-semibold block mb-1">
+            <span className="text-[10px] uppercase font-sans tracking-[0.3em] text-[#9E7A32] font-semibold block mb-1">
               Curated Vault
             </span>
-            <h2 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#FAF6EE]">
+            <h2 className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#121110]">
               The Vast Culture Collection
             </h2>
           </div>
           <button
             onClick={onClose}
             aria-label="Close collections"
-            className="w-9 h-9 rounded-full bg-[#181512] border border-[#2C251C] hover:bg-[#D8B26E] hover:text-black text-[#FAF6EE] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-full bg-white border border-[#DCD3C0] hover:bg-black hover:text-white flex items-center justify-center transition-colors cursor-pointer"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Filter and Sort Bar */}
-        <div className="px-5 py-3.5 bg-[#14120F] border-b border-[#2C251C] flex flex-wrap items-center justify-between gap-3">
+        <div className="px-5 py-3.5 bg-white border-b border-[#E8DEC9] flex flex-wrap items-center justify-between gap-3">
           {/* Categories */}
           <div className="flex items-center gap-1.5 overflow-x-auto py-1">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 text-xs font-sans uppercase tracking-wider rounded-xs transition-colors cursor-pointer ${
-                  selectedCategory === cat
-                    ? 'bg-[#D8B26E] text-black font-semibold'
-                    : 'bg-[#1C1813] text-[#A89F91] border border-[#2C251C] hover:text-[#FAF6EE] hover:border-[#D8B26E]/40'
-                }`}
+                className={`px-3.5 py-1.5 text-xs font-sans uppercase tracking-wider rounded-xs transition-colors cursor-pointer ${selectedCategory === cat
+                    ? 'bg-[#0D0D0D] text-[#EBD5A0] font-semibold'
+                    : 'bg-[#FAF7F2] text-[#5C5548] hover:bg-[#EDE3D0]'
+                  }`}
               >
                 {cat}
               </button>
@@ -78,18 +77,18 @@ export const CollectionsModal = ({
           </div>
 
           {/* Sort */}
-          <div className="flex items-center gap-2 text-xs font-sans text-[#A89F91]">
-            <SlidersHorizontal size={14} className="text-[#D8B26E]" />
+          <div className="flex items-center gap-2 text-xs font-sans text-[#5C5548]">
+            <SlidersHorizontal size={14} className="text-[#9E7A32]" />
             <span>Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-[#181512] border border-[#2C251C] text-xs font-sans px-2.5 py-1.5 text-[#FAF6EE] outline-none cursor-pointer rounded-xs focus:border-[#D8B26E]"
+              className="bg-[#FAF7F2] border border-[#DCD3C0] text-xs font-sans px-2.5 py-1.5 text-[#1A1A1A] outline-none cursor-pointer"
             >
-              <option value="featured" className="bg-[#181512] text-[#FAF6EE]">Featured</option>
-              <option value="price-low" className="bg-[#181512] text-[#FAF6EE]">Price: Low to High</option>
-              <option value="price-high" className="bg-[#181512] text-[#FAF6EE]">Price: High to Low</option>
-              <option value="rating" className="bg-[#181512] text-[#FAF6EE]">Top Rated</option>
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
             </select>
           </div>
         </div>
@@ -101,9 +100,9 @@ export const CollectionsModal = ({
             return (
               <div
                 key={product.id}
-                className="bg-[#14120F] border border-[#262018] overflow-hidden flex flex-col justify-between group hover:border-[#D8B26E]/70 hover:shadow-lg transition-all"
+                className="bg-white border border-[#E8DFC8] overflow-hidden flex flex-col justify-between group hover:border-[#D8B26E] hover:shadow-md transition-all"
               >
-                <div className="relative aspect-square bg-[#1A1713] overflow-hidden">
+                <div className="relative aspect-square bg-[#F5EFEB] overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -112,15 +111,15 @@ export const CollectionsModal = ({
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   {product.tag && (
-                    <span className="absolute top-2 left-2 bg-[#0A0908]/90 border border-[#D8B26E]/40 text-[#D8B26E] text-[8px] uppercase tracking-wider px-1.5 py-0.5">
+                    <span className="absolute top-2 left-2 bg-[#121110] text-[#EBD5A0] text-[8px] uppercase tracking-wider px-1.5 py-0.5">
                       {product.tag}
                     </span>
                   )}
                   <button
                     onClick={() => onToggleWishlist(product)}
-                    className="absolute top-2 right-2 p-1.5 bg-black/60 backdrop-blur-xs rounded-full hover:bg-[#1E1A15] text-[#FAF6EE] cursor-pointer transition-colors"
+                    className="absolute top-2 right-2 p-1.5 bg-white/80 backdrop-blur-xs rounded-full hover:bg-white text-black cursor-pointer"
                   >
-                    <Heart size={14} fill={isWishlisted ? '#D8B26E' : 'none'} className={isWishlisted ? 'text-[#D8B26E]' : 'text-[#FAF6EE]'} />
+                    <Heart size={14} fill={isWishlisted ? '#D8B26E' : 'none'} className={isWishlisted ? 'text-[#D8B26E]' : 'text-black'} />
                   </button>
                 </div>
 
@@ -128,33 +127,33 @@ export const CollectionsModal = ({
                   <div>
                     <div className="flex items-center gap-1 text-[#D8B26E] mb-1">
                       <Star size={10} fill="#D8B26E" strokeWidth={0} />
-                      <span className="text-[10px] text-[#A89F91] font-sans">
+                      <span className="text-[10px] text-[#786F61] font-sans">
                         {product.rating} ({product.reviewCount})
                       </span>
                     </div>
-                    <h3 
+                    <h3
                       onClick={() => onQuickView(product)}
-                      className="font-serif-luxury text-sm text-[#FAF6EE] font-normal leading-snug line-clamp-1 cursor-pointer hover:text-[#D8B26E] transition-colors"
+                      className="font-serif-luxury text-sm text-[#141210] font-normal leading-snug line-clamp-1 cursor-pointer hover:text-[#9E7A32]"
                     >
                       {product.name}
                     </h3>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-[#262018] flex items-center justify-between">
-                    <span className="font-sans font-semibold text-xs text-[#E5C378]">
+                  <div className="mt-3 pt-2 border-t border-[#F2ECE1] flex items-center justify-between">
+                    <span className="font-sans font-semibold text-xs text-[#141210]">
                       ₹{product.price}
                     </span>
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => onQuickView(product)}
-                        className="p-1.5 bg-[#1E1A15] hover:bg-[#D8B26E] hover:text-black text-[#FAF6EE] border border-[#2C251C] text-[10px] cursor-pointer transition-colors"
+                        className="p-1.5 bg-[#FAF7F2] hover:bg-[#EBD5A0] text-black border border-[#DCD3C0] text-[10px] cursor-pointer"
                         title="Quick View"
                       >
                         <Eye size={13} />
                       </button>
                       <button
                         onClick={() => onAddToCart(product)}
-                        className="px-2 py-1 bg-gradient-to-r from-[#D8B26E] to-[#C89D52] hover:from-[#E5C378] hover:to-[#D8B26E] text-black text-[10px] font-sans uppercase font-semibold tracking-wider cursor-pointer transition-all shadow-xs"
+                        className="px-2 py-1 bg-[#0D0D0D] hover:bg-[#D8B26E] text-white hover:text-black text-[10px] font-sans uppercase tracking-wider cursor-pointer"
                       >
                         Add
                       </button>
