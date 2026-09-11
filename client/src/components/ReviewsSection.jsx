@@ -19,17 +19,17 @@ export const ReviewsSection = () => {
     <section
       id="customer-reviews"
       aria-label="Customer Testimonials"
-      className="w-full bg-[#0A0908] border-t border-[#262018] text-[#FAF6EE] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
+      className="w-full bg-[#FAF7F2] border-t border-[#EAE2D2] text-[#1E1B18] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <div className="text-center max-w-xl mx-auto mb-10 sm:mb-14">
-          <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-sans font-semibold uppercase text-[#D8B26E] block mb-1.5 sm:mb-2">
+          <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-sans font-semibold uppercase text-[#9E7A32] block mb-1.5 sm:mb-2">
             Client Impressions
           </span>
           <h2
             id="reviews-heading"
-            className="font-serif-luxury text-[#FAF6EE] font-normal tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+            className="font-serif-luxury text-[#121110] font-normal tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
           >
             Loved by Thousands
           </h2>
@@ -37,7 +37,7 @@ export const ReviewsSection = () => {
             {[...Array(5)].map((_, i) => (
               <Star key={i} size={12} fill="#D8B26E" strokeWidth={0} />
             ))}
-            <span className="text-xs text-[#A89F91] font-sans ml-1.5">4.9 / 5.0 (2,400+ Verified Reviews)</span>
+            <span className="text-xs text-[#5E574B] font-sans ml-1.5">4.9 / 5.0 (2,400+ Verified Reviews)</span>
           </div>
           <div className="w-10 h-[1px] bg-[#D8B26E] mx-auto mt-3" />
         </div>
@@ -48,9 +48,9 @@ export const ReviewsSection = () => {
             <div
               key={review.id}
               id={`review-card-${review.id}`}
-              className="bg-[#14120F] border border-[#262018] p-6 lg:p-7 flex flex-col justify-between hover:border-[#D8B26E]/70 hover:shadow-xl transition-all duration-300 relative group rounded-xs"
+              className="bg-white border border-[#E8DFC8] p-6 lg:p-7 flex flex-col justify-between hover:border-[#D8B26E] hover:shadow-md transition-all duration-300 relative group"
             >
-              <Quote size={28} className="text-[#D8B26E] opacity-25 absolute top-5 right-5 pointer-events-none" />
+              <Quote size={28} className="text-[#EBD5A0] opacity-40 absolute top-5 right-5 pointer-events-none" />
 
               <div>
                 {/* 5 Gold Stars */}
@@ -61,13 +61,13 @@ export const ReviewsSection = () => {
                 </div>
 
                 {/* Short Review */}
-                <p className="font-serif-luxury italic text-base lg:text-[17px] text-[#E8E1D5] leading-relaxed mb-6 font-normal">
+                <p className="font-serif-luxury italic text-base lg:text-[17px] text-[#2C2720] leading-relaxed mb-6 font-normal">
                   {review.content}
                 </p>
               </div>
 
               {/* Customer Profile Row */}
-              <div className="pt-4 border-t border-[#262018] flex items-center gap-3.5">
+              <div className="pt-4 border-t border-[#F2ECE1] flex items-center gap-3.5">
                 <img
                   src={review.avatar}
                   alt={review.name}
@@ -79,14 +79,14 @@ export const ReviewsSection = () => {
                 />
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h3 className="font-sans font-semibold text-xs tracking-wider text-[#FAF6EE]">
+                    <h3 className="font-sans font-semibold text-xs tracking-wider text-[#121110]">
                       {review.name}
                     </h3>
                     {review.verified && (
-                      <CheckCircle2 size={13} className="text-[#D8B26E]" />
+                      <CheckCircle2 size={13} className="text-[#8C6D2D]" />
                     )}
                   </div>
-                  <span className="text-[10px] lg:text-[11px] text-[#A89F91] font-sans">
+                  <span className="text-[10px] lg:text-[11px] text-[#786F61] font-sans">
                     {review.location} · {review.productName}
                   </span>
                 </div>
@@ -97,8 +97,8 @@ export const ReviewsSection = () => {
 
         {/* Mobile Swipeable Carousel Card */}
         <div className="block md:hidden">
-          <div className="bg-[#14120F] border border-[#262018] p-5 sm:p-6 relative shadow-md rounded-xs">
-            <Quote size={24} className="text-[#D8B26E] opacity-25 absolute top-4 right-4 pointer-events-none" />
+          <div className="bg-white border border-[#E8DFC8] p-5 sm:p-6 relative shadow-xs">
+            <Quote size={24} className="text-[#EBD5A0] opacity-50 absolute top-4 right-4 pointer-events-none" />
 
             <div className="flex text-[#D8B26E] mb-3">
               {[...Array(currentMobileReview.rating)].map((_, i) => (
@@ -106,11 +106,11 @@ export const ReviewsSection = () => {
               ))}
             </div>
 
-            <p className="font-serif-luxury italic text-base text-[#E8E1D5] leading-relaxed mb-5 font-normal">
+            <p className="font-serif-luxury italic text-base text-[#2C2720] leading-relaxed mb-5 font-normal">
               "{currentMobileReview.content}"
             </p>
 
-            <div className="pt-3.5 border-t border-[#262018] flex items-center justify-between">
+            <div className="pt-3.5 border-t border-[#F2ECE1] flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img
                   src={currentMobileReview.avatar}
@@ -123,14 +123,14 @@ export const ReviewsSection = () => {
                 />
                 <div>
                   <div className="flex items-center gap-1">
-                    <h3 className="font-sans font-semibold text-xs text-[#FAF6EE]">
+                    <h3 className="font-sans font-semibold text-xs text-[#121110]">
                       {currentMobileReview.name}
                     </h3>
                     {currentMobileReview.verified && (
-                      <CheckCircle2 size={12} className="text-[#D8B26E]" />
+                      <CheckCircle2 size={12} className="text-[#8C6D2D]" />
                     )}
                   </div>
-                  <span className="text-[10px] text-[#A89F91] font-sans">
+                  <span className="text-[10px] text-[#786F61] font-sans">
                     {currentMobileReview.location}
                   </span>
                 </div>
@@ -141,14 +141,14 @@ export const ReviewsSection = () => {
                 <button
                   onClick={handlePrev}
                   aria-label="Previous testimonial"
-                  className="w-7 h-7 rounded-full border border-[#2C251C] bg-[#1E1A15] text-[#FAF6EE] hover:bg-[#D8B26E] hover:text-black flex items-center justify-center transition-colors cursor-pointer"
+                  className="w-7 h-7 rounded-full border border-[#D8CEBA] bg-[#FAF7F2] hover:bg-[#D8B26E] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <ChevronLeft size={14} />
                 </button>
                 <button
                   onClick={handleNext}
                   aria-label="Next testimonial"
-                  className="w-7 h-7 rounded-full border border-[#2C251C] bg-[#1E1A15] text-[#FAF6EE] hover:bg-[#D8B26E] hover:text-black flex items-center justify-center transition-colors cursor-pointer"
+                  className="w-7 h-7 rounded-full border border-[#D8CEBA] bg-[#FAF7F2] hover:bg-[#D8B26E] hover:text-white flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <ChevronRight size={14} />
                 </button>
@@ -163,7 +163,7 @@ export const ReviewsSection = () => {
                 key={i}
                 onClick={() => setMobileIndex(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${mobileIndex === i ? 'w-5 bg-[#D8B26E]' : 'w-1.5 bg-[#2C251C]'
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${mobileIndex === i ? 'w-5 bg-[#D8B26E]' : 'w-1.5 bg-[#D5CABB]'
                   }`}
               />
             ))}

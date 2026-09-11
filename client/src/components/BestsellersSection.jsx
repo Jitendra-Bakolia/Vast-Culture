@@ -70,8 +70,8 @@ export const BestsellersSection = ({
                     }}
                     aria-label={`Add ${product.name} to wishlist`}
                     className={`absolute top-2 right-2 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer z-10 tap-bounce ${isWishlisted
-                        ? 'bg-[#D8B26E] text-black shadow-md heart-pop-anim'
-                        : 'bg-[#181512]/90 hover:bg-[#241F18] text-[#C5BCAD] hover:text-[#FAF6EE] hover:scale-110 border border-[#2C251C]'
+                      ? 'bg-[#D8B26E] text-black shadow-md heart-pop-anim'
+                      : 'bg-[#181512]/90 hover:bg-[#241F18] text-[#C5BCAD] hover:text-[#FAF6EE] hover:scale-110 border border-[#2C251C]'
                       }`}
                   >
                     <Heart
@@ -183,7 +183,6 @@ export const BestsellersSection = ({
           >
             <span>VIEW ALL PIECES</span>
             <ArrowRight size={14} className="group-hover:translate-x-1.5 transition-transform duration-300" />
-          </button>
         </div>
       </div>
     </section>
