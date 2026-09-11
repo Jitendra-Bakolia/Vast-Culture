@@ -26,67 +26,66 @@ export const DesktopFooter = ({ onShopClick }) => {
     <footer 
       id="footer"
       aria-label="Footer"
-      className="w-full bg-[#0D0D0D] border-t border-[#23201B] text-[#FAF7F2] pt-20 pb-12 px-8"
+      className="w-full bg-[#0A0908] border-t border-[#262018] text-[#FAF6EE] pt-8 pb-6 px-6 sm:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-[#26221C]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 pb-6 border-b border-[#262018]">
           {/* Left Column: Brand Statement & Socials (4 Cols) */}
           <div className="md:col-span-4 flex flex-col items-start pr-4">
-            <div className="cursor-pointer mb-6 flex flex-col leading-none">
-              <span className="font-cinzel-luxury text-[22px] tracking-[0.32em] font-semibold text-[#D8B26E]">
+            <div className="cursor-pointer mb-3 flex flex-col leading-none">
+              <span className="font-cinzel-luxury text-[17px] tracking-[0.24em] font-semibold text-[#D8B26E]">
                 VAST
               </span>
-              <span className="font-cinzel-luxury text-[14px] tracking-[0.48em] font-medium text-[#C49E59] -mt-0.5">
+              <span className="font-cinzel-luxury text-[10px] tracking-[0.4em] font-medium text-[#C49E59] mt-0.5">
                 CULTURE
               </span>
             </div>
 
-            <div className="font-serif-luxury text-base text-[#D4CDC3] leading-relaxed mb-8 italic space-y-1">
+            <div className="font-serif-luxury text-xs text-[#A89F91] leading-relaxed mb-4 italic space-y-0.5">
               <p>Jewelry that defines you.</p>
-              <p>Crafted with purpose,</p>
-              <p>made to be cherished.</p>
+              <p>Crafted with purpose, made to be cherished.</p>
             </div>
 
             {/* Social Media Icons */}
-            <div className="flex items-center space-x-4 text-[#C4B7A6]">
+            <div className="flex items-center space-x-2.5 text-[#A89F91]">
               <a
                 href="#instagram"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
-                <Instagram size={17} />
+                <Instagram size={13} />
               </a>
               <a
                 href="#facebook"
                 aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
-                <Facebook size={17} />
+                <Facebook size={13} />
               </a>
               <a
                 href="#pinterest"
                 aria-label="Pinterest"
-                className="w-9 h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
-                <PinterestIcon size={16} />
+                <PinterestIcon size={13} />
               </a>
               <a
                 href="#youtube"
                 aria-label="YouTube"
-                className="w-9 h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
-                <Youtube size={17} />
+                <Youtube size={13} />
               </a>
             </div>
           </div>
 
           {/* Center-Left: QUICK LINKS (2 Cols) */}
           <div className="md:col-span-2">
-            <h3 className="font-sans font-semibold text-xs tracking-[0.2em] uppercase text-[#D8B26E] mb-6">
+            <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-2.5">
               QUICK LINKS
             </h3>
-            <ul className="space-y-3 font-sans text-xs text-[#B5ABA0]">
+            <ul className="space-y-1.5 font-sans text-[11.5px] text-[#A89F91]">
               {[
                 { name: 'Home', link: '#hero' },
                 { name: 'Collections', action: onShopClick },
@@ -98,14 +97,14 @@ export const DesktopFooter = ({ onShopClick }) => {
                   {item.action ? (
                     <button
                       onClick={item.action}
-                      className="hover:text-[#FAF7F2] hover:translate-x-1 inline-block transition-all cursor-pointer text-left"
+                      className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all cursor-pointer text-left"
                     >
                       {item.name}
                     </button>
                   ) : (
                     <a
                       href={item.link}
-                      className="hover:text-[#FAF7F2] hover:translate-x-1 inline-block transition-all"
+                      className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
                     >
                       {item.name}
                     </a>
@@ -117,15 +116,15 @@ export const DesktopFooter = ({ onShopClick }) => {
 
           {/* Center-Right: CUSTOMER CARE (3 Cols) */}
           <div className="md:col-span-3">
-            <h3 className="font-sans font-semibold text-xs tracking-[0.2em] uppercase text-[#D8B26E] mb-6">
+            <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-2.5">
               CUSTOMER CARE
             </h3>
-            <ul className="space-y-3 font-sans text-xs text-[#B5ABA0]">
+            <ul className="space-y-1.5 font-sans text-[11.5px] text-[#A89F91]">
               {['Shipping Policy', 'Return & Exchange', "FAQ's", 'Track Order', 'Terms & Conditions'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
-                    className="hover:text-[#FAF7F2] hover:translate-x-1 inline-block transition-all"
+                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
                   >
                     {item}
                   </a>
@@ -136,16 +135,16 @@ export const DesktopFooter = ({ onShopClick }) => {
 
           {/* Right: SHOP INFO & NEWSLETTER (3 Cols) */}
           <div className="md:col-span-3">
-            <div className="mb-8">
-              <h3 className="font-sans font-semibold text-xs tracking-[0.2em] uppercase text-[#D8B26E] mb-4">
+            <div className="mb-4">
+              <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-2">
                 SHOP INFO
               </h3>
-              <ul className="space-y-2.5 font-sans text-xs text-[#B5ABA0]">
+              <ul className="space-y-1.5 font-sans text-[11.5px] text-[#A89F91]">
                 {['Payment Methods', 'Size Guide', 'Jewelry Care'].map((item) => (
                   <li key={item}>
                     <a
                       href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="hover:text-[#FAF7F2] hover:translate-x-1 inline-block transition-all"
+                      className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
                     >
                       {item}
                     </a>
@@ -156,16 +155,16 @@ export const DesktopFooter = ({ onShopClick }) => {
 
             {/* Newsletter Subscription */}
             <div>
-              <h3 className="font-sans font-semibold text-xs tracking-[0.2em] uppercase text-[#D8B26E] mb-2">
+              <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-1">
                 NEWSLETTER
               </h3>
-              <p className="text-xs text-[#A89E92] font-sans font-light mb-3 leading-relaxed">
+              <p className="text-[11px] text-[#A89F91] font-sans font-light mb-2 leading-relaxed">
                 Subscribe to get special offers and updates.
               </p>
 
               {subscribed ? (
-                <div className="bg-[#1C281F] border border-[#3E6547] text-[#9FE3AC] px-3.5 py-2.5 text-xs flex items-center gap-2">
-                  <Check size={14} />
+                <div className="bg-[#14261B] border border-[#235E35] text-[#4ADE80] px-3 py-2 text-xs flex items-center gap-2 rounded-xs">
+                  <Check size={13} />
                   <span>Thank you for subscribing!</span>
                 </div>
               ) : (
@@ -177,14 +176,14 @@ export const DesktopFooter = ({ onShopClick }) => {
                     placeholder="Enter your email"
                     required
                     aria-label="Email for newsletter"
-                    className="w-full bg-[#171513] border border-[#383229] focus:border-[#D8B26E] text-[#FAF7F2] placeholder-[#736B60] text-xs px-3.5 py-3 pr-10 outline-none transition-colors"
+                    className="w-full bg-[#14120F] border border-[#262018] focus:border-[#D8B26E] text-[#FAF6EE] placeholder-[#706759] text-xs px-3 py-1.5 pr-8 outline-none rounded-xs transition-colors"
                   />
                   <button
                     type="submit"
                     aria-label="Subscribe"
-                    className="absolute right-1 top-1 bottom-1 px-3 bg-[#D8B26E] hover:bg-[#EBD5A0] text-[#0D0D0D] flex items-center justify-center transition-colors cursor-pointer"
+                    className="absolute right-1 top-1 bottom-1 px-2.5 bg-[#D8B26E] hover:bg-[#E5C378] text-black flex items-center justify-center rounded-xs transition-colors cursor-pointer"
                   >
-                    <ArrowRight size={14} />
+                    <ArrowRight size={12} />
                   </button>
                 </form>
               )}
@@ -193,16 +192,16 @@ export const DesktopFooter = ({ onShopClick }) => {
         </div>
 
         {/* Bottom Bar: Copyright & Payment Badges */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8A8174] font-sans">
-          <p>© 2025 Vast Culture. All Rights Reserved.</p>
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#706759] font-sans">
+          <p>© {new Date().getFullYear()} Vast Culture. All Rights Reserved.</p>
 
           {/* Payment Icons */}
-          <div className="flex items-center gap-2.5">
-            <span className="text-[11px] uppercase tracking-wider text-[#696155] mr-1">We Accept:</span>
-            {['Visa', 'Mastercard', 'PayPal', 'UPI'].map((badge) => (
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] uppercase tracking-wider text-[#706759] mr-1">We Accept:</span>
+            {['Visa', 'Mastercard', 'UPI', 'Net Banking'].map((badge) => (
               <span
                 key={badge}
-                className="px-2.5 py-1 bg-[#1A1815] border border-[#2B2721] text-[10px] font-medium tracking-wide text-[#DDD5C7] rounded-xs"
+                className="px-2 py-0.5 bg-[#14120F] border border-[#262018] text-[9px] font-medium tracking-wide text-[#A89F91] rounded-xs"
               >
                 {badge}
               </span>

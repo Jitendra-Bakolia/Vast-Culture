@@ -257,7 +257,7 @@ export default function App() {
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="w-full min-h-screen bg-[#0D0D0D] text-[#1A1A1A] relative selection:bg-[#D8B26E] selection:text-black has-mobile-bottom-bar">
+    <div className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#0D0D0D] text-[#FAF6EE] relative selection:bg-[#D8B26E] selection:text-black has-mobile-bottom-bar">
       {/* 0. MAIN LUXURY PRELOADER & SPLASH SCREEN */}
       <MainLoader
         isLoading={isInitialLoading}
@@ -294,7 +294,7 @@ export default function App() {
 
       {/* 3. DYNAMIC PAGE ROUTER: EITHER SHOP / ALL COLLECTIONS VAULT PAGE OR HOME LUXURY PAGE */}
       {currentPage === 'shop' ? (
-        <main id="main-content-shop">
+        <main id="main-content-shop" className="w-full max-w-full overflow-x-hidden">
           <ShopPage
             wishlistIds={wishlistIds}
             onToggleWishlist={handleToggleWishlist}
@@ -306,7 +306,7 @@ export default function App() {
           />
         </main>
       ) : (
-        <main id="main-content-home">
+        <main id="main-content-home" className="w-full max-w-full overflow-x-hidden">
           {/* A. HERO SHOWCASE WITH DYNAMIC SLIDER & CURATED SETS */}
           <HeroSection
             onShopClick={() => handleNavigateToShop('All')}

@@ -22,7 +22,7 @@ export const AnnouncementBar = ({
     <aside 
       id="announcement-bar"
       aria-label="Promotional Announcement"
-      className="w-full bg-[#0E0D0C] border-b border-[#D8B26E]/25 text-[#E0D8CE] py-1.5 px-3 sm:px-6 transition-all duration-300 relative z-30 select-none"
+      className="w-full max-w-full overflow-hidden bg-[#0E0D0C] border-b border-[#D8B26E]/25 text-[#E0D8CE] py-1.5 px-3 sm:px-6 transition-all duration-300 relative z-30 select-none"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         {/* Centered Luxury Messaging */}

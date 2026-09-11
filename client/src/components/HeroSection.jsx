@@ -89,12 +89,12 @@ export const HeroSection = ({
         {/* Curated Set Thumbnails Selector */}
         <div
           id="hero-curated-thumbnails"
-          className="w-full md:w-auto flex md:flex-col gap-3 sm:gap-4 pt-4 md:pt-0 md:pl-8 border-t border-white/10 md:border-t-0"
+          className="w-full md:w-auto flex md:flex-col gap-3 sm:gap-4 pt-4 md:pt-0 md:pl-8 border-t border-white/10 md:border-t-0 min-w-0 max-w-full overflow-hidden"
         >
           <div className="text-[10px] uppercase tracking-[0.2em] text-[#C4B7A6] font-sans text-left md:text-right hidden sm:block mb-0.5">
             Curated Sets
           </div>
-          <div className="flex md:flex-col gap-2.5 sm:gap-3 overflow-x-auto pb-1 md:pb-0">
+          <div className="flex md:flex-col gap-2.5 sm:gap-3 overflow-x-auto pb-1 md:pb-0 max-w-full touch-pan-x overscroll-x-contain">
             {HERO_THUMBNAILS.map((thumb, index) => {
               const isActive = activeSlideIndex === index;
               return (

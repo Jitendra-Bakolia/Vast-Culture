@@ -21,7 +21,7 @@ export const Header = ({
   return (
     <header
       id="main-header"
-      className="w-full bg-[#0D0D0D]/90 backdrop-blur-md border-b border-[#23201B]/80 text-[#FAF7F2] sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 transition-all"
+      className="w-full max-w-full overflow-hidden bg-[#0D0D0D]/90 backdrop-blur-md border-b border-[#23201B]/80 text-[#FAF7F2] sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 transition-all"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Mobile Left: Hamburger Menu Button */}
@@ -30,7 +30,7 @@ export const Header = ({
             id="btn-mobile-menu"
             onClick={onOpenMobileNav}
             aria-label="Open navigation menu"
-            className="text-[#E5DFD5] hover:text-[#D8B26E] p-1.5 -ml-1.5 transition-colors cursor-pointer"
+            className="text-[#E5DFD5] hover:text-[#D8B26E] p-1.5 transition-colors cursor-pointer"
           >
             <Menu size={22} strokeWidth={1.5} />
           </button>

@@ -22,7 +22,7 @@ export const ServicesSection = () => {
     <section
       id="services-section"
       aria-label="Why Choose Vast Culture"
-      className="w-full bg-[#F2ECE1] border-y border-[#E5DEC9] text-[#1E1B18] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
+      className="w-full max-w-full overflow-hidden bg-[#F2ECE1] border-y border-[#E5DEC9] text-[#1E1B18] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}

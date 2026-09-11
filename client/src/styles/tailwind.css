@@ -15,10 +15,25 @@
     --color-black-surface: #141414;
   }
 
+  html,
   body {
     font-family: var(--font-sans);
     background-color: #0E0D0C;
-    color: #1A1A1A;
+    color: #FAF6EE;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
     overflow-x: hidden;
+    position: relative;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    overflow-x: hidden;
+    position: relative;
   }
 }

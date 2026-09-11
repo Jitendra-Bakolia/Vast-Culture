@@ -8,9 +8,21 @@
 // Global mobile touch & viewport handling
 html, body {
   @include touch-optimized;
+  overflow-x: clip;
   overflow-x: hidden;
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
+  position: relative;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-x: hidden;
+  position: relative;
 }
 
 // Smooth momentum scrolling for mobile lists & drawers

@@ -13,7 +13,7 @@ export const BestsellersSection = ({
     <section
       id="bestsellers"
       aria-label="Our Bestsellers"
-      className="w-full bg-[#0E0D0B] text-[#FAF6EE] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-t border-[#262018]"
+      className="w-full max-w-full overflow-hidden bg-[#0E0D0B] text-[#FAF6EE] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-t border-[#262018]"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}

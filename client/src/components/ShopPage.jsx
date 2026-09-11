@@ -84,9 +84,9 @@ export const ShopPage = ({
   };
 
   return (
-    <div id="shop-page-container" className="w-full min-h-screen bg-[#FAF7F2] text-[#1E1B18] pb-16 animate-in fade-in duration-300">
+    <div id="shop-page-container" className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#FAF7F2] text-[#1E1B18] pb-16 animate-in fade-in duration-300">
       {/* 1. SHOP HEADER & BREADCRUMB BANNER */}
-      <div className="bg-[#0D0D0D] border-b border-[#24201A] text-[#FAF7F2] py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="bg-[#0D0D0D] border-b border-[#24201A] text-[#FAF7F2] py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden max-w-full">
         {/* Subtle decorative glow */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#D8B26E]/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -142,7 +142,7 @@ export const ShopPage = ({
       <div className="sticky top-[58px] sm:top-[64px] z-30 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E5DEC9] px-4 sm:px-6 lg:px-8 py-3.5 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
           {/* Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none max-w-full touch-pan-x overscroll-x-contain">
             {categories.map((cat) => {
               const isActive = selectedCategory.toLowerCase() === cat.toLowerCase();
               return (

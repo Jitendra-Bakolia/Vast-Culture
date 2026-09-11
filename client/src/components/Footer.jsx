@@ -33,109 +33,106 @@ export const Footer = ({
   };
 
   return (
-    <footer 
+    <footer
       id="footer"
       aria-label="Footer"
-      className="w-full bg-[#0D0D0D] border-t border-[#23201B] text-[#FAF7F2] pt-14 sm:pt-18 md:pt-20 pb-10 sm:pb-12 px-4 sm:px-6 lg:px-8"
+      className="w-full max-w-full overflow-hidden bg-[#0A0908] border-t border-[#262018] text-[#FAF6EE] pt-8 sm:pt-10 pb-5 sm:pb-6 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Main Footer Grid: 1 col on mobile, 2 col on tablet, 12 cols on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 pb-12 sm:pb-16 border-b border-[#26221C]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 pb-6 sm:pb-7 border-b border-[#262018]">
           {/* Brand Statement & Socials (5 Cols on desktop) */}
           <div className="lg:col-span-5 flex flex-col items-start lg:pr-6">
-            <div 
+            <div
               onClick={onNavigateToHome}
-              className="cursor-pointer mb-5 flex items-center gap-3 leading-none select-none group"
+              className="cursor-pointer mb-3 flex items-center gap-2.5 leading-none select-none group"
             >
               <div className="relative flex-shrink-0 flex items-center justify-center">
                 <img
                   src={logo}
                   alt="Vast Culture"
-                  className="w-10 h-10 object-contain drop-shadow-[0_1px_8px_rgba(216,178,110,0.35)] group-hover:scale-105 transition-transform"
+                  className="w-7.5 h-7.5 sm:w-8 sm:h-8 object-contain drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)] group-hover:scale-105 transition-transform"
                 />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-cinzel-luxury text-[20px] sm:text-[22px] tracking-[0.24em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors">
+                <span className="font-cinzel-luxury text-[16px] sm:text-[18px] tracking-[0.22em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors">
                   VAST
                 </span>
-                <span className="font-cinzel-luxury text-[11px] sm:text-[12px] tracking-[0.44em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors mt-0.5">
+                <span className="font-cinzel-luxury text-[9.5px] sm:text-[10.5px] tracking-[0.4em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors mt-0.5">
                   CULTURE
                 </span>
               </div>
             </div>
 
-            <div className="font-serif-luxury text-sm sm:text-base text-[#D4CDC3] leading-relaxed mb-6 sm:mb-7 italic space-y-0.5">
+            <div className="font-serif-luxury text-xs text-[#A89F91] leading-relaxed mb-3.5 italic space-y-0.5">
               <p>Jewelry that defines you.</p>
-              <p>Crafted with purpose,</p>
-              <p>made to be cherished forever.</p>
+              <p>Crafted with purpose, cherished forever.</p>
             </div>
 
             {/* Social Media Icons */}
-            <div className="flex items-center space-x-3 sm:space-x-4 text-[#C4B7A6]">
+            <div className="flex items-center space-x-2 sm:space-x-2.5 text-[#A89F91]">
               <a
                 href="#instagram"
                 aria-label="Instagram"
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
-                <Instagram size={16} />
+                <Instagram size={13} />
               </a>
               <a
                 href="#facebook"
                 aria-label="Facebook"
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
-                <Facebook size={16} />
+                <Facebook size={13} />
               </a>
               <a
                 href="#pinterest"
                 aria-label="Pinterest"
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
-                <PinterestIcon size={15} />
+                <PinterestIcon size={13} />
               </a>
               <a
                 href="#youtube"
                 aria-label="YouTube"
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#181614] border border-[#2B2721] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
+                className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
-                <Youtube size={16} />
+                <Youtube size={13} />
               </a>
             </div>
           </div>
 
           {/* Center-Left: QUICK LINKS */}
-          <div className="lg:col-span-2 border-t border-[#23201B] lg:border-t-0 pt-4 lg:pt-0">
+          <div className="lg:col-span-2 border-t border-[#262018] lg:border-t-0 pt-3 lg:pt-0">
             <button
               onClick={() => toggleAccordion('links')}
-              className="w-full flex items-center justify-between lg:pointer-events-none text-left mb-3 lg:mb-5 cursor-pointer"
+              className="w-full flex items-center justify-between lg:pointer-events-none text-left mb-2 lg:mb-2.5 cursor-pointer"
             >
-              <h3 className="font-sans font-semibold text-xs tracking-[0.2em] uppercase text-[#D8B26E]">
+              <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E]">
                 QUICK LINKS
               </h3>
               <ChevronDown
-                size={16}
-                className={`text-[#D8B26E] lg:hidden transition-transform ${
-                  openAccordion === 'links' ? 'rotate-180' : ''
-                }`}
+                size={14}
+                className={`text-[#D8B26E] lg:hidden transition-transform ${openAccordion === 'links' ? 'rotate-180' : ''
+                  }`}
               />
             </button>
-            <ul className={`space-y-2.5 sm:space-y-3 font-sans text-xs text-[#B5ABA0] ${
-              openAccordion === 'links' ? 'block pb-3' : 'hidden lg:block'
-            }`}>
+            <ul className={`space-y-1.5 font-sans text-[11.5px] text-[#A89F91] ${openAccordion === 'links' ? 'block pb-2' : 'hidden lg:block'
+              }`}>
               {[
                 { name: 'Home', action: () => onNavigateToHome?.() },
-                { name: 'Shop All Pieces', action: () => onNavigateToShop?.() },
-                { name: 'Earrings Collection', action: () => onNavigateToShop?.('Earrings') },
-                { name: 'Necklaces & Pendants', action: () => onNavigateToShop?.('Necklaces') },
-                { name: 'Bracelets & Cuffs', action: () => onNavigateToShop?.('Bracelets') },
-                { name: 'Statement Rings', action: () => onNavigateToShop?.('Rings') },
+                { name: 'Shop All', action: () => onNavigateToShop?.() },
+                { name: 'Earrings', action: () => onNavigateToShop?.('Earrings') },
+                { name: 'Necklaces', action: () => onNavigateToShop?.('Necklaces') },
+                { name: 'Bracelets', action: () => onNavigateToShop?.('Bracelets') },
+                { name: 'Rings', action: () => onNavigateToShop?.('Rings') },
                 { name: 'About Us', action: () => onNavigateSection?.('our-story') },
-                { name: 'Contact Us', action: () => onNavigateSection?.('footer') },
+                { name: 'Contact', action: () => onNavigateSection?.('footer') },
               ].map((link) => (
                 <li key={link.name}>
                   <button
                     onClick={link.action}
-                    className="hover:text-[#FAF7F2] hover:translate-x-1 inline-block transition-all text-left cursor-pointer"
+                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all text-left cursor-pointer"
                   >
                     {link.name}
                   </button>
@@ -145,29 +142,27 @@ export const Footer = ({
           </div>
 
           {/* Center-Right: CUSTOMER CARE */}
-          <div className="lg:col-span-2 border-t border-[#23201B] lg:border-t-0 pt-4 lg:pt-0">
+          <div className="lg:col-span-2 border-t border-[#262018] lg:border-t-0 pt-3 lg:pt-0">
             <button
               onClick={() => toggleAccordion('care')}
-              className="w-full flex items-center justify-between lg:pointer-events-none text-left mb-3 lg:mb-5 cursor-pointer"
+              className="w-full flex items-center justify-between lg:pointer-events-none text-left mb-2 lg:mb-2.5 cursor-pointer"
             >
-              <h3 className="font-sans font-semibold text-xs tracking-[0.2em] uppercase text-[#D8B26E]">
+              <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E]">
                 CUSTOMER CARE
               </h3>
               <ChevronDown
-                size={16}
-                className={`text-[#D8B26E] lg:hidden transition-transform ${
-                  openAccordion === 'care' ? 'rotate-180' : ''
-                }`}
+                size={14}
+                className={`text-[#D8B26E] lg:hidden transition-transform ${openAccordion === 'care' ? 'rotate-180' : ''
+                  }`}
               />
             </button>
-            <ul className={`space-y-2.5 sm:space-y-3 font-sans text-xs text-[#B5ABA0] ${
-              openAccordion === 'care' ? 'block pb-3' : 'hidden lg:block'
-            }`}>
-              {['Track Your Order', 'Shipping & Delivery', 'Returns & Exchanges', 'Jewelry Care Guide', 'FAQs'].map((item) => (
+            <ul className={`space-y-1.5 font-sans text-[11.5px] text-[#A89F91] ${openAccordion === 'care' ? 'block pb-2' : 'hidden lg:block'
+              }`}>
+              {['Track Order', 'Shipping & Delivery', 'Returns & Exchanges', 'Jewelry Care', 'FAQs'].map((item) => (
                 <li key={item}>
                   <a
                     href="#care"
-                    className="hover:text-[#FAF7F2] hover:translate-x-1 inline-block transition-all"
+                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
                   >
                     {item}
                   </a>
@@ -177,21 +172,21 @@ export const Footer = ({
           </div>
 
           {/* Right Column: NEWSLETTER */}
-          <div className="lg:col-span-3 border-t border-[#23201B] lg:border-t-0 pt-6 lg:pt-0">
-            <h3 className="font-sans font-semibold text-xs tracking-[0.2em] uppercase text-[#D8B26E] mb-3">
+          <div className="lg:col-span-3 border-t border-[#262018] lg:border-t-0 pt-3 lg:pt-0">
+            <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-1.5">
               THE VAST SOCIETY
             </h3>
-            <p className="text-xs text-[#B5ABA0] font-sans font-light leading-relaxed mb-4">
-              Subscribe for early access to private vault drops, styling guides, and 10% off your first order.
+            <p className="text-[11px] text-[#A89F91] font-sans font-light leading-relaxed mb-2.5">
+              Subscribe for private vault drops, styling guides, and 10% off your first order.
             </p>
 
             {subscribed ? (
-              <div className="p-3 bg-[#1C281F] border border-[#376642] text-[#A6E8B5] text-xs font-sans flex items-center gap-2 rounded-xs">
-                <Check size={16} />
+              <div className="p-2.5 bg-[#14261B] border border-[#235E35] text-[#4ADE80] text-xs font-sans flex items-center gap-2 rounded-xs">
+                <Check size={14} />
                 <span>Welcome to the Vast Society.</span>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2.5">
+              <form onSubmit={handleSubscribe} className="space-y-1.5">
                 <div className="relative flex items-center">
                   <input
                     type="email"
@@ -199,18 +194,18 @@ export const Footer = ({
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-[#181614] border border-[#332D24] focus:border-[#D8B26E] px-3.5 py-2.5 text-xs text-[#FAF7F2] placeholder-[#786F63] outline-none rounded-xs font-sans transition-colors"
+                    className="w-full bg-[#14120F] border border-[#262018] focus:border-[#D8B26E] pl-3 pr-8 py-1.5 text-xs text-[#FAF6EE] placeholder-[#706759] outline-none rounded-xs font-sans transition-colors"
                   />
                   <button
                     type="submit"
                     aria-label="Subscribe"
-                    className="absolute right-1 px-3 py-1.5 bg-[#D8B26E] text-black hover:bg-[#EBD5A0] text-xs transition-colors rounded-xs cursor-pointer"
+                    className="absolute right-1 px-2.5 py-1 bg-[#D8B26E] text-black hover:bg-[#E5C378] text-xs transition-colors rounded-xs cursor-pointer"
                   >
-                    <ArrowRight size={13} />
+                    <ArrowRight size={12} />
                   </button>
                 </div>
-                <span className="text-[10px] text-[#736B5E] font-sans block">
-                  By joining, you agree to our Privacy Policy. Unsubscribe anytime.
+                <span className="text-[10px] text-[#706759] font-sans block">
+                  By joining, you agree to our Privacy Policy.
                 </span>
               </form>
             )}
@@ -218,17 +213,17 @@ export const Footer = ({
         </div>
 
         {/* Bottom Bar: Copyright & Payment Badges */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-[#786F63]">
+        <div className="pt-4 sm:pt-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-sans text-[#706759]">
           <div className="text-center sm:text-left">
-            <p>© {new Date().getFullYear()} VAST CULTURE. All rights reserved. Crafted with timeless precision.</p>
+            <p>© {new Date().getFullYear()} VAST CULTURE. All rights reserved.</p>
           </div>
 
           {/* Payment Method Badges */}
-          <div className="flex items-center space-x-2 text-[10px] uppercase tracking-wider text-[#A69A89]">
-            <span className="px-2 py-1 bg-[#1A1815] border border-[#2B2720] rounded-xs">UPI</span>
-            <span className="px-2 py-1 bg-[#1A1815] border border-[#2B2720] rounded-xs">VISA</span>
-            <span className="px-2 py-1 bg-[#1A1815] border border-[#2B2720] rounded-xs">MASTERCARD</span>
-            <span className="px-2 py-1 bg-[#1A1815] border border-[#2B2720] rounded-xs">NET BANKING</span>
+          <div className="flex items-center justify-center sm:justify-end flex-wrap gap-1.5 text-[9px] uppercase tracking-wider text-[#A89F91]">
+            <span className="px-2 py-0.5 bg-[#14120F] border border-[#262018] rounded-xs">UPI</span>
+            <span className="px-2 py-0.5 bg-[#14120F] border border-[#262018] rounded-xs">VISA</span>
+            <span className="px-2 py-0.5 bg-[#14120F] border border-[#262018] rounded-xs">MASTERCARD</span>
+            <span className="px-2 py-0.5 bg-[#14120F] border border-[#262018] rounded-xs">NET BANKING</span>
           </div>
         </div>
       </div>

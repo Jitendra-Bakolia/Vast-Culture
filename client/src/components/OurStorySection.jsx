@@ -7,7 +7,7 @@ export const OurStorySection = () => {
     <section
       id="our-story"
       aria-label="Our Story & Philosophy"
-      className="w-full bg-[#FAF7F2] text-[#1E1B18] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
+      className="w-full max-w-full overflow-hidden bg-[#FAF7F2] text-[#1E1B18] py-14 sm:py-18 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 sm:gap-12 lg:gap-16">

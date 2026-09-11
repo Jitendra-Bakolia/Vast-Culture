@@ -89,16 +89,16 @@ export const MainLoader = ({
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Loading Vast Culture Luxury Boutique"
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center loader-vignette-bg text-[#FAF7F2] select-none transition-all duration-750 ease-out ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center loader-vignette-bg text-[#FAF7F2] select-none transition-all duration-750 ease-out w-full max-w-full overflow-hidden ${
         isExiting 
-          ? 'opacity-0 scale-[1.05] pointer-events-none blur-sm' 
+          ? 'opacity-0 scale-100 pointer-events-none blur-sm' 
           : 'opacity-100 scale-100'
       }`}
     >
       {/* 1. Atmospheric Ambient Layer: Floating Stardust & Classical Atelier Accents */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Deep molten gold core backlight behind center */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[540px] md:w-[680px] h-[380px] sm:h-[540px] md:h-[680px] rounded-full bg-[#D8B26E]/14 blur-[110px] animate-core-aura" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[540px] md:w-[680px] h-[280px] sm:h-[540px] md:h-[680px] max-w-[85vw] max-h-[85vw] rounded-full bg-[#D8B26E]/14 blur-[110px] animate-core-aura" />
 
         {/* Ambient floating golden diamond dust particles */}
         <div className="absolute top-[20%] left-[18%] w-1 h-1 rounded-full bg-[#FFF5DC] shadow-[0_0_6px_#D8B26E] animate-stardust-1" />
