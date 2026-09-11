@@ -6,7 +6,6 @@ import {
   Copy,
   ChevronLeft,
   ChevronRight,
-  Menu,
   Gift,
   Crown,
   Gem,
@@ -149,7 +148,7 @@ export const AnnouncementBar = ({
         onMouseLeave={() => setIsPaused(false)}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-1 sm:gap-2">
-          {/* Left Controls: < (Back) and ☰ (Three Line All Offers Button) */}
+          {/* Left Controls: < (Back) and 🎁 (All Offers & Gifts Button) */}
           <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
             <button
               id="btn-announcement-prev"
@@ -164,11 +163,11 @@ export const AnnouncementBar = ({
             <button
               id="btn-announcement-offers-modal"
               onClick={handleOpenModal}
-              title="View all offers (☰)"
-              aria-label="View all promotional offers modal"
-              className="text-[#D8B26E] hover:text-[#FAF6EE] p-1 rounded-sm hover:bg-[#D8B26E]/10 transition-colors cursor-pointer shrink-0 tap-bounce flex items-center justify-center gap-1 group"
+              title="View all gifts & offers (Maison Privileges)"
+              aria-label="View all promotional gifts and offers modal"
+              className="text-[#D8B26E] hover:text-[#FAF6EE] p-1 rounded-sm hover:bg-[#D8B26E]/15 transition-colors cursor-pointer shrink-0 tap-bounce flex items-center justify-center gap-1 group"
             >
-              <Menu size={13} strokeWidth={2.2} />
+              <Gift size={13} strokeWidth={2.2} className="text-[#D8B26E] group-hover:scale-110 group-hover:rotate-6 transition-transform duration-200" />
               <span className="hidden xl:inline text-[9px] uppercase tracking-wider text-[#D8B26E] font-medium font-sans">
                 Offers ({ANNOUNCEMENT_OFFERS.length})
               </span>
@@ -244,7 +243,7 @@ export const AnnouncementBar = ({
         </div>
       </aside>
 
-      {/* 3-Line Button Triggered Modal: All Available Offers & Privileges */}
+      {/* Gift Button Triggered Modal: All Available Offers & Privileges */}
       {isOffersModalOpen && (
         <div
           id="offers-modal-overlay"
