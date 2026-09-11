@@ -18,7 +18,7 @@ export default defineConfig(() => {
     },
 
     server: {
-      allowedHosts: ['.ngrok-free.app'],
+      allowedHosts: true,
 
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},

@@ -1,0 +1,93 @@
+# ==============================================================================
+# Vast Culture — Development Orchestration with Hot Module Replacement (HMR) & Ngrok
+# ==============================================================================
+# Usage:
+#   docker compose -f docker-compose.dev.yml up --build
+# ==============================================================================
+
+services:
+  client:
+    container_name: vast-culture-client-dev
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    ports:
+      - "${CLIENT_PORT:-3000}:3000"
+    volumes:
+      # Mount source code for live hot-reload
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+      - ./client/index.html:/app/index.html
+      # Preserve container node_modules
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+      - vast-culture-network
+
+  ngrok:
+    container_name: vast-culture-ngrok-dev
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "http"
+      - "client:3000"
+      - "--log=stdout"
+      - "--log-format=logfmt"
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN:-2S3ER37dEVIkIX99wU8bt29CXDS_44tLxwfiYBduQKMWpthDY}
+    ports:
+      - "${NGROK_WEB_PORT:-4041}:4040"
+    depends_on:
+      - client
+    networks:
+      - vast-culture-network
+
+  # Helper service to extract and prominently display the live public ngrok URL in logs
+  ngrok-url:
+    container_name: vast-culture-ngrok-url
+    image: node:22-alpine
+    restart: on-failure
+    depends_on:
+      - ngrok
+    networks:
+      - vast-culture-network
+    environment:
+      - NGROK_WEB_PORT=${NGROK_WEB_PORT:-4041}
+    command:
+      - "node"
+      - "-e"
+      - |
+        async function reportTunnel() {
+          console.log('⏳ Waiting for ngrok tunnel initialization...');
+          for (let attempt = 1; attempt <= 45; attempt++) {
+            try {
+              const res = await fetch('http://ngrok:4040/api/tunnels');
+              if (res.ok) {
+                const data = await res.json();
+                const tunnel = data.tunnels && data.tunnels[0];
+                if (tunnel && tunnel.public_url) {
+                  const inspectorPort = process.env.NGROK_WEB_PORT || '4041';
+                  console.log('\n' + '='.repeat(70));
+                  console.log('  🚀 [VAST CULTURE DEVELOPMENT TUNNEL ACTIVE]');
+                  console.log('  🌐 LIVE PUBLIC NGROK URL : ' + tunnel.public_url);
+                  console.log('  📊 WEB INSPECTOR         : http://localhost:' + inspectorPort);
+                  console.log('  🔌 FORWARDING TO         : ' + (tunnel.config?.addr || 'http://client:3000'));
+                  console.log('='.repeat(70) + '\n');
+                  return;
+                }
+              }
+            } catch (err) {}
+            await new Promise((r) => setTimeout(r, 1000));
+          }
+          console.warn('⚠️ Ngrok tunnel did not report a URL within 45 seconds.');
+        }
+        reportTunnel();
+
+networks:
+  vast-culture-network:
+    name: vast-culture-network-dev
+    driver: bridge

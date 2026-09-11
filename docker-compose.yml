@@ -1,0 +1,124 @@
+# ==============================================================================
+# Vast Culture — Multi-Server Architecture Orchestration (Docker Compose)
+# ==============================================================================
+# Architecture ready for:
+#   1. Frontend Client (Active)
+#   2. Multi-Service Backend APIs (Auth, Catalog, Checkout, Payments)
+#   3. Databases (PostgreSQL, MongoDB, Redis Cache)
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. CLIENT / FRONTEND WEB APPLICATION (Active)
+  # High-performance Nginx production web server serving the React SPA
+  # ----------------------------------------------------------------------------
+  client:
+    container_name: vast-culture-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "${CLIENT_PORT:-3000}:80"
+    restart: unless-stopped
+    networks:
+      - vast-culture-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ----------------------------------------------------------------------------
+  # 2. FUTURE BACKEND SERVERS BLUEPRINT (Uncomment when adding server services)
+  # ----------------------------------------------------------------------------
+  # api-gateway:
+  #   container_name: vast-culture-api-gateway
+  #   build:
+  #     context: ./server
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     - NODE_ENV=production
+  #     - PORT=5000
+  #     - DATABASE_URL=postgresql://${POSTGRES_USER:-vastadmin}:${POSTGRES_PASSWORD:-secret}@postgres:5432/${POSTGRES_DB:-vastculture}
+  #     - REDIS_URL=redis://redis:6379
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   restart: unless-stopped
+  #   networks:
+  #     - vast-culture-network
+
+  # ----------------------------------------------------------------------------
+  # 3. FUTURE DATABASES BLUEPRINT (Uncomment when adding database services)
+  # ----------------------------------------------------------------------------
+  # postgres:
+  #   image: postgres:16-alpine
+  #   container_name: vast-culture-postgres
+  #   environment:
+  #     POSTGRES_USER: ${POSTGRES_USER:-vastadmin}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secret}
+  #     POSTGRES_DB: ${POSTGRES_DB:-vastculture}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+  #   networks:
+  #     - vast-culture-network
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-vastadmin} -d ${POSTGRES_DB:-vastculture}"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+  # mongodb:
+  #   image: mongo:7-jammy
+  #   container_name: vast-culture-mongodb
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-vastadmin}
+  #     MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-secret}
+  #   volumes:
+  #     - mongo_data:/data/db
+  #   ports:
+  #     - "27017:27017"
+  #   restart: unless-stopped
+  #   networks:
+  #     - vast-culture-network
+
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: vast-culture-redis
+  #   command: redis-server --save 60 1 --loglevel warning
+  #   volumes:
+  #     - redis_data:/data
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+  #   networks:
+  #     - vast-culture-network
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
+
+# ------------------------------------------------------------------------------
+# NETWORKS: Bridge network for service discovery & microservices communication
+# ------------------------------------------------------------------------------
+networks:
+  vast-culture-network:
+    name: vast-culture-network
+    driver: bridge
+
+# ------------------------------------------------------------------------------
+# VOLUMES: Persistent data storage for future database containers
+# ------------------------------------------------------------------------------
+# volumes:
+#   postgres_data:
+#   mongo_data:
+#   redis_data:
