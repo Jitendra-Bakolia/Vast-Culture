@@ -78,12 +78,12 @@ export const Header = ({
         </div>
 
         {/* Center: Desktop Navigation Links */}
-        <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center space-x-6 lg:space-x-8">
+        <nav id="desktop-nav" aria-label="Main Navigation" className="hidden md:flex items-center space-x-2.5 lg:space-x-6 xl:space-x-8">
           {/* Home Tab */}
           <button
             id="nav-link-home"
             onClick={onNavigateToHome}
-            className={`text-xs lg:text-[13px] tracking-[0.14em] uppercase font-sans transition-colors relative py-1 cursor-pointer ${currentPage === 'home'
+            className={`text-[11px] lg:text-xs xl:text-[13px] tracking-[0.08em] lg:tracking-[0.14em] uppercase font-sans transition-colors relative py-1 cursor-pointer ${currentPage === 'home'
               ? 'text-[#D8B26E] font-semibold after:w-full'
               : 'text-[#E5DFD5] hover:text-[#D8B26E]'
               } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300`}
@@ -95,7 +95,7 @@ export const Header = ({
           <button
             id="nav-link-shop"
             onClick={() => onNavigateToShop('All')}
-            className={`text-xs lg:text-[13px] tracking-[0.14em] uppercase font-sans transition-colors relative py-1 cursor-pointer ${currentPage === 'shop'
+            className={`text-[11px] lg:text-xs xl:text-[13px] tracking-[0.08em] lg:tracking-[0.14em] uppercase font-sans transition-colors relative py-1 cursor-pointer ${currentPage === 'shop'
               ? 'text-[#D8B26E] font-semibold after:w-full'
               : 'text-[#E5DFD5] hover:text-[#D8B26E]'
               } after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 flex items-center gap-1.5`}
@@ -110,7 +110,7 @@ export const Header = ({
           <button
             id="nav-link-about-us"
             onClick={() => onNavigateSection('our-story')}
-            className="text-xs lg:text-[13px] tracking-[0.14em] uppercase font-sans text-[#E5DFD5] hover:text-[#D8B26E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
+            className="text-[11px] lg:text-xs xl:text-[13px] tracking-[0.08em] lg:tracking-[0.14em] uppercase font-sans text-[#E5DFD5] hover:text-[#D8B26E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
           >
             About Us
           </button>
@@ -119,7 +119,7 @@ export const Header = ({
           <button
             id="nav-link-reviews"
             onClick={() => onNavigateSection('customer-reviews')}
-            className="text-xs lg:text-[13px] tracking-[0.14em] uppercase font-sans text-[#E5DFD5] hover:text-[#D8B26E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
+            className="text-[11px] lg:text-xs xl:text-[13px] tracking-[0.08em] lg:tracking-[0.14em] uppercase font-sans text-[#E5DFD5] hover:text-[#D8B26E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
           >
             Reviews
           </button>
@@ -128,7 +128,7 @@ export const Header = ({
           <button
             id="nav-link-contact"
             onClick={() => onNavigateSection('footer')}
-            className="text-xs lg:text-[13px] tracking-[0.14em] uppercase font-sans text-[#E5DFD5] hover:text-[#D8B26E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
+            className="text-[11px] lg:text-xs xl:text-[13px] tracking-[0.08em] lg:tracking-[0.14em] uppercase font-sans text-[#E5DFD5] hover:text-[#D8B26E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#D8B26E] hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
           >
             Contact
           </button>
@@ -193,10 +193,10 @@ export const Header = ({
               id="btn-account-login"
               onClick={() => onOpenAuth('login')}
               aria-label="Sign In / Register"
-              className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-xs border border-[#3D3528] bg-[#141210] text-[#EBD5A0] text-[11px] font-sans uppercase tracking-wider cursor-pointer luxury-outline-btn"
+              className="hidden md:flex items-center gap-1.5 px-2 lg:px-2.5 py-1 rounded-xs border border-[#3D3528] bg-[#141210] text-[#EBD5A0] text-[11px] font-sans uppercase tracking-wider cursor-pointer luxury-outline-btn"
             >
               <UserIcon size={14} className="text-[#D8B26E]" />
-              <span>Sign In</span>
+              <span className="hidden lg:inline">Sign In</span>
             </button>
           )}
 
