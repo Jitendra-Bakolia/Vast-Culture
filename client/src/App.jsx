@@ -22,20 +22,110 @@ import { MobileBottomBar } from './components/MobileBottomBar';
 import { MainLoader } from './components/MainLoader';
 import { CheckCircle } from 'lucide-react';
 
-export default function App() {
-  // Current Page State: 'home' | 'shop' | 'auth'
-  const [currentPage, setCurrentPage] = useState(() => {
-    const hash = window.location.hash.toLowerCase();
-    if (hash.includes('login') || hash.includes('register') || hash.includes('auth')) {
-      return 'auth';
-    }
-    if (hash.includes('shop') || hash.includes('collections')) {
-      return 'shop';
-    }
-    return 'home';
-  });
+// Helper to parse clean pathname routes and auto-sanitize legacy hashes
+function parseRouteFromLocation() {
+  const pathname = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
 
-  const [shopCategory, setShopCategory] = useState('All');
+  // 1. Sanitize legacy hashes if present (e.g. #login, #shop, #register)
+  if (hash) {
+    let cleanPath = '/';
+    let targetPage = 'home';
+    let targetMode = 'login';
+    let targetCategory = 'All';
+
+    if (hash.includes('register')) {
+      cleanPath = '/register';
+      targetPage = 'auth';
+      targetMode = 'register';
+    } else if (hash.includes('login') || hash.includes('auth')) {
+      cleanPath = '/login';
+      targetPage = 'auth';
+      targetMode = 'login';
+    } else if (hash.includes('shop') || hash.includes('collections')) {
+      if (hash.includes('earrings')) {
+        cleanPath = '/shop/earrings';
+        targetCategory = 'Earrings';
+      } else if (hash.includes('necklaces')) {
+        cleanPath = '/shop/necklaces';
+        targetCategory = 'Necklaces';
+      } else if (hash.includes('bracelets')) {
+        cleanPath = '/shop/bracelets';
+        targetCategory = 'Bracelets';
+      } else if (hash.includes('rings')) {
+        cleanPath = '/shop/rings';
+        targetCategory = 'Rings';
+      } else {
+        cleanPath = '/shop';
+        targetCategory = 'All';
+      }
+      targetPage = 'shop';
+    } else if (hash.includes('our-story') || hash.includes('about')) {
+      cleanPath = '/about';
+      targetPage = 'home';
+    } else if (hash.includes('reviews')) {
+      cleanPath = '/reviews';
+      targetPage = 'home';
+    } else if (hash.includes('contact')) {
+      cleanPath = '/contact';
+      targetPage = 'home';
+    }
+
+    try {
+      window.history.replaceState(null, '', cleanPath);
+    } catch {
+      // ignore
+    }
+    return { page: targetPage, authMode: targetMode, category: targetCategory, section: hash.replace('#', '') };
+  }
+
+  // 2. Parse clean pathname
+  if (pathname.startsWith('/register')) {
+    return { page: 'auth', authMode: 'register', category: 'All' };
+  }
+  if (pathname.startsWith('/login') || pathname.startsWith('/auth')) {
+    return { page: 'auth', authMode: 'login', category: 'All' };
+  }
+  if (pathname.startsWith('/forgot-password')) {
+    return { page: 'auth', authMode: 'forgot', category: 'All' };
+  }
+  if (pathname.startsWith('/shop') || pathname.startsWith('/collections')) {
+    const parts = pathname.split('/').filter(Boolean);
+    let cat = 'All';
+    if (parts.length > 1) {
+      const seg = parts[1].toLowerCase();
+      if (seg === 'earrings') cat = 'Earrings';
+      else if (seg === 'necklaces') cat = 'Necklaces';
+      else if (seg === 'bracelets') cat = 'Bracelets';
+      else if (seg === 'rings') cat = 'Rings';
+    } else {
+      const searchParams = new URLSearchParams(window.location.search);
+      const queryCat = searchParams.get('category');
+      if (queryCat) {
+        cat = queryCat.charAt(0).toUpperCase() + queryCat.slice(1);
+      }
+    }
+    return { page: 'shop', authMode: 'login', category: cat };
+  }
+  if (pathname.startsWith('/about') || pathname.startsWith('/our-story')) {
+    return { page: 'home', authMode: 'login', category: 'All', section: 'our-story' };
+  }
+  if (pathname.startsWith('/reviews')) {
+    return { page: 'home', authMode: 'login', category: 'All', section: 'customer-reviews' };
+  }
+  if (pathname.startsWith('/contact')) {
+    return { page: 'home', authMode: 'login', category: 'All', section: 'footer' };
+  }
+
+  return { page: 'home', authMode: 'login', category: 'All' };
+}
+
+export default function App() {
+  const initialRoute = parseRouteFromLocation();
+
+  // Current Page State: 'home' | 'shop' | 'auth'
+  const [currentPage, setCurrentPage] = useState(initialRoute.page);
+  const [shopCategory, setShopCategory] = useState(initialRoute.category || 'All');
 
   // Main App Initial Luxury Loader State
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -54,11 +144,7 @@ export default function App() {
   });
 
   const [authIntent, setAuthIntent] = useState('general');
-  const [authInitialMode, setAuthInitialMode] = useState(() => {
-    const hash = window.location.hash.toLowerCase();
-    if (hash.includes('register')) return 'register';
-    return 'login';
-  });
+  const [authInitialMode, setAuthInitialMode] = useState(initialRoute.authMode || 'login');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [pendingBuyItem, setPendingBuyItem] = useState(null);
 
@@ -91,60 +177,93 @@ export default function App() {
     }, 2800);
   };
 
-  // Sync with browser hash / back-forward navigation
+  // Sync with browser back-forward navigation (HTML5 History API popstate)
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.toLowerCase();
-      if (hash.includes('register')) {
-        setCurrentPage('auth');
-        setAuthInitialMode('register');
-      } else if (hash.includes('login') || hash.includes('auth')) {
-        setCurrentPage('auth');
-        setAuthInitialMode('login');
-      } else if (hash.includes('shop') || hash.includes('collections')) {
-        setCurrentPage('shop');
-        if (hash.includes('earrings')) setShopCategory('Earrings');
-        else if (hash.includes('necklaces')) setShopCategory('Necklaces');
-        else if (hash.includes('bracelets')) setShopCategory('Bracelets');
-        else if (hash.includes('rings')) setShopCategory('Rings');
-        else setShopCategory('All');
-      } else {
-        setCurrentPage('home');
+    const handlePopState = () => {
+      const route = parseRouteFromLocation();
+      setCurrentPage(route.page);
+      setShopCategory(route.category);
+      if (route.page === 'auth') {
+        setAuthInitialMode(route.authMode);
+      }
+      if (route.section) {
+        setTimeout(() => {
+          const el = document.getElementById(route.section);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
       }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Navigation functions
+  // On initial mount, if section was targeted in clean route (e.g. /about or /reviews), scroll smoothly
+  useEffect(() => {
+    const route = parseRouteFromLocation();
+    if (route.section) {
+      setTimeout(() => {
+        const el = document.getElementById(route.section);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 400);
+    }
+  }, []);
+
+  // Clean Navigation functions without '#'
   const handleNavigateToHome = () => {
     setCurrentPage('home');
-    window.location.hash = '#home';
+    if (window.location.pathname !== '/' && window.location.pathname !== '/home') {
+      window.history.pushState(null, '', '/');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNavigateToShop = (category = 'All') => {
     setShopCategory(category);
     setCurrentPage('shop');
-    window.location.hash = category !== 'All' ? `#shop-${category.toLowerCase()}` : '#shop';
+    const path = category !== 'All' ? `/shop/${category.toLowerCase()}` : '/shop';
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     showToast(category !== 'All' ? `Browsing ${category} Collection` : 'All Collections Vault');
+  };
+
+  const handleCategoryChange = (category) => {
+    setShopCategory(category);
+    const path = category !== 'All' ? `/shop/${category.toLowerCase()}` : '/shop';
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path);
+    }
   };
 
   const handleNavigateToAuth = (mode = 'login', intent = 'general') => {
     setAuthIntent(intent);
     setAuthInitialMode(mode);
     setCurrentPage('auth');
-    window.location.hash = mode === 'register' ? '#register' : '#login';
+    const path = mode === 'register' ? '/register' : mode === 'forgot' ? '/forgot-password' : '/login';
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Section navigation (scrolling)
+  // Clean section navigation (scrolling without '#')
   const handleNavigateSection = (sectionId) => {
+    const routeMap = {
+      'our-story': '/about',
+      'customer-reviews': '/reviews',
+      'footer': '/contact',
+      'bestsellers': '/',
+      'hero': '/',
+    };
+    const path = routeMap[sectionId] || '/';
+
     if (currentPage !== 'home') {
       setCurrentPage('home');
-      window.location.hash = `#${sectionId}`;
+      if (window.location.pathname !== path) {
+        window.history.pushState(null, '', path);
+      }
       setTimeout(() => {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -152,6 +271,9 @@ export default function App() {
         }
       }, 100);
     } else {
+      if (window.location.pathname !== path) {
+        window.history.pushState(null, '', path);
+      }
       const el = document.getElementById(sectionId);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
@@ -170,14 +292,14 @@ export default function App() {
 
     if (authIntent === 'checkout') {
       setCurrentPage('home');
-      window.location.hash = '#home';
+      window.history.pushState(null, '', '/');
       setIsCheckoutOpen(true);
       showToast(`Welcome ${user.name}! Proceeding to secure checkout.`);
     } else if (authIntent === 'buy-now' && pendingBuyItem) {
       handleAddToCart(pendingBuyItem.product, pendingBuyItem.quantity);
       setPendingBuyItem(null);
       setCurrentPage('home');
-      window.location.hash = '#home';
+      window.history.pushState(null, '', '/');
       setIsCheckoutOpen(true);
       showToast(`Welcome ${user.name}! Proceeding to instant checkout.`);
     } else {
@@ -319,6 +441,7 @@ export default function App() {
             onQuickView={(p) => setQuickViewProduct(p)}
             onNavigateToHome={handleNavigateToHome}
             initialCategory={shopCategory}
+            onCategoryChange={handleCategoryChange}
           />
         </main>
       ) : currentPage === 'auth' ? (
@@ -329,6 +452,13 @@ export default function App() {
             onLoginSuccess={handleLoginSuccess}
             onNavigateToHome={handleNavigateToHome}
             onNavigateToShop={handleNavigateToShop}
+            onModeChange={(newMode) => {
+              setAuthInitialMode(newMode);
+              const path = newMode === 'register' ? '/register' : newMode === 'forgot' ? '/forgot-password' : '/login';
+              if (window.location.pathname !== path) {
+                window.history.pushState(null, '', path);
+              }
+            }}
             currentUser={currentUser}
             onLogout={handleLogout}
           />

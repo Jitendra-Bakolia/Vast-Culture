@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ALL_COLLECTION_PRODUCTS } from '../data/mockData';
 import {
   Star,
@@ -25,6 +25,7 @@ export const ShopPage = ({
   onQuickView,
   onNavigateToHome,
   initialCategory = 'All',
+  onCategoryChange,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,6 +33,18 @@ export const ShopPage = ({
   const [priceFilter, setPriceFilter] = useState('all');
   const [selectedTag, setSelectedTag] = useState('all');
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
+
+  // Sync category when initialCategory prop changes (e.g. from browser back/forward or navigation)
+  useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [initialCategory]);
+
+  const handleCategorySelect = (cat) => {
+    setSelectedCategory(cat);
+    onCategoryChange?.(cat);
+  };
 
   // Categories list
   const categories = ['All', 'Earrings', 'Necklaces', 'Bracelets', 'Rings'];
@@ -76,7 +89,7 @@ export const ShopPage = ({
   const hasActiveFilters = selectedCategory !== 'All' || selectedTag !== 'all' || priceFilter !== 'all' || searchQuery.trim() !== '';
 
   const clearAllFilters = () => {
-    setSelectedCategory('All');
+    handleCategorySelect('All');
     setSelectedTag('all');
     setPriceFilter('all');
     setSearchQuery('');
@@ -149,7 +162,7 @@ export const ShopPage = ({
                 <button
                   key={cat}
                   id={`tab-category-${cat.toLowerCase()}`}
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => handleCategorySelect(cat)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-sans tracking-wider uppercase transition-all whitespace-nowrap cursor-pointer ${isActive
                       ? 'bg-[#0D0D0D] text-[#FAF7F2] font-semibold shadow-xs'
                       : 'bg-white border border-[#DCD3C0] text-[#595247] hover:border-[#0D0D0D] hover:text-[#0D0D0D]'

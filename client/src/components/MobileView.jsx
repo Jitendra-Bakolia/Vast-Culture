@@ -76,7 +76,17 @@ export const MobileView = ({
       <ReviewsSection isMobileLayout={true} />
 
       {/* 8. MOBILE ACCORDION FOOTER */}
-      <MobileFooter onShopClick={onViewAllCollections} />
+      <MobileFooter 
+        onShopClick={onViewAllCollections} 
+        onNavigate={(section) => {
+          if (section === 'hero') {
+            onNavigateHome?.();
+          } else {
+            const el = document.getElementById(section);
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }
+        }} 
+      />
     </div>
   );
 };

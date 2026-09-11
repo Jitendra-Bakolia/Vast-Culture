@@ -8,7 +8,7 @@ const PinterestIcon = ({ size = 16 }) => (
   </svg>
 );
 
-export const MobileFooter = ({ onShopClick }) => {
+export const MobileFooter = ({ onShopClick, onNavigate }) => {
   const [openSection, setOpenSection] = useState(null);
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -35,7 +35,10 @@ export const MobileFooter = ({ onShopClick }) => {
       className="w-full bg-[#0A0908] border-t border-[#262018] text-[#FAF6EE] pt-6 pb-5 px-4"
     >
       {/* Centered Brand Logo Lockup */}
-      <div className="flex items-center justify-center gap-2 mb-2.5 select-none">
+      <div 
+        onClick={() => onNavigate?.('hero')}
+        className="flex items-center justify-center gap-2 mb-2.5 select-none cursor-pointer"
+      >
         <div className="relative flex-shrink-0 flex items-center justify-center">
           <img
             src={logo}
@@ -62,28 +65,36 @@ export const MobileFooter = ({ onShopClick }) => {
       {/* Social Icons Centered */}
       <div className="flex items-center justify-center space-x-2.5 text-[#A89F91] mb-4">
         <a
-          href="#instagram"
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Instagram"
           className="w-7 h-7 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center text-[#D8B26E]"
         >
           <Instagram size={13} />
         </a>
         <a
-          href="#facebook"
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Facebook"
           className="w-7 h-7 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center text-[#D8B26E]"
         >
           <Facebook size={13} />
         </a>
         <a
-          href="#pinterest"
+          href="https://pinterest.com"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="Pinterest"
           className="w-7 h-7 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center text-[#D8B26E]"
         >
           <PinterestIcon size={12} />
         </a>
         <a
-          href="#youtube"
+          href="https://youtube.com"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="YouTube"
           className="w-7 h-7 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center text-[#D8B26E]"
         >
@@ -110,25 +121,20 @@ export const MobileFooter = ({ onShopClick }) => {
           {openSection === 'quick-links' && (
             <ul className="pb-2.5 pt-0.5 space-y-1.5 font-sans text-[11px] text-[#A89F91] pl-2">
               {[
-                { name: 'Home', link: '#hero' },
+                { name: 'Home', action: () => onNavigate?.('hero') },
                 { name: 'Collections', action: onShopClick },
                 { name: 'Shop All Jewelry', action: onShopClick },
-                { name: 'About Us', link: '#our-story' },
-                { name: 'Contact Us', link: '#footer' },
+                { name: 'About Us', action: () => onNavigate?.('our-story') },
+                { name: 'Contact Us', action: () => onNavigate?.('footer') },
               ].map((item) => (
                 <li key={item.name}>
-                  {item.action ? (
-                    <button
-                      onClick={item.action}
-                      className="hover:text-white block py-0.5 text-left cursor-pointer"
-                    >
-                      {item.name}
-                    </button>
-                  ) : (
-                    <a href={item.link} className="hover:text-white block py-0.5">
-                      {item.name}
-                    </a>
-                  )}
+                  <button
+                    type="button"
+                    onClick={item.action}
+                    className="hover:text-white block py-0.5 text-left cursor-pointer"
+                  >
+                    {item.name}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -153,9 +159,13 @@ export const MobileFooter = ({ onShopClick }) => {
             <ul className="pb-2.5 pt-0.5 space-y-1.5 font-sans text-[11px] text-[#A89F91] pl-2">
               {['Shipping Policy', 'Return & Exchange', "FAQ's", 'Track Order', 'Terms & Conditions'].map((item) => (
                 <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/[^a-z0-9]/g, '-')}`} className="hover:text-white block py-0.5">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate?.('footer')}
+                    className="hover:text-white block py-0.5 text-left cursor-pointer"
+                  >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -180,9 +190,13 @@ export const MobileFooter = ({ onShopClick }) => {
             <ul className="pb-2.5 pt-0.5 space-y-1.5 font-sans text-[11px] text-[#A89F91] pl-2">
               {['Payment Methods', 'Size Guide', 'Jewelry Care'].map((item) => (
                 <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-white block py-0.5">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate?.('footer')}
+                    className="hover:text-white block py-0.5 text-left cursor-pointer"
+                  >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>

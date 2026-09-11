@@ -75,7 +75,7 @@ export const DesktopView = ({
       <ReviewsSection isMobileLayout={false} />
 
       {/* 8. FOOTER */}
-      <DesktopFooter onShopClick={onViewAllCollections} />
+      <DesktopFooter onShopClick={onViewAllCollections} onNavigate={onNavigate} />
     </div>
   );
 };

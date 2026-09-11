@@ -7,7 +7,7 @@ const PinterestIcon = ({ size = 18 }) => (
   </svg>
 );
 
-export const DesktopFooter = ({ onShopClick }) => {
+export const DesktopFooter = ({ onShopClick, onNavigate }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -24,22 +24,33 @@ export const DesktopFooter = ({ onShopClick }) => {
 
   return (
     <footer 
-      id="footer"
-      aria-label="Footer"
-      className="w-full bg-[#0A0908] border-t border-[#262018] text-[#FAF6EE] pt-8 pb-6 px-6 sm:px-8"
+      id="desktop-footer"
+      className="w-full bg-[#0A0908] border-t border-[#262018] text-[#FAF6EE] pt-10 pb-6 px-8"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 pb-6 border-b border-[#262018]">
-          {/* Left Column: Brand Statement & Socials (4 Cols) */}
-          <div className="md:col-span-4 flex flex-col items-start pr-4">
-            <div className="cursor-pointer mb-3 flex flex-col leading-none">
-              <span className="font-cinzel-luxury text-[17px] tracking-[0.24em] font-semibold text-[#D8B26E]">
-                VAST
-              </span>
-              <span className="font-cinzel-luxury text-[10px] tracking-[0.4em] font-medium text-[#C49E59] mt-0.5">
-                CULTURE
-              </span>
+        {/* Main Footer Grid: 12 Columns */}
+        <div className="grid grid-cols-12 gap-8 pb-8 border-b border-[#262018]">
+          {/* Left: Brand Statement & Socials (4 Cols) */}
+          <div className="col-span-4 pr-6">
+            <div 
+              onClick={() => onNavigate?.('hero')}
+              className="cursor-pointer mb-3 flex items-center gap-2.5 leading-none select-none group"
+            >
+              <div className="relative flex-shrink-0 flex items-center justify-center">
+                <img
+                  src={logo}
+                  alt="Vast Culture"
+                  className="w-11 h-11 object-contain drop-shadow-[0_1px_8px_rgba(216,178,110,0.45)] group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="font-cinzel-luxury text-[17px] tracking-[0.22em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors">
+                  VAST
+                </span>
+                <span className="font-cinzel-luxury text-[10px] tracking-[0.4em] font-medium text-[#C49E59] mt-0.5">
+                  CULTURE
+                </span>
+              </div>
             </div>
 
             <div className="font-serif-luxury text-xs text-[#A89F91] leading-relaxed mb-4 italic space-y-0.5">
@@ -50,28 +61,36 @@ export const DesktopFooter = ({ onShopClick }) => {
             {/* Social Media Icons */}
             <div className="flex items-center space-x-2.5 text-[#A89F91]">
               <a
-                href="#instagram"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
                 <Instagram size={13} />
               </a>
               <a
-                href="#facebook"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
                 <Facebook size={13} />
               </a>
               <a
-                href="#pinterest"
+                href="https://pinterest.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Pinterest"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
                 <PinterestIcon size={13} />
               </a>
               <a
-                href="#youtube"
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="YouTube"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors"
               >
@@ -81,60 +100,53 @@ export const DesktopFooter = ({ onShopClick }) => {
           </div>
 
           {/* Center-Left: QUICK LINKS (2 Cols) */}
-          <div className="md:col-span-2">
+          <div className="col-span-2">
             <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-2.5">
               QUICK LINKS
             </h3>
             <ul className="space-y-1.5 font-sans text-[11.5px] text-[#A89F91]">
               {[
-                { name: 'Home', link: '#hero' },
+                { name: 'Home', action: () => onNavigate?.('hero') },
                 { name: 'Collections', action: onShopClick },
                 { name: 'Shop All Jewelry', action: onShopClick },
-                { name: 'About Us', link: '#our-story' },
-                { name: 'Contact Us', link: '#footer' },
+                { name: 'About Us', action: () => onNavigate?.('our-story') },
+                { name: 'Contact Us', action: () => onNavigate?.('footer') },
               ].map((item) => (
                 <li key={item.name}>
-                  {item.action ? (
-                    <button
-                      onClick={item.action}
-                      className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all cursor-pointer text-left"
-                    >
-                      {item.name}
-                    </button>
-                  ) : (
-                    <a
-                      href={item.link}
-                      className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
-                    >
-                      {item.name}
-                    </a>
-                  )}
+                  <button
+                    type="button"
+                    onClick={item.action}
+                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all cursor-pointer text-left"
+                  >
+                    {item.name}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Center-Right: CUSTOMER CARE (3 Cols) */}
-          <div className="md:col-span-3">
+          <div className="col-span-3">
             <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-2.5">
               CUSTOMER CARE
             </h3>
             <ul className="space-y-1.5 font-sans text-[11.5px] text-[#A89F91]">
               {['Shipping Policy', 'Return & Exchange', "FAQ's", 'Track Order', 'Terms & Conditions'].map((item) => (
                 <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
-                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
+                  <button
+                    type="button"
+                    onClick={() => onNavigate?.('footer')}
+                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all text-left cursor-pointer"
                   >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Right: SHOP INFO & NEWSLETTER (3 Cols) */}
-          <div className="md:col-span-3">
+          <div className="col-span-3">
             <div className="mb-4">
               <h3 className="font-sans font-semibold text-[11px] tracking-[0.18em] uppercase text-[#D8B26E] mb-2">
                 SHOP INFO
@@ -142,12 +154,13 @@ export const DesktopFooter = ({ onShopClick }) => {
               <ul className="space-y-1.5 font-sans text-[11.5px] text-[#A89F91]">
                 {['Payment Methods', 'Size Guide', 'Jewelry Care'].map((item) => (
                   <li key={item}>
-                    <a
-                      href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
+                    <button
+                      type="button"
+                      onClick={() => onNavigate?.('footer')}
+                      className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all text-left cursor-pointer"
                     >
                       {item}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>

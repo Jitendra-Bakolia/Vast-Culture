@@ -26,6 +26,7 @@ export const AuthPage = ({
   onLoginSuccess,
   onNavigateToHome,
   onNavigateToShop,
+  onModeChange,
   currentUser,
   onLogout,
 }) => {
@@ -44,7 +45,14 @@ export const AuthPage = ({
   const [confirmPassword, setConfirmPassword] = useState('');
   const [agreeTerms, setAgreeTerms] = useState(true);
 
-  // Sync mode when initialMode prop changes (e.g. via hash link)
+  // Switch mode and sync URL route
+  const handleSwitchMode = (newMode) => {
+    setMode(newMode);
+    setErrorMessage(null);
+    onModeChange?.(newMode);
+  };
+
+  // Sync mode when initialMode prop changes (e.g. via browser navigation)
   useEffect(() => {
     if (initialMode) {
       setMode(initialMode);
@@ -169,7 +177,7 @@ export const AuthPage = ({
       setSuccessMessage(`A password reset link has been dispatched to ${email}. Please check your inbox.`);
       setTimeout(() => {
         setSuccessMessage(null);
-        setMode('login');
+        handleSwitchMode('login');
       }, 3500);
     }
   };
@@ -399,8 +407,7 @@ export const AuthPage = ({
                       {mode === 'login' ? 'New here?' : 'Already registered?'}{' '}
                       <button
                         onClick={() => {
-                          setMode(mode === 'login' ? 'register' : 'login');
-                          setErrorMessage(null);
+                          handleSwitchMode(mode === 'login' ? 'register' : 'login');
                         }}
                         className="text-[#D8B26E] hover:underline font-semibold cursor-pointer ml-1"
                       >
@@ -430,8 +437,7 @@ export const AuthPage = ({
                     id="tab-auth-login"
                     type="button"
                     onClick={() => {
-                      setMode('login');
-                      setErrorMessage(null);
+                      handleSwitchMode('login');
                     }}
                     className={`py-2.5 text-center transition-all rounded-xs cursor-pointer ${
                       mode === 'login'
@@ -445,8 +451,7 @@ export const AuthPage = ({
                     id="tab-auth-register"
                     type="button"
                     onClick={() => {
-                      setMode('register');
-                      setErrorMessage(null);
+                      handleSwitchMode('register');
                     }}
                     className={`py-2.5 text-center transition-all rounded-xs cursor-pointer ${
                       mode === 'register'
@@ -621,8 +626,7 @@ export const AuthPage = ({
                         <button
                           type="button"
                           onClick={() => {
-                            setMode('forgot');
-                            setErrorMessage(null);
+                            handleSwitchMode('forgot');
                           }}
                           className="text-[11px] text-[#D8B26E] hover:underline cursor-pointer font-sans"
                         >
@@ -727,8 +731,7 @@ export const AuthPage = ({
                   <button
                     type="button"
                     onClick={() => {
-                      setMode('login');
-                      setErrorMessage(null);
+                      handleSwitchMode('login');
                     }}
                     className="w-full py-2 text-center text-xs text-[#8C8273] hover:text-[#D8B26E] transition-colors font-medium cursor-pointer"
                   >

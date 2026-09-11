@@ -72,28 +72,36 @@ export const Footer = ({
             {/* Social Media Icons */}
             <div className="flex items-center space-x-2 sm:space-x-2.5 text-[#A89F91]">
               <a
-                href="#instagram"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
                 <Instagram size={13} />
               </a>
               <a
-                href="#facebook"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
                 <Facebook size={13} />
               </a>
               <a
-                href="#pinterest"
+                href="https://pinterest.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Pinterest"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
                 <PinterestIcon size={13} />
               </a>
               <a
-                href="#youtube"
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="YouTube"
                 className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full bg-[#14120F] border border-[#262018] flex items-center justify-center hover:text-[#D8B26E] hover:border-[#D8B26E] transition-colors cursor-pointer"
               >
@@ -160,12 +168,15 @@ export const Footer = ({
               }`}>
               {['Track Order', 'Shipping & Delivery', 'Returns & Exchanges', 'Jewelry Care', 'FAQs'].map((item) => (
                 <li key={item}>
-                  <a
-                    href="#care"
-                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onNavigateSection?.('footer');
+                    }}
+                    className="hover:text-[#FAF6EE] hover:translate-x-0.5 inline-block transition-all text-left cursor-pointer"
                   >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
