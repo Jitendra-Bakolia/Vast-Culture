@@ -15,7 +15,7 @@ import { MobileNavDrawer } from './components/MobileNavDrawer';
 import { CollectionsModal } from './components/CollectionsModal';
 import { WishlistModal } from './components/WishlistModal';
 import { CheckoutModal } from './components/CheckoutModal';
-import { AuthModal } from './components/AuthModal';
+import { AuthPage } from './components/AuthPage';
 import { UserProfileModal } from './components/UserProfileModal';
 import { ShopPage } from './components/ShopPage';
 import { MobileBottomBar } from './components/MobileBottomBar';
@@ -23,9 +23,12 @@ import { MainLoader } from './components/MainLoader';
 import { CheckCircle } from 'lucide-react';
 
 export default function App() {
-  // Current Page State: 'home' | 'shop'
+  // Current Page State: 'home' | 'shop' | 'auth'
   const [currentPage, setCurrentPage] = useState(() => {
     const hash = window.location.hash.toLowerCase();
+    if (hash.includes('login') || hash.includes('register') || hash.includes('auth')) {
+      return 'auth';
+    }
     if (hash.includes('shop') || hash.includes('collections')) {
       return 'shop';
     }
@@ -50,9 +53,12 @@ export default function App() {
     }
   });
 
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authIntent, setAuthIntent] = useState('general');
-  const [authInitialMode, setAuthInitialMode] = useState('login');
+  const [authInitialMode, setAuthInitialMode] = useState(() => {
+    const hash = window.location.hash.toLowerCase();
+    if (hash.includes('register')) return 'register';
+    return 'login';
+  });
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [pendingBuyItem, setPendingBuyItem] = useState(null);
 
@@ -89,7 +95,13 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.toLowerCase();
-      if (hash.includes('shop') || hash.includes('collections')) {
+      if (hash.includes('register')) {
+        setCurrentPage('auth');
+        setAuthInitialMode('register');
+      } else if (hash.includes('login') || hash.includes('auth')) {
+        setCurrentPage('auth');
+        setAuthInitialMode('login');
+      } else if (hash.includes('shop') || hash.includes('collections')) {
         setCurrentPage('shop');
         if (hash.includes('earrings')) setShopCategory('Earrings');
         else if (hash.includes('necklaces')) setShopCategory('Necklaces');
@@ -120,6 +132,14 @@ export default function App() {
     showToast(category !== 'All' ? `Browsing ${category} Collection` : 'All Collections Vault');
   };
 
+  const handleNavigateToAuth = (mode = 'login', intent = 'general') => {
+    setAuthIntent(intent);
+    setAuthInitialMode(mode);
+    setCurrentPage('auth');
+    window.location.hash = mode === 'register' ? '#register' : '#login';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Section navigation (scrolling)
   const handleNavigateSection = (sectionId) => {
     if (currentPage !== 'home') {
@@ -147,17 +167,21 @@ export default function App() {
     } catch {
       // ignore
     }
-    setIsAuthOpen(false);
 
     if (authIntent === 'checkout') {
+      setCurrentPage('home');
+      window.location.hash = '#home';
       setIsCheckoutOpen(true);
       showToast(`Welcome ${user.name}! Proceeding to secure checkout.`);
     } else if (authIntent === 'buy-now' && pendingBuyItem) {
       handleAddToCart(pendingBuyItem.product, pendingBuyItem.quantity);
       setPendingBuyItem(null);
+      setCurrentPage('home');
+      window.location.hash = '#home';
       setIsCheckoutOpen(true);
       showToast(`Welcome ${user.name}! Proceeding to instant checkout.`);
     } else {
+      handleNavigateToHome();
       showToast(`Welcome ${user.name}! You are now signed in.`);
     }
 
@@ -178,10 +202,8 @@ export default function App() {
   // Checkout gate handler: User MUST be logged in to proceed to checkout
   const handleInitiateCheckout = () => {
     if (!currentUser) {
-      setAuthIntent('checkout');
-      setAuthInitialMode('login');
       setIsCartOpen(false);
-      setIsAuthOpen(true);
+      handleNavigateToAuth('login', 'checkout');
     } else {
       setIsCartOpen(false);
       setIsCheckoutOpen(true);
@@ -192,10 +214,8 @@ export default function App() {
   const handleBuyNow = (product, quantity = 1) => {
     if (!currentUser) {
       setPendingBuyItem({ product, quantity });
-      setAuthIntent('buy-now');
-      setAuthInitialMode('login');
       setQuickViewProduct(null);
-      setIsAuthOpen(true);
+      handleNavigateToAuth('login', 'buy-now');
     } else {
       handleAddToCart(product, quantity);
       setQuickViewProduct(null);
@@ -281,18 +301,14 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenMobileNav={() => setIsMobileNavOpen(true)}
-        onOpenAuth={(mode = 'login') => {
-          setAuthIntent('general');
-          setAuthInitialMode(mode);
-          setIsAuthOpen(true);
-        }}
+        onOpenAuth={(mode = 'login') => handleNavigateToAuth(mode, 'general')}
         onOpenProfile={() => setIsProfileOpen(true)}
         onNavigateToHome={handleNavigateToHome}
         onNavigateToShop={handleNavigateToShop}
         onNavigateSection={handleNavigateSection}
       />
 
-      {/* 3. DYNAMIC PAGE ROUTER: EITHER SHOP / ALL COLLECTIONS VAULT PAGE OR HOME LUXURY PAGE */}
+      {/* 3. DYNAMIC PAGE ROUTER: EITHER SHOP / ALL COLLECTIONS VAULT, AUTH PAGE, OR HOME LUXURY PAGE */}
       {currentPage === 'shop' ? (
         <main id="main-content-shop" className="w-full max-w-full overflow-x-hidden">
           <ShopPage
@@ -303,6 +319,18 @@ export default function App() {
             onQuickView={(p) => setQuickViewProduct(p)}
             onNavigateToHome={handleNavigateToHome}
             initialCategory={shopCategory}
+          />
+        </main>
+      ) : currentPage === 'auth' ? (
+        <main id="main-content-auth" className="w-full max-w-full overflow-x-hidden">
+          <AuthPage
+            initialMode={authInitialMode}
+            intent={authIntent}
+            onLoginSuccess={handleLoginSuccess}
+            onNavigateToHome={handleNavigateToHome}
+            onNavigateToShop={handleNavigateToShop}
+            currentUser={currentUser}
+            onLogout={handleLogout}
           />
         </main>
       ) : (
@@ -415,25 +443,9 @@ export default function App() {
         onOpenCart={() => setIsCartOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         currentUser={currentUser}
-        onOpenAuth={(mode = 'login') => {
-          setAuthIntent('general');
-          setAuthInitialMode(mode);
-          setIsAuthOpen(true);
-        }}
+        onOpenAuth={(mode = 'login') => handleNavigateToAuth(mode, 'general')}
         onOpenProfile={() => setIsProfileOpen(true)}
         onLogout={handleLogout}
-      />
-
-      {/* Authentication Modal (Sign In / Register / Social Providers) */}
-      <AuthModal
-        isOpen={isAuthOpen}
-        onClose={() => {
-          setIsAuthOpen(false);
-          setPendingBuyItem(null);
-        }}
-        onLoginSuccess={handleLoginSuccess}
-        intent={authIntent}
-        initialMode={authInitialMode}
       />
 
       {/* User Profile Modal */}
@@ -469,11 +481,7 @@ export default function App() {
         onNavigateToShop={handleNavigateToShop}
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenAuth={(mode = 'login') => {
-          setAuthIntent('general');
-          setAuthInitialMode(mode);
-          setIsAuthOpen(true);
-        }}
+        onOpenAuth={(mode = 'login') => handleNavigateToAuth(mode, 'general')}
         onOpenProfile={() => setIsProfileOpen(true)}
       />
     </div>

@@ -79,7 +79,7 @@ export const MobileBottomBar = ({
         id="btn-mobile-tab-account"
         onClick={currentUser ? onOpenProfile : () => onOpenAuth('login')}
         aria-label={currentUser ? `Account (${currentUser.name})` : 'Sign In'}
-        className="mobile-tab-btn tap-bounce"
+        className={`mobile-tab-btn tap-bounce ${currentPage === 'auth' ? 'active' : ''}`}
       >
         {currentUser && currentUser.avatar ? (
           <img
