@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, ShieldCheck, Tag, Lock, Truck, CheckCircle2 } from 'lucide-react';
 
 export const CartDrawer = ({
@@ -12,8 +12,31 @@ export const CartDrawer = ({
   const [couponCode, setCouponCode] = useState('VAST10');
   const [discountApplied, setDiscountApplied] = useState(false);
   const [couponError, setCouponError] = useState('');
+  const [isRendered, setIsRendered] = useState(isOpen);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      setIsRendered(true);
+      document.body.classList.add('overflow-hidden');
+    } else if (isRendered) {
+      const timer = setTimeout(() => {
+        setIsRendered(false);
+        document.body.classList.remove('overflow-hidden');
+      }, 260);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, isRendered]);
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, []);
+
+  const shouldRender = isOpen || isRendered;
+  const isExiting = isRendered && !isOpen;
+
+  if (!shouldRender) return null;
 
   const subtotal = (items || []).reduce(
     (sum, item) => sum + item.product.price * item.quantity,
@@ -43,11 +66,17 @@ export const CartDrawer = ({
   return (
     <div
       id="cart-drawer-backdrop"
-      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex justify-end transition-opacity duration-300"
+      onClick={isExiting ? undefined : onClose}
+      className={`fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex justify-end ${
+        isExiting ? 'drawer-fade-out pointer-events-none' : 'drawer-fade-in'
+      }`}
     >
       <div
         id="cart-drawer-panel"
-        className="w-full max-w-md bg-[#FAF7F2] h-full flex flex-col shadow-2xl text-[#1E1B18] border-l border-[#E2D8C6] animate-in slide-in-from-right duration-300"
+        onClick={(e) => e.stopPropagation()}
+        className={`w-full max-w-md bg-[#FAF7F2] h-full flex flex-col shadow-2xl text-[#1E1B18] border-l border-[#E2D8C6] ${
+          isExiting ? 'drawer-slide-out-right pointer-events-none' : 'drawer-slide-in-right'
+        }`}
       >
         {/* Header */}
         <div className="p-5 border-b border-[#E8DFC8] bg-[#FAF4EB] flex items-center justify-between">

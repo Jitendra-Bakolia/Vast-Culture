@@ -24,56 +24,58 @@ export const Header = ({
       className="w-full max-w-full overflow-hidden bg-[#0D0D0D]/90 backdrop-blur-md border-b border-[#23201B]/80 text-[#FAF7F2] sticky top-0 z-40 px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 transition-all"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Mobile Left: Hamburger Menu Button */}
-        <div className="flex items-center md:hidden">
-          <button
-            id="btn-mobile-menu"
-            onClick={onOpenMobileNav}
-            aria-label="Open navigation menu"
-            className="text-[#E5DFD5] hover:text-[#D8B26E] p-1.5 transition-colors cursor-pointer"
-          >
-            <Menu size={22} strokeWidth={1.5} />
-          </button>
-        </div>
-
-        {/* Brand Logo Lockup: Authentic Maison Emblem + Sculpted Typography */}
-        <div
-          id="brand-logo"
-          onClick={onNavigateToHome}
-          className="cursor-pointer group flex items-center gap-2.5 sm:gap-3 select-none py-0.5"
-          role="button"
-          tabIndex={0}
-          aria-label="Vast Culture Home"
-        >
-          {/* Authentic Brand Emblem with Golden Aura */}
-          <div className="relative flex-shrink-0 flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-[#D8B26E]/20 blur-sm scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 pointer-events-none" />
-            <img
-              src={logo}
-              alt="Vast Culture"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              className="
-                relative z-10
-                w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11
-                object-contain
-                drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)]
-                group-hover:drop-shadow-[0_2px_12px_rgba(216,178,110,0.6)]
-                group-hover:scale-105
-                transition-all duration-300
-              "
-            />
+        {/* Left: Mobile Hamburger Menu & Brand Logo Lockup */}
+        <div className="flex items-center gap-1 sm:gap-2">
+          <div className="flex items-center md:hidden">
+            <button
+              id="btn-mobile-menu"
+              onClick={onOpenMobileNav}
+              aria-label="Open navigation menu"
+              className="text-[#E5DFD5] hover:text-[#D8B26E] p-1 -ml-1 transition-colors cursor-pointer tap-bounce"
+            >
+              <Menu size={22} strokeWidth={1.5} />
+            </button>
           </div>
 
-          {/* Haute Joaillerie Typography */}
-          <div className="flex flex-col leading-none">
-            <span className="font-cinzel-luxury text-[15px] sm:text-[17px] md:text-[19px] tracking-[0.24em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors duration-300">
-              VAST
-            </span>
-            <span className="font-cinzel-luxury text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.44em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors duration-300 mt-0.5">
-              CULTURE
-            </span>
+          {/* Brand Logo Lockup: Authentic Maison Emblem + Sculpted Typography */}
+          <div
+            id="brand-logo"
+            onClick={onNavigateToHome}
+            className="cursor-pointer group flex items-center gap-2 sm:gap-2.5 select-none py-0.5"
+            role="button"
+            tabIndex={0}
+            aria-label="Vast Culture Home"
+          >
+            {/* Authentic Brand Emblem with Golden Aura */}
+            <div className="relative flex-shrink-0 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full bg-[#D8B26E]/20 blur-sm scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 pointer-events-none" />
+              <img
+                src={logo}
+                alt="Vast Culture"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="
+                  relative z-10
+                  w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11
+                  object-contain
+                  drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)]
+                  group-hover:drop-shadow-[0_2px_12px_rgba(216,178,110,0.6)]
+                  group-hover:scale-105
+                  transition-all duration-300
+                "
+              />
+            </div>
+
+            {/* Haute Joaillerie Typography */}
+            <div className="flex flex-col leading-none">
+              <span className="font-cinzel-luxury text-[15px] sm:text-[17px] md:text-[19px] tracking-[0.24em] font-semibold text-[#F5E8D0] group-hover:text-white transition-colors duration-300">
+                VAST
+              </span>
+              <span className="font-cinzel-luxury text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.44em] font-medium text-[#D8B26E] group-hover:text-[#F3D79B] transition-colors duration-300 mt-0.5">
+                CULTURE
+              </span>
+            </div>
           </div>
         </div>
 

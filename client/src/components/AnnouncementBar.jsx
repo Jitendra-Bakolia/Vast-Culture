@@ -72,10 +72,23 @@ export const AnnouncementBar = ({
   const [copiedCode, setCopiedCode] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isOffersModalOpen, setIsOffersModalOpen] = useState(false);
+  const [isModalRendered, setIsModalRendered] = useState(false);
   const timerRef = useRef(null);
 
   const currentOffer = ANNOUNCEMENT_OFFERS[currentIndex] || ANNOUNCEMENT_OFFERS[0];
   const CurrentIcon = currentOffer.icon || Sparkles;
+
+  // Sync offers modal rendered state with animated unmount
+  useEffect(() => {
+    if (isOffersModalOpen) {
+      setIsModalRendered(true);
+    } else if (isModalRendered) {
+      const timer = setTimeout(() => {
+        setIsModalRendered(false);
+      }, 220);
+      return () => clearTimeout(timer);
+    }
+  }, [isOffersModalOpen, isModalRendered]);
 
   // Auto-scroll every 10 seconds
   useEffect(() => {
@@ -137,6 +150,9 @@ export const AnnouncementBar = ({
     setCurrentIndex(index);
     setIsOffersModalOpen(false);
   };
+
+  const shouldRenderModal = isOffersModalOpen || isModalRendered;
+  const isModalExiting = isModalRendered && !isOffersModalOpen;
 
   return (
     <>
@@ -244,15 +260,19 @@ export const AnnouncementBar = ({
       </aside>
 
       {/* Gift Button Triggered Modal: All Available Offers & Privileges */}
-      {isOffersModalOpen && (
+      {shouldRenderModal && (
         <div
           id="offers-modal-overlay"
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200"
-          onClick={() => setIsOffersModalOpen(false)}
+          className={`fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 ${
+            isModalExiting ? 'drawer-fade-out pointer-events-none' : 'drawer-fade-in'
+          }`}
+          onClick={isModalExiting ? undefined : () => setIsOffersModalOpen(false)}
         >
           <div
             id="offers-modal-content"
-            className="relative w-full max-w-lg bg-[#110F0D] border border-[#D8B26E]/40 text-[#FAF6EE] p-5 sm:p-7 shadow-2xl overflow-y-auto max-h-[90vh] animate-in zoom-in-95 duration-200"
+            className={`relative w-full max-w-lg bg-[#110F0D] border border-[#D8B26E]/40 text-[#FAF6EE] p-5 sm:p-7 shadow-2xl overflow-y-auto max-h-[90vh] ${
+              isModalExiting ? 'modal-animate-out pointer-events-none' : 'modal-animate-in'
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

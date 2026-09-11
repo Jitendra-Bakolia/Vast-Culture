@@ -411,6 +411,9 @@ export default function App() {
         onNavigateToShop={handleNavigateToShop}
         wishlistCount={wishlistIds.length}
         onOpenWishlist={() => setIsWishlistOpen(true)}
+        cartCount={totalCartCount}
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenSearch={() => setIsSearchOpen(true)}
         currentUser={currentUser}
         onOpenAuth={(mode = 'login') => {
           setAuthIntent('general');

@@ -51,7 +51,7 @@ export const Footer = ({
                 <img
                   src={logo}
                   alt="Vast Culture"
-                  className="w-7.5 h-7.5 sm:w-8 sm:h-8 object-contain drop-shadow-[0_1px_6px_rgba(216,178,110,0.35)] group-hover:scale-105 transition-transform"
+                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 object-contain drop-shadow-[0_1px_8px_rgba(216,178,110,0.45)] group-hover:scale-105 transition-transform"
                 />
               </div>
               <div className="flex flex-col leading-none">
