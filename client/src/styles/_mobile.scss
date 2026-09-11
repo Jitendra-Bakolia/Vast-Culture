@@ -37,16 +37,16 @@ html, body {
   left: 0;
   right: 0;
   z-index: $z-mobile-bar;
-  background: rgba(13, 13, 13, 0.95);
+  background: rgba(13, 13, 13, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(216, 178, 110, 0.25);
+  border-top: 1px solid rgba(216, 178, 110, 0.22);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-top: 8px;
-  @include safe-area-bottom(10px);
-  box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.75);
+  padding-top: 5px;
+  @include safe-area-bottom(5px);
+  box-shadow: 0 -3px 20px rgba(0, 0, 0, 0.7);
   transition: transform $transition-normal;
 
   @media (min-width: #{$bp-md}) {
@@ -58,17 +58,17 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 1.5px;
     background: transparent;
     border: none;
     color: #A89F91;
     font-family: $font-sans;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.05em;
-    padding: 6px 10px;
-    min-width: 58px;
-    min-height: 48px;
+    letter-spacing: 0.04em;
+    padding: 3px 6px;
+    min-width: 48px;
+    min-height: 38px;
     cursor: pointer;
     position: relative;
     transition: color $transition-fast, transform $transition-fast;
@@ -88,18 +88,18 @@ html, body {
 
     .tab-badge {
       position: absolute;
-      top: 3px;
-      right: 12px;
+      top: 1px;
+      right: 9px;
       background: $color-gold;
       color: #000;
-      font-size: 9px;
+      font-size: 8px;
       font-weight: 700;
-      min-width: 16px;
-      height: 16px;
-      line-height: 16px;
+      min-width: 14px;
+      height: 14px;
+      line-height: 14px;
       border-radius: 999px;
       text-align: center;
-      padding: 0 4px;
+      padding: 0 3px;
     }
   }
 }
@@ -107,8 +107,8 @@ html, body {
 // Container padding to offset mobile bottom nav
 .has-mobile-bottom-bar {
   @media (max-width: #{$bp-md - 1px}) {
-    padding-bottom: 74px;
-    padding-bottom: calc(64px + env(safe-area-inset-bottom, 12px));
+    padding-bottom: 54px;
+    padding-bottom: calc(46px + env(safe-area-inset-bottom, 8px));
   }
 }
 

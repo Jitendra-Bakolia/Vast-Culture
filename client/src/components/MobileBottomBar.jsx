@@ -31,7 +31,7 @@ export const MobileBottomBar = ({
         aria-label="Home"
         className={`mobile-tab-btn tap-bounce ${isHomeActive ? 'active' : ''}`}
       >
-        <Home size={20} strokeWidth={isHomeActive ? 2.2 : 1.6} />
+        <Home size={17} strokeWidth={isHomeActive ? 2.0 : 1.5} />
         <span>Home</span>
       </button>
 
@@ -42,7 +42,7 @@ export const MobileBottomBar = ({
         aria-label="Shop Vault"
         className={`mobile-tab-btn tap-bounce ${isShopActive ? 'active' : ''}`}
       >
-        <Sparkles size={20} strokeWidth={isShopActive ? 2.2 : 1.6} />
+        <Sparkles size={17} strokeWidth={isShopActive ? 2.0 : 1.5} />
         <span>Shop</span>
       </button>
 
@@ -53,7 +53,7 @@ export const MobileBottomBar = ({
         aria-label={`Wishlist (${wishlistCount} items)`}
         className={`mobile-tab-btn tap-bounce ${isWishlistOpen ? 'active' : ''}`}
       >
-        <Heart size={20} strokeWidth={isWishlistOpen ? 2.2 : 1.6} fill={isWishlistOpen ? 'currentColor' : 'none'} />
+        <Heart size={17} strokeWidth={isWishlistOpen ? 2.0 : 1.5} fill={isWishlistOpen ? 'currentColor' : 'none'} />
         <span>Wishlist</span>
         {wishlistCount > 0 && (
           <span className="tab-badge badge-bounce-anim">{wishlistCount}</span>
@@ -67,7 +67,7 @@ export const MobileBottomBar = ({
         aria-label={`Shopping Bag (${cartCount} items)`}
         className={`mobile-tab-btn tap-bounce ${isCartOpen ? 'active' : ''}`}
       >
-        <ShoppingBag size={20} strokeWidth={isCartOpen ? 2.2 : 1.6} />
+        <ShoppingBag size={17} strokeWidth={isCartOpen ? 2.0 : 1.5} />
         <span>Bag</span>
         {cartCount > 0 && (
           <span className="tab-badge badge-bounce-anim">{cartCount}</span>
@@ -87,12 +87,12 @@ export const MobileBottomBar = ({
             alt={currentUser.name}
             loading="lazy"
             decoding="async"
-            width="20"
-            height="20"
-            className="w-5 h-5 rounded-full object-cover border border-[#D8B26E]"
+            width="16"
+            height="16"
+            className="w-4 h-4 rounded-full object-cover border border-[#D8B26E]"
           />
         ) : (
-          <User size={20} strokeWidth={1.6} />
+          <User size={17} strokeWidth={1.5} />
         )}
         <span>{currentUser ? currentUser.name.split(' ')[0] : 'Sign In'}</span>
       </button>
