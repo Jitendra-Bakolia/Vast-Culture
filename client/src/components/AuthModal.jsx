@@ -226,7 +226,7 @@ export const AuthModal = ({
                 setErrorMessage(null);
               }}
               className={`py-2 text-center transition-all rounded-xs cursor-pointer ${mode === 'login'
-                  ? 'bg-[#0D0D0D] text-[#FAF7F2] font-semibold shadow-xs'
+                  ? 'bg-[#D8B26E] text-[#141210] font-bold shadow-xs'
                   : 'text-[#5C5447] hover:text-black'
                 }`}
             >
@@ -240,7 +240,7 @@ export const AuthModal = ({
                 setErrorMessage(null);
               }}
               className={`py-2 text-center transition-all rounded-xs cursor-pointer ${mode === 'register'
-                  ? 'bg-[#0D0D0D] text-[#FAF7F2] font-semibold shadow-xs'
+                  ? 'bg-[#D8B26E] text-[#141210] font-bold shadow-xs'
                   : 'text-[#5C5447] hover:text-black'
                 }`}
             >
@@ -473,7 +473,7 @@ export const AuthModal = ({
             id="btn-auth-submit"
             type="submit"
             disabled={loadingProvider !== null}
-            className="w-full py-3 bg-[#0D0D0D] hover:bg-[#D8B26E] hover:text-black text-[#FAF7F2] font-sans font-semibold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
+            className="w-full py-3 bg-[#D8B26E] hover:bg-[#C9A056] text-[#141210] font-sans font-bold text-xs tracking-[0.2em] uppercase transition-all duration-300 shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
           >
             {loadingProvider === 'email' ? (
               <span>Authenticating...</span>
@@ -517,7 +517,7 @@ export const AuthModal = ({
             id="btn-demo-quick-login"
             type="button"
             onClick={handleQuickDemoLogin}
-            className="px-2.5 py-1 bg-[#1A1815] hover:bg-[#D8B26E] hover:text-black text-[#FAF7F2] text-[10px] font-sans uppercase tracking-wider font-semibold rounded-xs transition-colors cursor-pointer"
+            className="px-2.5 py-1 bg-white hover:bg-[#D8B26E] hover:text-[#141210] border border-[#D8B26E] text-[#7A5813] text-[10px] font-sans uppercase tracking-wider font-semibold rounded-xs transition-colors cursor-pointer shadow-xs"
           >
             One-Click Login
           </button>
