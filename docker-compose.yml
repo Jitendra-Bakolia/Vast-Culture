@@ -1,5 +1,5 @@
 # ==============================================================================
-# Vast Culture — Production Multi-Server Architecture (Docker Compose)
+# Multi-Server Architecture Orchestration (Docker Compose)
 # ==============================================================================
 # Services:
 #   1. client: Production Nginx serving React SPA (Port 3000)
@@ -16,8 +16,8 @@ services:
   # 1. DATABASES & BROKERS
   # ----------------------------------------------------------------------------
   mysql:
+    container_name: mysql
     image: mysql:8.0
-    container_name: vast-culture-mysql
     restart: unless-stopped
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     environment:
@@ -36,11 +36,11 @@ services:
       retries: 5
       start_period: 15s
     networks:
-      - vast-culture-network
+      - app-network
 
   redis:
+    container_name: redis
     image: redis:7-alpine
-    container_name: vast-culture-redis
     restart: unless-stopped
     command: redis-server --save 60 1 --loglevel warning
     ports:
@@ -53,13 +53,13 @@ services:
       timeout: 3s
       retries: 5
     networks:
-      - vast-culture-network
+      - app-network
 
   # ----------------------------------------------------------------------------
   # 2. BACKEND MICROSERVICES
   # ----------------------------------------------------------------------------
   server:
-    container_name: vast-culture-server
+    container_name: server
     build:
       context: .
       dockerfile: server/Dockerfile
@@ -84,10 +84,10 @@ services:
         condition: service_healthy
     restart: unless-stopped
     networks:
-      - vast-culture-network
+      - app-network
 
   socket-server:
-    container_name: vast-culture-socket-server
+    container_name: socket-server
     build:
       context: .
       dockerfile: socket-server/Dockerfile
@@ -111,10 +111,10 @@ services:
         condition: service_healthy
     restart: unless-stopped
     networks:
-      - vast-culture-network
+      - app-network
 
   job-server:
-    container_name: vast-culture-job-server
+    container_name: job-server
     build:
       context: .
       dockerfile: job-server/Dockerfile
@@ -138,10 +138,10 @@ services:
         condition: service_healthy
     restart: unless-stopped
     networks:
-      - vast-culture-network
+      - app-network
 
   calling-server:
-    container_name: vast-culture-calling-server
+    container_name: calling-server
     build:
       context: .
       dockerfile: calling-server/Dockerfile
@@ -161,13 +161,13 @@ services:
         condition: service_healthy
     restart: unless-stopped
     networks:
-      - vast-culture-network
+      - app-network
 
   # ----------------------------------------------------------------------------
   # 3. CLIENT / FRONTEND WEB APPLICATION
   # ----------------------------------------------------------------------------
   client:
-    container_name: vast-culture-client
+    container_name: client
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -175,7 +175,7 @@ services:
       - "${CLIENT_PORT:-3000}:80"
     restart: unless-stopped
     networks:
-      - vast-culture-network
+      - app-network
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/healthz"]
       interval: 30s
@@ -187,7 +187,7 @@ services:
   # 4. ORCHESTRATION TERMINAL STATUS LOGGERS
   # ----------------------------------------------------------------------------
   services-summary:
-    container_name: vast-culture-services-summary
+    container_name: services-summary
     image: node:22-alpine
     restart: "no"
     depends_on:
@@ -204,22 +204,22 @@ services:
       calling-server:
         condition: service_started
     networks:
-      - vast-culture-network
+      - app-network
     command:
       - "node"
       - "-e"
       - |
         setTimeout(() => {
           console.log('\n' + '='.repeat(74));
-          console.log('  🌟 [VAST CULTURE MULTI-SERVER ARCHITECTURE TERMINAL STATUS]');
+          console.log('  🌟 [MULTI-SERVER ARCHITECTURE TERMINAL STATUS]');
           console.log('='.repeat(74));
-          console.log('  🗄️  mysql-server    : running on internal 3306 (host port: 3307) [Database: vastculture]');
-          console.log('  ⚡ redis-server    : running on internal 6379 (host port: 6380) [Broker / Cache]');
-          console.log('  🚀 core-server     : running on port 5000 (http://localhost:5000/api/health)');
+          console.log('  🗄️  mysql           : running on internal 3306 (host port: 3307) [Database: vastculture]');
+          console.log('  ⚡ redis           : running on internal 6379 (host port: 6380) [Broker / Cache]');
+          console.log('  🚀 server          : running on port 5000 (http://localhost:5000/api/health)');
           console.log('  🔌 socket-server   : running on port 7000 (http://localhost:7000/socket-api/health)');
           console.log('  📞 calling-server  : running on port 8000 (ws://localhost:8000 | http://localhost:8000/api/calling/health)');
           console.log('  💼 job-server      : running on port 9000 (http://localhost:9000/job-api/health)');
-          console.log('  💻 client-app      : running on port 3000 (http://localhost:3000)');
+          console.log('  💻 client          : running on port 3000 (http://localhost:3000)');
           console.log('='.repeat(74) + '\n');
         }, 1500);
 
@@ -227,8 +227,8 @@ services:
 # NETWORKS
 # ------------------------------------------------------------------------------
 networks:
-  vast-culture-network:
-    name: vast-culture-network
+  app-network:
+    name: app-network
     driver: bridge
 
 # ------------------------------------------------------------------------------
