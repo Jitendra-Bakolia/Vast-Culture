@@ -1,10 +1,11 @@
 const { redis } = require('../configs/redis.config');
+const { DATABASE } = require('../constants');
 
 class RedisSocketDAO {
     #dbName;
 
     constructor() {
-        this.#dbName = process.env.DB_NAME || 'vastculture';
+        this.#dbName = process.env.DB_NAME || DATABASE.DEFAULT_NAME;
     }
 
     async save(socketId, userId) {

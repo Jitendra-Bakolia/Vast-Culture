@@ -1,12 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment-timezone');
 const { taskQueue } = require('../controllers/worker-events.controller');
+const {
+    HttpStatus,
+    HEALTH_STATUS,
+    SERVICE_NAMES,
+    QUEUES,
+    TIMEZONES,
+    Toasty,
+} = require('../constants');
 
 router.get('/health', (req, res) => {
-    res.status(200).json({
-        status: 'OK',
-        server: 'Job Server',
-        timestamp: new Date().toISOString(),
+    res.status(HttpStatus.OK).json({
+        status: HEALTH_STATUS.OK,
+        server: SERVICE_NAMES.JOB_SERVER,
+        timestamp: moment().tz(TIMEZONES.DEFAULT).toISOString(),
         uptime: process.uptime(),
     });
 });
@@ -14,17 +23,17 @@ router.get('/health', (req, res) => {
 router.post('/dispatch', async (req, res) => {
     try {
         const { jobName, payload } = req.body;
-        const job = await taskQueue.add(jobName || 'general-task', payload || {}, {
-            removeOnComplete: true,
-            attempts: 3,
+        const job = await taskQueue.add(jobName || QUEUES.DEFAULT_JOB_NAME, payload || {}, {
+            removeOnComplete: QUEUES.REMOVE_ON_COMPLETE,
+            attempts: QUEUES.ATTEMPTS,
         });
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
             success: true,
             jobId: job.id,
-            message: 'Job enqueued successfully',
+            message: Toasty.JOB.ENQUEUED,
         });
     } catch (err) {
-        res.status(500).json({ success: false, error: err.message });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ success: false, error: err.message });
     }
 });
 

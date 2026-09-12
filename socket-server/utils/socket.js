@@ -1,3 +1,5 @@
+const { Toasty } = require('../constants');
+
 let io = null;
 
 module.exports = {
@@ -6,7 +8,7 @@ module.exports = {
     },
     getIO: () => {
         if (!io) {
-            throw new Error('Socket.io has not been initialized');
+            throw new Error(Toasty.SERVER.SOCKET_NOT_INITIALIZED);
         }
         return io;
     },

@@ -1,4 +1,15 @@
-process.env.TZ = process.env.TZ || 'UTC';
+const {
+    TIMEZONES,
+    DEFAULT_PORTS,
+    SERVER_CONFIG,
+    QUEUES,
+    DATABASE,
+    REDIS_CONFIG,
+    HttpStatus,
+    Toasty,
+} = require('./constants');
+
+process.env.TZ = process.env.TZ || TIMEZONES.UTC;
 const filePath = 'job-server/server.js';
 
 require('dotenv').config();
@@ -12,21 +23,21 @@ require('./configs/redis.config');
 const { initializeWorkers } = require('./controllers/worker-events.controller');
 const { log, info } = require('./utils/logger.util');
 
-const PORT = process.env.PORT || process.env.JOB_PORT || 9000;
+const PORT = process.env.PORT || process.env.JOB_PORT || DEFAULT_PORTS.JOB_SERVER;
 const app = express();
 
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({ limit: SERVER_CONFIG.BODY_LIMIT }));
+app.use(express.urlencoded({ limit: SERVER_CONFIG.BODY_LIMIT, extended: true }));
 
-if (['development', 'test'].includes(process.env.NODE_ENV || 'development')) {
+if (SERVER_CONFIG.DEV_ENVIRONMENTS.includes(process.env.NODE_ENV || SERVER_CONFIG.DEFAULT_ENV)) {
     app.use(morgan('dev'));
 }
 
 app.use('/job-api', require('./routes'));
 
 app.get('*', (req, res) => {
-    res.status(404).json({ message: 'Sorry, this route was not found on the Job Server' });
+    res.status(HttpStatus.NOT_FOUND).json({ message: Toasty.SERVER.ROUTE_NOT_FOUND });
 });
 
 app.use(async function (error, req, res, next) {
@@ -34,18 +45,21 @@ app.use(async function (error, req, res, next) {
         route: req?._parsedUrl?.pathname,
         method: req?.method,
     });
-    res.status(500).json({ success: false, message: error?.message || 'Job Server Error' });
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: error?.message || Toasty.SERVER.JOB_SERVER_ERROR,
+    });
 });
 
 /* -------- Start server & workers -------- */
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, SERVER_CONFIG.HOST, () => {
     console.log(`
 \x1b[34m======================================================================
   💼 [job-server] BullMQ Job & Worker Server running on port ${PORT}
-  📡 Environment : ${process.env.NODE_ENV || 'development'}
-  📦 Task Queue  : vast-culture-tasks
-  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || 'localhost'}:${process.env.MYSQL_PORT || 3306}
-  ⚡ Redis Broker: Redis running on ${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}
+  📡 Environment : ${process.env.NODE_ENV || SERVER_CONFIG.DEFAULT_ENV}
+  📦 Task Queue  : ${QUEUES.DEFAULT_TASKS}
+  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || DATABASE.DEFAULT_HOST}:${process.env.MYSQL_PORT || DATABASE.DEFAULT_PORT}
+  ⚡ Redis Broker: Redis running on ${process.env.REDIS_HOST || REDIS_CONFIG.DEFAULT_HOST}:${process.env.REDIS_PORT || REDIS_CONFIG.DEFAULT_PORT}
   🩺 Health Check: http://localhost:${PORT}/job-api/health
 ======================================================================\x1b[0m`);
     info(filePath, `Job Server successfully started on port ${PORT}`);

@@ -11,6 +11,7 @@ const DEFAULT_PORTS = {
 };
 
 const DATABASE = {
+    DIALECT: 'mysql',
     DEFAULT_NAME: 'vastculture',
     DEFAULT_USER: 'vastadmin',
     DEFAULT_HOST: 'localhost',
@@ -29,6 +30,10 @@ const DATABASE = {
 const REDIS_CONFIG = {
     DEFAULT_HOST: 'localhost',
     DEFAULT_PORT: 6379,
+    RETRY_STRATEGY: {
+        MULTIPLIER: 200,
+        MAX_DELAY: 3000,
+    },
 };
 
 const QUEUES = {
@@ -36,6 +41,7 @@ const QUEUES = {
     DEFAULT_JOB_NAME: 'general-task',
     CONCURRENCY: 5,
     ATTEMPTS: 3,
+    REMOVE_ON_COMPLETE: true,
 };
 
 const DEFAULT_ADMIN_USER = {
@@ -43,6 +49,11 @@ const DEFAULT_ADMIN_USER = {
     EMAIL: 'superadmin@vastculture.com',
     FIRST_NAME: 'priyanka',
     MOBILE_NUMBER: '0000000000',
+    ROLE: 'ADMIN',
+    TIMEZONE: 'Asia/Kolkata',
+    TIME_ZONE: 'Asia/Kolkata',
+    STATUS: 'ACTIVE',
+    IS_AUTHENTICATED: true,
 };
 
 const DATE_FORMATS = {
@@ -52,6 +63,44 @@ const DATE_FORMATS = {
     TIMESTAMP_WITH_OFFSET: 'YYYY-MM-DD HH:mm:ss ZZ',
 };
 
+const SERVER_CONFIG = {
+    HOST: '0.0.0.0',
+    BODY_LIMIT: '50mb',
+    ENVIRONMENTS: {
+        DEVELOPMENT: 'development',
+        PRODUCTION: 'production',
+        TEST: 'test',
+    },
+    DEV_ENVIRONMENTS: ['development', 'test'],
+    DEFAULT_ENV: 'development',
+};
+
+const LOGGER_CONFIG = {
+    DIR: 'logs',
+    DEFAULT_LEVEL: 'info',
+    APP_LOG_MAX_FILES: '14d',
+    ERROR_LOG_MAX_FILES: '30d',
+};
+
+const SERVICE_NAMES = {
+    SERVER: 'Core API Server',
+    SOCKET_SERVER: 'Socket Server',
+    JOB_SERVER: 'BullMQ Job & Worker Server',
+    CALLING_SERVER: 'Calling & WebSocket Server',
+};
+
+const PAGINATION = {
+    DEFAULT_PAGE: 1,
+    DEFAULT_LIMIT: 50,
+    DEFAULT_ORDER: [['createdAt', 'DESC']],
+    EXCLUDE_FIELDS: ['password'],
+};
+
+const HEALTH_STATUS = {
+    OK: 'OK',
+    ERROR: 'ERROR',
+};
+
 module.exports = {
     DEFAULT_PORTS,
     DATABASE,
@@ -59,4 +108,9 @@ module.exports = {
     QUEUES,
     DEFAULT_ADMIN_USER,
     DATE_FORMATS,
+    SERVER_CONFIG,
+    LOGGER_CONFIG,
+    SERVICE_NAMES,
+    PAGINATION,
+    HEALTH_STATUS,
 };

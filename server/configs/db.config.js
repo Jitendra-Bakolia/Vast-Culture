@@ -2,7 +2,7 @@ const path = require('path');
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const moment = require('moment-timezone');
-const { DATABASE, TIMEZONES, DATE_FORMATS } = require(path.resolve(__dirname, '..', '..', 'resources', 'constants'));
+const { DATABASE, TIMEZONES, DATE_FORMATS } = require('../constants');
 
 const appTimezone = process.env.TIMEZONE || TIMEZONES.DEFAULT;
 const dbTimezone = moment().tz(appTimezone).format(DATE_FORMATS.TIMEZONE_OFFSET);
@@ -19,7 +19,7 @@ const sequelize = new Sequelize(
     {
         host,
         port,
-        dialect: 'mysql',
+        dialect: DATABASE.DIALECT,
         timezone: dbTimezone,
         dialectOptions: {
             dateStrings: true,

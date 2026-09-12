@@ -1,4 +1,6 @@
+const moment = require('moment-timezone');
 const { log } = require('../utils/logger.util');
+const { CALL_EVENTS, CALL_STATUS, TIMEZONES } = require('../constants');
 
 const activeCalls = new Map();
 const connectedPeers = new Map();
@@ -9,7 +11,7 @@ const connectedPeers = new Map();
  */
 module.exports = (wss) => {
     wss.on('connection', (ws, req) => {
-        const peerId = req.headers['sec-websocket-key'] || `peer_${Date.now()}`;
+        const peerId = req.headers['sec-websocket-key'] || `peer_${moment().valueOf()}`;
         connectedPeers.set(peerId, ws);
         console.log(`[Calling WebSocket] Peer connected: ${peerId} (Total: ${connectedPeers.size})`);
 
@@ -19,20 +21,20 @@ module.exports = (wss) => {
                 const { event, targetPeerId, payload, callId } = data;
 
                 switch (event) {
-                    case 'ping':
-                        ws.send(JSON.stringify({ event: 'pong', timestamp: Date.now() }));
+                    case CALL_EVENTS.PING:
+                        ws.send(JSON.stringify({ event: CALL_EVENTS.PONG, timestamp: moment().valueOf() }));
                         break;
 
-                    case 'call:initiate':
+                    case CALL_EVENTS.CALL_INITIATE:
                         activeCalls.set(callId, {
                             caller: peerId,
                             callee: targetPeerId,
-                            status: 'INITIATED',
-                            startedAt: new Date(),
+                            status: CALL_STATUS.INITIATED,
+                            startedAt: moment().tz(TIMEZONES.DEFAULT).toDate(),
                         });
                         if (targetPeerId && connectedPeers.has(targetPeerId)) {
                             connectedPeers.get(targetPeerId).send(JSON.stringify({
-                                event: 'call:incoming',
+                                event: CALL_EVENTS.CALL_INCOMING,
                                 callerId: peerId,
                                 callId,
                                 payload,
@@ -40,9 +42,9 @@ module.exports = (wss) => {
                         }
                         break;
 
-                    case 'call:offer':
-                    case 'call:answer':
-                    case 'call:candidate':
+                    case CALL_EVENTS.CALL_OFFER:
+                    case CALL_EVENTS.CALL_ANSWER:
+                    case CALL_EVENTS.CALL_CANDIDATE:
                         if (targetPeerId && connectedPeers.has(targetPeerId)) {
                             connectedPeers.get(targetPeerId).send(JSON.stringify({
                                 event,
@@ -52,15 +54,15 @@ module.exports = (wss) => {
                         }
                         break;
 
-                    case 'call:hangup':
+                    case CALL_EVENTS.CALL_HANGUP:
                         if (callId && activeCalls.has(callId)) {
                             const call = activeCalls.get(callId);
-                            call.status = 'COMPLETED';
+                            call.status = CALL_STATUS.COMPLETED;
                             activeCalls.delete(callId);
                         }
                         if (targetPeerId && connectedPeers.has(targetPeerId)) {
                             connectedPeers.get(targetPeerId).send(JSON.stringify({
-                                event: 'call:hangup',
+                                event: CALL_EVENTS.CALL_HANGUP,
                                 fromPeerId: peerId,
                                 callId,
                             }));

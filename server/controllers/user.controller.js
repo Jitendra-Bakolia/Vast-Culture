@@ -1,16 +1,24 @@
 const { User } = require('../dao');
-const HttpStatus = require('../constants/http-status.constant');
-const Toasty = require('../constants/toasty.constant');
-const { USER_ROLES, USER_STATUS, TIMEZONES } = require('../constants/types.constant');
+const { recordLoginActivityHelper } = require('./login-activity.controller');
+const {
+    HttpStatus,
+    Toasty,
+    USER_ROLES,
+    USER_STATUS,
+    TIMEZONES,
+    LOGIN_ACTIVITY_TYPES,
+    ACTIVITY_STATUS,
+    PAGINATION,
+} = require('../constants');
 
 const UserController = {
     async createUser(req, res, next) {
         try {
-            const { email, firstName, lastName, mobileNumber, mobileNo, role, timezone, password, status, isAuthenticated } = req.body;
+            const { email, firstName, lastName, mobileNumber, mobileNo, role, timeZone, timezone, password, status, isAuthenticated } = req.body;
             if (!email) {
                 return res.status(HttpStatus.BAD_REQUEST).json({
                     success: false,
-                    message: 'Email is required',
+                    message: Toasty.USER.EMAIL_REQUIRED,
                 });
             }
 
@@ -18,7 +26,7 @@ const UserController = {
             if (existingUser) {
                 return res.status(HttpStatus.CONFLICT).json({
                     success: false,
-                    message: 'User with this email already exists',
+                    message: Toasty.USER.EMAIL_EXISTS,
                 });
             }
 
@@ -28,10 +36,19 @@ const UserController = {
                 lastName,
                 mobileNumber: mobileNumber || mobileNo || null,
                 role: role || USER_ROLES.USER,
-                timezone: timezone || TIMEZONES.DEFAULT,
+                timeZone: timeZone || timezone || TIMEZONES.DEFAULT,
                 password: password || null,
                 status: status || USER_STATUS.ACTIVE,
                 isAuthenticated: typeof isAuthenticated === 'boolean' ? isAuthenticated : false,
+            });
+
+            // Automatically record first registration activity
+            await recordLoginActivityHelper({
+                userId: newUser.id,
+                activityType: LOGIN_ACTIVITY_TYPES.REGISTER,
+                status: ACTIVITY_STATUS.SUCCESS,
+                req,
+                metadata: { email: newUser.email, role: newUser.role },
             });
 
             return res.status(HttpStatus.CREATED).json({
@@ -47,9 +64,9 @@ const UserController = {
     async getUsers(req, res, next) {
         try {
             const users = await User.findAll({
-                attributes: { exclude: ['password'] },
-                order: [['createdAt', 'DESC']],
-                limit: 50,
+                attributes: { exclude: PAGINATION.EXCLUDE_FIELDS },
+                order: PAGINATION.DEFAULT_ORDER,
+                limit: PAGINATION.DEFAULT_LIMIT,
             });
 
             return res.status(HttpStatus.OK).json({
@@ -66,7 +83,7 @@ const UserController = {
         try {
             const { id } = req.params;
             const user = await User.findByPk(id, {
-                attributes: { exclude: ['password'] },
+                attributes: { exclude: PAGINATION.EXCLUDE_FIELDS },
             });
 
             if (!user) {

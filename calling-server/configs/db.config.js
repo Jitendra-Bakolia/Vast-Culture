@@ -1,23 +1,24 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const moment = require('moment-timezone');
+const { DATABASE, TIMEZONES, DATE_FORMATS } = require('../constants');
 
-const appTimezone = process.env.TIMEZONE || 'UTC';
-const dbTimezone = moment().tz(appTimezone).format('Z');
+const appTimezone = process.env.TIMEZONE || TIMEZONES.DEFAULT;
+const dbTimezone = moment().tz(appTimezone).format(DATE_FORMATS.TIMEZONE_OFFSET);
 
-const host = process.env.MYSQL_HOST || 'localhost';
-const port = Number(process.env.MYSQL_PORT) || 3306;
-const dbName = process.env.DB_NAME || 'vastculture';
-const user = process.env.MYSQL_USER || 'vastadmin';
+const host = process.env.MYSQL_HOST || DATABASE.DEFAULT_HOST;
+const port = Number(process.env.MYSQL_PORT) || DATABASE.DEFAULT_PORT;
+const dbName = process.env.DB_NAME || DATABASE.DEFAULT_NAME;
+const user = process.env.MYSQL_USER || DATABASE.DEFAULT_USER;
 
 const sequelize = new Sequelize(
     dbName,
     user,
-    process.env.MYSQL_PASSWORD || 'secret',
+    process.env.MYSQL_PASSWORD || DATABASE.DEFAULT_PASSWORD,
     {
         host,
         port,
-        dialect: 'mysql',
+        dialect: DATABASE.DIALECT,
         timezone: dbTimezone,
         dialectOptions: {
             dateStrings: true,
@@ -26,10 +27,10 @@ const sequelize = new Sequelize(
         },
         logging: process.env.DB_LOGGING === 'true' ? console.log : false,
         pool: {
-            max: 10,
-            min: 0,
-            acquire: 30000,
-            idle: 10000,
+            max: DATABASE.POOL.MAX,
+            min: DATABASE.POOL.MIN,
+            acquire: DATABASE.POOL.ACQUIRE,
+            idle: DATABASE.POOL.IDLE,
         },
     }
 );

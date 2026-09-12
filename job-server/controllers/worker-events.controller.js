@@ -1,8 +1,10 @@
 const { Worker, Queue } = require('bullmq');
+const moment = require('moment-timezone');
 const { redis } = require('../configs/redis.config');
 const { log } = require('../utils/logger.util');
+const { QUEUES, TIMEZONES } = require('../constants');
 
-const DEFAULT_QUEUE_NAME = 'vast-culture-tasks';
+const DEFAULT_QUEUE_NAME = QUEUES.DEFAULT_TASKS;
 
 const taskQueue = new Queue(DEFAULT_QUEUE_NAME, {
     connection: redis,
@@ -13,10 +15,10 @@ const initializeWorkers = () => {
         const worker = new Worker(DEFAULT_QUEUE_NAME, async (job) => {
             console.log(`[Job Worker] Processing job ${job.id} (${job.name}) with data:`, job.data);
             // Process job here
-            return { processed: true, at: new Date().toISOString() };
+            return { processed: true, at: moment().tz(TIMEZONES.DEFAULT).toISOString() };
         }, {
             connection: redis,
-            concurrency: 5,
+            concurrency: QUEUES.CONCURRENCY,
         });
 
         worker.on('completed', (job) => {

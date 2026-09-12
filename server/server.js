@@ -1,4 +1,15 @@
-process.env.TZ = process.env.TZ || 'UTC';
+const path = require('path');
+const {
+    TIMEZONES,
+    DEFAULT_PORTS,
+    DATABASE,
+    REDIS_CONFIG,
+    SERVER_CONFIG,
+    HttpStatus,
+    Toasty,
+} = require('./constants');
+
+process.env.TZ = process.env.TZ || TIMEZONES.UTC;
 const filePath = 'server/server.js';
 
 require('dotenv').config();
@@ -12,10 +23,8 @@ const { connectMySQL } = require('./configs/db.config');
 require('./configs/redis.config');
 
 const { log, info } = require('./utils/logger.util');
-const HttpStatus = require('./constants/http-status.constant');
-const Toasty = require('./constants/toasty.constant');
 
-const PORT = process.env.PORT || process.env.SERVER_PORT || 5000;
+const PORT = process.env.PORT || process.env.SERVER_PORT || DEFAULT_PORTS.SERVER;
 const app = express();
 
 app.disable('etag');
@@ -24,12 +33,12 @@ app.use(cors({
     exposedHeaders: ['x-token', 'content-disposition'],
 }));
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({ limit: SERVER_CONFIG.BODY_LIMIT }));
+app.use(express.urlencoded({ limit: SERVER_CONFIG.BODY_LIMIT, extended: true }));
 app.use(userAgent.express());
 app.use(requestIp.mw());
 
-if (['development', 'test'].includes(process.env.NODE_ENV || 'development')) {
+if (SERVER_CONFIG.DEV_ENVIRONMENTS.includes(process.env.NODE_ENV || SERVER_CONFIG.DEFAULT_ENV)) {
     app.use(morgan('dev'));
 }
 
@@ -61,13 +70,13 @@ app.use(async function (error, req, res, next) {
 });
 
 /* -------- Start server -------- */
-const server = app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, SERVER_CONFIG.HOST, () => {
     console.log(`
 \x1b[36m======================================================================
   🚀 [core-server] Core API Server running on port ${PORT}
-  📡 Environment : ${process.env.NODE_ENV || 'development'}
-  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || 'localhost'}:${process.env.MYSQL_PORT || 3306}
-  ⚡ Cache       : Redis running on ${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}
+  📡 Environment : ${process.env.NODE_ENV || SERVER_CONFIG.DEFAULT_ENV}
+  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || DATABASE.DEFAULT_HOST}:${process.env.MYSQL_PORT || DATABASE.DEFAULT_PORT}
+  ⚡ Cache       : Redis running on ${process.env.REDIS_HOST || REDIS_CONFIG.DEFAULT_HOST}:${process.env.REDIS_PORT || REDIS_CONFIG.DEFAULT_PORT}
   🩺 Health Check: http://localhost:${PORT}/api/health
 ======================================================================\x1b[0m`);
     info(filePath, `Core API Server successfully started on port ${PORT}`);

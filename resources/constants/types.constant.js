@@ -51,6 +51,19 @@ const CALL_STATUS = {
     NO_ANSWER: 'NO_ANSWER',
 };
 
+const LOGIN_ACTIVITY_TYPES = {
+    REGISTER: 'REGISTER',
+    LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT',
+    FAILED_LOGIN: 'FAILED_LOGIN',
+    PASSWORD_RESET: 'PASSWORD_RESET',
+};
+
+const ACTIVITY_STATUS = {
+    SUCCESS: 'SUCCESS',
+    FAILED: 'FAILED',
+};
+
 module.exports = {
     USER_ROLES,
     USER_STATUS,
@@ -58,4 +71,6 @@ module.exports = {
     SOCKET_EVENTS,
     CALL_EVENTS,
     CALL_STATUS,
+    LOGIN_ACTIVITY_TYPES,
+    ACTIVITY_STATUS,
 };

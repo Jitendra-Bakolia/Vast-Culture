@@ -1,11 +1,13 @@
+const moment = require('moment-timezone');
 const { redis } = require('../configs/redis.config');
 const RedisSocketDAO = require('./socket.dao');
+const { DATABASE } = require('../constants');
 
 class RedisUserDAO {
     #dbName;
 
     constructor() {
-        this.#dbName = process.env.DB_NAME || 'vastculture';
+        this.#dbName = process.env.DB_NAME || DATABASE.DEFAULT_NAME;
     }
 
     static async flushAll() {
@@ -46,7 +48,7 @@ class RedisUserDAO {
         const remainingSockets = await redis.scard(key);
         if (remainingSockets === 0) {
             await redis.hset(`${this.#dbName}:users:${userId}`, 'isOnline', 'false');
-            const unixTime = Math.floor(Date.now() / 1000);
+            const unixTime = moment().unix();
             await redis.hset(`${this.#dbName}:users:${userId}`, 'lastSeen', unixTime);
         }
     }

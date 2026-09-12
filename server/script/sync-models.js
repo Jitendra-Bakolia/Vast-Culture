@@ -7,6 +7,7 @@ process.chdir(path.resolve(__dirname, '..'));
 require('dotenv').config();
 
 const { sequelize } = require('../configs/db.config');
+const { DATABASE } = require('../constants');
 
 // Load all models and associations
 require('../dao');
@@ -30,11 +31,11 @@ const syncOptions = {
 };
 
 const ensureDatabaseExists = async () => {
-    const dbName = process.env.DB_NAME || 'vastculture';
-    const host = process.env.MYSQL_HOST || 'localhost';
-    const port = Number(process.env.MYSQL_PORT) || 3306;
-    const user = process.env.MYSQL_USER || 'vastadmin';
-    const password = process.env.MYSQL_PASSWORD || 'secret';
+    const dbName = process.env.DB_NAME || DATABASE.DEFAULT_NAME;
+    const host = process.env.MYSQL_HOST || DATABASE.DEFAULT_HOST;
+    const port = Number(process.env.MYSQL_PORT) || DATABASE.DEFAULT_PORT;
+    const user = process.env.MYSQL_USER || DATABASE.DEFAULT_USER;
+    const password = process.env.MYSQL_PASSWORD || DATABASE.DEFAULT_PASSWORD;
 
     try {
         const connection = await mysql.createConnection({
@@ -43,7 +44,9 @@ const ensureDatabaseExists = async () => {
             user,
             password,
         });
-        await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`);
+        await connection.query(
+            `CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET ${DATABASE.DEFAULT_CHARSET} COLLATE ${DATABASE.DEFAULT_COLLATE};`
+        );
         await connection.end();
         console.log(`[MySQL] Database "${dbName}" checked/created successfully.`);
     } catch (err) {

@@ -33,7 +33,7 @@ module.exports = ((DataTypes) => {
             type: DataTypes.STRING,
             defaultValue: USER_ROLES.USER,
         },
-        timezone: {
+        timeZone: {
             type: DataTypes.STRING,
             defaultValue: TIMEZONES.DEFAULT,
         },
