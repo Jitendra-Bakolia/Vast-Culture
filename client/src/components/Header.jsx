@@ -1,7 +1,6 @@
 import React from 'react';
 import { Search, Heart, User as UserIcon, ShoppingBag, Menu } from 'lucide-react';
-import logo from "../../src/img/logo.png";
-// import logo2 from "../../src/img/logo2.png";
+import logo from '../img/logo.png';
 
 export const Header = ({
   cartCount,

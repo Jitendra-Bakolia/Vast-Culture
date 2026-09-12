@@ -30,18 +30,16 @@ export const HeroSection = ({
         return (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1200 ease-in-out ${
-              isActive ? 'opacity-100 z-1' : 'opacity-0 z-0 pointer-events-none'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1200 ease-in-out ${isActive ? 'opacity-100 z-1' : 'opacity-0 z-0 pointer-events-none'
+              }`}
           >
             <img
               src={slide.image}
               alt={slide.title || 'Luxury jewelry editorial'}
               loading={index === 0 ? 'eager' : 'lazy'}
               decoding="async"
-              className={`w-full h-full object-cover object-center transition-transform duration-[5000ms] ease-out ${
-                isActive ? 'scale-105' : 'scale-100'
-              }`}
+              className={`w-full h-full object-cover object-center transition-transform duration-[5000ms] ease-out ${isActive ? 'scale-105' : 'scale-100'
+                }`}
             />
             {/* Subtle Dark Gradient Overlays for optimal luxury contrast */}
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/90 via-black/65 to-black/35" />
@@ -132,9 +130,8 @@ export const HeroSection = ({
                 />
               ) : (
                 <div
-                  className={`h-full ${
-                    idx < activeSlideIndex ? 'w-full bg-[#D8B26E]/40' : 'w-0'
-                  }`}
+                  className={`h-full ${idx < activeSlideIndex ? 'w-full bg-[#D8B26E]/40' : 'w-0'
+                    }`}
                 />
               )}
             </div>

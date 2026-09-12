@@ -28,24 +28,6 @@ export const HERO_SLIDES = [
   }
 ];
 
-export const HERO_THUMBNAILS = [
-  {
-    id: 'thumb-1',
-    label: 'Chains & Pearls',
-    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=400&auto=format&fit=crop',
-  },
-  {
-    id: 'thumb-2',
-    label: 'Statement Rings',
-    image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=400&auto=format&fit=crop',
-  },
-  {
-    id: 'thumb-3',
-    label: 'Pendant Sets',
-    image: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?q=80&w=400&auto=format&fit=crop',
-  }
-];
-
 export const BESTSELLER_PRODUCTS = [
   {
     id: 'p1',
