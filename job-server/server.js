@@ -10,7 +10,7 @@ const { connectMySQL } = require('./configs/db.config');
 require('./configs/redis.config');
 
 const { initializeWorkers } = require('./controllers/worker-events.controller');
-const { log } = require('./utils/logger.util');
+const { log, info } = require('./utils/logger.util');
 
 const PORT = process.env.PORT || process.env.JOB_PORT || 9000;
 const app = express();
@@ -39,7 +39,16 @@ app.use(async function (error, req, res, next) {
 
 /* -------- Start server & workers -------- */
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`[Job Server] Running on port ${PORT} (PID: ${process.pid})`);
+    console.log(`
+\x1b[34m======================================================================
+  💼 [job-server] BullMQ Job & Worker Server running on port ${PORT}
+  📡 Environment : ${process.env.NODE_ENV || 'development'}
+  📦 Task Queue  : vast-culture-tasks
+  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || 'localhost'}:${process.env.MYSQL_PORT || 3306}
+  ⚡ Redis Broker: Redis running on ${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}
+  🩺 Health Check: http://localhost:${PORT}/job-api/health
+======================================================================\x1b[0m`);
+    info(filePath, `Job Server successfully started on port ${PORT}`);
     connectMySQL();
     initializeWorkers();
 });

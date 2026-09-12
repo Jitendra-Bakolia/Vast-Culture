@@ -225,6 +225,46 @@ services:
     networks:
       - vast-culture-network
 
+  # ----------------------------------------------------------------------------
+  # 4. ORCHESTRATION TERMINAL STATUS LOGGERS
+  # ----------------------------------------------------------------------------
+  services-summary:
+    container_name: vast-culture-services-summary
+    image: node:22-alpine
+    restart: "no"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      server:
+        condition: service_started
+      socket-server:
+        condition: service_started
+      job-server:
+        condition: service_started
+      calling-server:
+        condition: service_started
+    networks:
+      - vast-culture-network
+    command:
+      - "node"
+      - "-e"
+      - |
+        setTimeout(() => {
+          console.log('\n' + '='.repeat(74));
+          console.log('  🌟 [VAST CULTURE MULTI-SERVER ARCHITECTURE TERMINAL STATUS]');
+          console.log('='.repeat(74));
+          console.log('  🗄️  mysql-server    : running on internal 3306 (host port: 3307) [Database: vastculture]');
+          console.log('  ⚡ redis-server    : running on internal 6379 (host port: 6380) [Broker / Cache]');
+          console.log('  🚀 core-server     : running on port 5000 (http://localhost:5000/api/health)');
+          console.log('  🔌 socket-server   : running on port 7000 (http://localhost:7000/socket-api/health)');
+          console.log('  📞 calling-server  : running on port 8000 (ws://localhost:8000 | http://localhost:8000/api/calling/health)');
+          console.log('  💼 job-server      : running on port 9000 (http://localhost:9000/job-api/health)');
+          console.log('  💻 client-app      : running on port 3000 (http://localhost:3000)');
+          console.log('='.repeat(74) + '\n');
+        }, 1500);
+
   ngrok-url:
     container_name: vast-culture-ngrok-url
     image: node:22-alpine

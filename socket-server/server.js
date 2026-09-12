@@ -13,7 +13,7 @@ require('./configs/redis.config');
 
 const SocketHandler = require('./handlers/socket.handler');
 const { setIO } = require('./utils/socket');
-const { log } = require('./utils/logger.util');
+const { log, info } = require('./utils/logger.util');
 
 const PORT = process.env.PORT || process.env.SOCKET_PORT || 7000;
 const app = express();
@@ -55,7 +55,16 @@ app.use(async function (error, req, res, next) {
 
 /* -------- Start the server on the specified port -------- */
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`[Socket Server] Running on port ${PORT} (PID: ${process.pid})`);
+    console.log(`
+\x1b[35m======================================================================
+  ⚡ [socket-server] Socket.IO & Redis Server running on port ${PORT}
+  📡 Environment : ${process.env.NODE_ENV || 'development'}
+  🔌 Path        : /socket.io
+  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || 'localhost'}:${process.env.MYSQL_PORT || 3306}
+  ⚡ Redis Broker: Redis running on ${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}
+  🩺 Health Check: http://localhost:${PORT}/socket-api/health
+======================================================================\x1b[0m`);
+    info(filePath, `Socket Server successfully started on port ${PORT}`);
 });
 
 // Connect to MySQL

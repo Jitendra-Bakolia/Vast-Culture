@@ -11,7 +11,7 @@ const userAgent = require('express-useragent');
 const { connectMySQL } = require('./configs/db.config');
 require('./configs/redis.config');
 
-const { log } = require('./utils/logger.util');
+const { log, info } = require('./utils/logger.util');
 const HttpStatus = require('./constants/http-status.constant');
 const Toasty = require('./constants/toasty.constant');
 
@@ -62,7 +62,15 @@ app.use(async function (error, req, res, next) {
 
 /* -------- Start server -------- */
 const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`[Core API Server] Running on port ${PORT} (PID: ${process.pid})`);
+    console.log(`
+\x1b[36m======================================================================
+  🚀 [core-server] Core API Server running on port ${PORT}
+  📡 Environment : ${process.env.NODE_ENV || 'development'}
+  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || 'localhost'}:${process.env.MYSQL_PORT || 3306}
+  ⚡ Cache       : Redis running on ${process.env.REDIS_HOST || 'localhost'}:${process.env.REDIS_PORT || 6379}
+  🩺 Health Check: http://localhost:${PORT}/api/health
+======================================================================\x1b[0m`);
+    info(filePath, `Core API Server successfully started on port ${PORT}`);
 });
 
 /* -------- Global Error Handling -------- */

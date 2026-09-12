@@ -12,7 +12,7 @@ const { WebSocketServer } = require('ws');
 
 const { connectMySQL } = require('./configs/db.config');
 const WebSocketController = require('./controllers/websocket.controller');
-const { log } = require('./utils/logger.util');
+const { log, info } = require('./utils/logger.util');
 
 const PORT = process.env.PORT || process.env.CALLING_PORT || 8000;
 const app = express();
@@ -48,7 +48,15 @@ app.use(async function (error, req, res, next) {
 
 /* -------- Start server -------- */
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`[Calling Server] Running on port ${PORT} (PID: ${process.pid})`);
+    console.log(`
+\x1b[33m======================================================================
+  📞 [calling-server] Calling & WebSocket Server running on port ${PORT}
+  📡 Environment : ${process.env.NODE_ENV || 'development'}
+  🔌 Signaling WS: ws://0.0.0.0:${PORT}
+  🗄️  Database    : MySQL running on ${process.env.MYSQL_HOST || 'localhost'}:${process.env.MYSQL_PORT || 3306}
+  🩺 Health Check: http://localhost:${PORT}/api/calling/health
+======================================================================\x1b[0m`);
+    info(filePath, `Calling Server successfully started on port ${PORT}`);
 });
 
 connectMySQL();

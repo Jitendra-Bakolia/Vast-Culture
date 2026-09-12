@@ -5,13 +5,18 @@ const moment = require('moment-timezone');
 const appTimezone = process.env.TIMEZONE || 'UTC';
 const dbTimezone = moment().tz(appTimezone).format('Z');
 
+const host = process.env.MYSQL_HOST || 'localhost';
+const port = Number(process.env.MYSQL_PORT) || 3306;
+const dbName = process.env.DB_NAME || 'vastculture';
+const user = process.env.MYSQL_USER || 'vastadmin';
+
 const sequelize = new Sequelize(
-    process.env.DB_NAME || 'vastculture',
-    process.env.MYSQL_USER || 'vastadmin',
+    dbName,
+    user,
     process.env.MYSQL_PASSWORD || 'secret',
     {
-        host: process.env.MYSQL_HOST || 'localhost',
-        port: Number(process.env.MYSQL_PORT) || 3306,
+        host,
+        port,
         dialect: 'mysql',
         timezone: dbTimezone,
         dialectOptions: {
@@ -29,7 +34,6 @@ const sequelize = new Sequelize(
     }
 );
 
-// Moment-timezone utility helper
 const now = (tz = appTimezone) => {
     return moment().tz(tz).toDate();
 };
@@ -41,9 +45,9 @@ const formatInTimezone = (date, format = 'YYYY-MM-DD HH:mm:ss', tz = appTimezone
 const connectMySQL = async () => {
     try {
         await sequelize.authenticate();
-        console.log(`[MySQL] Connection established successfully (Timezone: ${appTimezone} ${dbTimezone}).`);
+        console.log(`\x1b[32m✔ [mysql-server] MySQL database "${dbName}" connected and running on host "${host}" on port ${port} (Timezone: ${appTimezone} ${dbTimezone})\x1b[0m`);
     } catch (error) {
-        console.error('[MySQL] Unable to connect to database:', error.message);
+        console.error(`\x1b[31m✖ [mysql-server] Unable to connect to MySQL on host "${host}" on port ${port}: ${error.message}\x1b[0m`);
     }
 };
 
