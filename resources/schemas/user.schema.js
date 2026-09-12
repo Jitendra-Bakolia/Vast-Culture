@@ -1,5 +1,5 @@
 const path = require('path');
-const { USER_ROLES, USER_STATUS, TIMEZONES } = require(path.resolve(__dirname, '..', 'constants', 'types.constant.js'));
+const { USER_ROLES, USER_STATUS, TIMEZONES, DATABASE } = require(path.resolve(__dirname, '..', 'constants'));
 
 module.exports = ((DataTypes) => {
     return [{
@@ -11,7 +11,7 @@ module.exports = ((DataTypes) => {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
-            collate: 'utf8mb4_general_ci',
+            collate: DATABASE.DEFAULT_COLLATE,
         },
         firstName: {
             type: DataTypes.STRING,

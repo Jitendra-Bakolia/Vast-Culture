@@ -27,6 +27,18 @@ const SOCKET_EVENTS = {
     USER_UPDATE: 'user:update',
     ONLINE_STATUS: 'online:status',
     MESSAGE: 'message',
+    MESSAGE_BROADCAST: 'message:broadcast',
+};
+
+const CALL_EVENTS = {
+    PING: 'ping',
+    PONG: 'pong',
+    CALL_INITIATE: 'call:initiate',
+    CALL_INCOMING: 'call:incoming',
+    CALL_OFFER: 'call:offer',
+    CALL_ANSWER: 'call:answer',
+    CALL_CANDIDATE: 'call:candidate',
+    CALL_HANGUP: 'call:hangup',
 };
 
 const CALL_STATUS = {
@@ -44,5 +56,6 @@ module.exports = {
     USER_STATUS,
     TIMEZONES,
     SOCKET_EVENTS,
+    CALL_EVENTS,
     CALL_STATUS,
 };
