@@ -63,6 +63,10 @@ const run = async () => {
         console.log(
             `[Sequelize] Models synced successfully. Options: alter=${Boolean(shouldAlter)}, force=${Boolean(shouldForce)}`
         );
+
+        // Seed default superadmin user
+        const { seedDefaultUser } = require('../seeds');
+        await seedDefaultUser();
     } catch (err) {
         console.error('[Sequelize] Model sync failed:', err);
         process.exitCode = 1;

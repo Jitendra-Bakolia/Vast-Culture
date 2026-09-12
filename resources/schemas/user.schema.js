@@ -1,3 +1,6 @@
+const path = require('path');
+const { USER_ROLES, USER_STATUS, TIMEZONES } = require(path.resolve(__dirname, '..', 'constants', 'types.constant.js'));
+
 module.exports = ((DataTypes) => {
     return [{
         id: {
@@ -18,7 +21,7 @@ module.exports = ((DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        mobileNo: {
+        mobileNumber: {
             type: DataTypes.STRING,
             allowNull: true,
         },
@@ -28,31 +31,19 @@ module.exports = ((DataTypes) => {
         },
         role: {
             type: DataTypes.STRING,
-            defaultValue: 'USER',
+            defaultValue: USER_ROLES.USER,
         },
         timezone: {
             type: DataTypes.STRING,
-            defaultValue: 'UTC',
+            defaultValue: TIMEZONES.DEFAULT,
         },
-        isActive: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true,
-        },
-        isDeleted: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
-        isOtpVerified: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
-        otp: {
+        status: {
             type: DataTypes.STRING,
-            allowNull: true,
+            defaultValue: USER_STATUS.ACTIVE,
         },
-        otpExpiresAt: {
-            type: DataTypes.DATE,
-            allowNull: true,
+        isAuthenticated: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
         },
     }, {
         timestamps: true,

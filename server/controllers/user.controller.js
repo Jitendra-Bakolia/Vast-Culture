@@ -1,11 +1,12 @@
 const { User } = require('../dao');
 const HttpStatus = require('../constants/http-status.constant');
 const Toasty = require('../constants/toasty.constant');
+const { USER_ROLES, USER_STATUS, TIMEZONES } = require('../constants/types.constant');
 
 const UserController = {
     async createUser(req, res, next) {
         try {
-            const { email, firstName, lastName, mobileNo, role, timezone, password } = req.body;
+            const { email, firstName, lastName, mobileNumber, mobileNo, role, timezone, password, status, isAuthenticated } = req.body;
             if (!email) {
                 return res.status(HttpStatus.BAD_REQUEST).json({
                     success: false,
@@ -13,7 +14,7 @@ const UserController = {
                 });
             }
 
-            const existingUser = await User.findOne({ where: { email, isDeleted: false } });
+            const existingUser = await User.findOne({ where: { email } });
             if (existingUser) {
                 return res.status(HttpStatus.CONFLICT).json({
                     success: false,
@@ -25,10 +26,12 @@ const UserController = {
                 email,
                 firstName,
                 lastName,
-                mobileNo,
-                role: role || 'USER',
-                timezone: timezone || 'UTC',
-                password,
+                mobileNumber: mobileNumber || mobileNo || null,
+                role: role || USER_ROLES.USER,
+                timezone: timezone || TIMEZONES.DEFAULT,
+                password: password || null,
+                status: status || USER_STATUS.ACTIVE,
+                isAuthenticated: typeof isAuthenticated === 'boolean' ? isAuthenticated : false,
             });
 
             return res.status(HttpStatus.CREATED).json({
@@ -44,8 +47,7 @@ const UserController = {
     async getUsers(req, res, next) {
         try {
             const users = await User.findAll({
-                where: { isDeleted: false },
-                attributes: { exclude: ['password', 'otp'] },
+                attributes: { exclude: ['password'] },
                 order: [['createdAt', 'DESC']],
                 limit: 50,
             });
@@ -64,10 +66,10 @@ const UserController = {
         try {
             const { id } = req.params;
             const user = await User.findByPk(id, {
-                attributes: { exclude: ['password', 'otp'] },
+                attributes: { exclude: ['password'] },
             });
 
-            if (!user || user.isDeleted) {
+            if (!user) {
                 return res.status(HttpStatus.NOT_FOUND).json({
                     success: false,
                     message: Toasty.USER.NOT_FOUND,

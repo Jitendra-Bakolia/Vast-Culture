@@ -46,6 +46,19 @@ const connectMySQL = async () => {
     try {
         await sequelize.authenticate();
         console.log(`\x1b[32m✔ [mysql-server] MySQL database "${dbName}" connected and running on host "${host}" on port ${port} (Timezone: ${appTimezone} ${dbTimezone})\x1b[0m`);
+
+        // Automatically ensure all defined models are synced to MySQL
+        try {
+            require('../dao');
+            await sequelize.sync();
+            console.log(`\x1b[32m✔ [mysql-server] Database tables verified & auto-synchronized successfully.\x1b[0m`);
+
+            // Seed default user if not present
+            const { seedDefaultUser } = require('../seeds');
+            await seedDefaultUser();
+        } catch (syncErr) {
+            console.warn(`\x1b[33m⚠ [mysql-server] Table sync note: ${syncErr.message}\x1b[0m`);
+        }
     } catch (error) {
         console.error(`\x1b[31m✖ [mysql-server] Unable to connect to MySQL on host "${host}" on port ${port}: ${error.message}\x1b[0m`);
     }

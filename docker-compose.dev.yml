@@ -67,7 +67,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=5000
-      - TIMEZONE=${TIMEZONE:-UTC}
+      - TIMEZONE=${TIMEZONE:-Asia/Kolkata}
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
       - DB_NAME=${DB_NAME:-vastculture}
@@ -100,7 +100,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=7000
-      - TIMEZONE=${TIMEZONE:-UTC}
+      - TIMEZONE=${TIMEZONE:-Asia/Kolkata}
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
       - DB_NAME=${DB_NAME:-vastculture}
@@ -132,7 +132,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=9000
-      - TIMEZONE=${TIMEZONE:-UTC}
+      - TIMEZONE=${TIMEZONE:-Asia/Kolkata}
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
       - DB_NAME=${DB_NAME:-vastculture}
@@ -164,7 +164,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=8000
-      - TIMEZONE=${TIMEZONE:-UTC}
+      - TIMEZONE=${TIMEZONE:-Asia/Kolkata}
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
       - DB_NAME=${DB_NAME:-vastculture}
