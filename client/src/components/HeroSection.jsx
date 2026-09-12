@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { HERO_SLIDES, HERO_THUMBNAILS } from '../data/mockData';
+import React, { useState, useEffect } from 'react';
+import { HERO_SLIDES } from '../data/mockData';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
 export const HeroSection = ({
@@ -7,6 +7,15 @@ export const HeroSection = ({
   onExploreClick,
 }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  // Auto-change hero slide and image every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   const currentSlide = HERO_SLIDES[activeSlideIndex] || HERO_SLIDES[0];
 
   return (
@@ -15,30 +24,41 @@ export const HeroSection = ({
       aria-label="Hero Showcase"
       className="relative w-full min-h-[580px] sm:min-h-[640px] md:h-[680px] lg:h-[720px] xl:h-[760px] bg-[#0E0D0C] overflow-hidden select-none flex items-center"
     >
-      {/* Background Lifestyle Image with Cinematic Lighting & Smooth Transition */}
-      <div className="absolute inset-0 transition-opacity duration-700 ease-in-out">
-        <img
-          id="hero-bg-image"
-          src={currentSlide.image}
-          alt="Luxury gold and pearl jewellery editorial"
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover object-center scale-100 transition-transform duration-1000 ease-out"
-        />
-        {/* Subtle Dark Gradient Overlay for optimal legibility & moody luxury contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/90 via-black/65 to-black/35" />
-        <div className="absolute inset-0 bg-radial-[circle_at_top_right] from-transparent via-black/20 to-black/60" />
-      </div>
+      {/* Background Lifestyle Slides with 5-Second Crossfade & Ken Burns Zoom Effect */}
+      {HERO_SLIDES.map((slide, index) => {
+        const isActive = activeSlideIndex === index;
+        return (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1200 ease-in-out ${
+              isActive ? 'opacity-100 z-1' : 'opacity-0 z-0 pointer-events-none'
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.title || 'Luxury jewelry editorial'}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              className={`w-full h-full object-cover object-center transition-transform duration-[5000ms] ease-out ${
+                isActive ? 'scale-105' : 'scale-100'
+              }`}
+            />
+            {/* Subtle Dark Gradient Overlays for optimal luxury contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/90 via-black/65 to-black/35" />
+            <div className="absolute inset-0 bg-radial-[circle_at_top_right] from-transparent via-black/20 to-black/60" />
+          </div>
+        );
+      })}
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-0 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-        {/* Left / Main Column: Typography & CTAs */}
+      <div className="relative z-20 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-0 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        {/* Left / Main Column: Dynamic Typography & CTAs */}
         <div className="max-w-2xl text-left">
           {/* Small Label Badge */}
           <div
             id="hero-badge"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1F1C18]/85 border border-[#D8B26E]/50 backdrop-blur-md mb-4 sm:mb-6 badge-glowing"
+            key={`badge-${activeSlideIndex}`}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1F1C18]/85 border border-[#D8B26E]/50 backdrop-blur-md mb-4 sm:mb-6 badge-glowing transition-all duration-700"
           >
             <Sparkles size={12} className="text-[#D8B26E]" />
             <span className="text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-sans font-medium text-[#EBD5A0]">
@@ -46,21 +66,23 @@ export const HeroSection = ({
             </span>
           </div>
 
-          {/* Large Responsive Headline */}
+          {/* Large Responsive Headline with dynamic slide change */}
           <h1
             id="hero-headline"
-            className="font-serif-luxury text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-5"
+            key={`headline-${activeSlideIndex}`}
+            className="font-serif-luxury text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal leading-[1.12] sm:leading-[1.08] tracking-tight mb-4 sm:mb-5 transition-opacity duration-700"
           >
-            Crafted with Purpose
+            {currentSlide.title || 'Crafted with Purpose'}
             <span className="block italic text-[#E5C378] font-light mt-1 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-              Shine in Every Moment
+              {currentSlide.subtitle || 'Shine in Every Moment'}
             </span>
           </h1>
 
           {/* Responsive Description */}
           <p
             id="hero-description"
-            className="text-[#E0D8CE] text-xs sm:text-sm md:text-base lg:text-lg font-light leading-relaxed max-w-lg mb-6 sm:mb-8 font-sans"
+            key={`desc-${activeSlideIndex}`}
+            className="text-[#E0D8CE] text-xs sm:text-sm md:text-base lg:text-lg font-light leading-relaxed max-w-lg mb-6 sm:mb-8 font-sans transition-opacity duration-700"
           >
             {currentSlide.description}
           </p>
@@ -85,46 +107,41 @@ export const HeroSection = ({
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Curated Set Thumbnails Selector */}
-        <div
-          id="hero-curated-thumbnails"
-          className="w-full md:w-auto flex md:flex-col gap-3 sm:gap-4 pt-4 md:pt-0 md:pl-8 border-t border-white/10 md:border-t-0 min-w-0 max-w-full overflow-hidden"
-        >
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[#C4B7A6] font-sans text-left md:text-right hidden sm:block mb-0.5">
-            Curated Sets
-          </div>
-          <div className="flex md:flex-col gap-2.5 sm:gap-3 overflow-x-auto pb-1 md:pb-0 max-w-full touch-pan-x overscroll-x-contain">
-            {HERO_THUMBNAILS.map((thumb, index) => {
-              const isActive = activeSlideIndex === index;
-              return (
-                <button
-                  key={thumb.id}
-                  id={`hero-thumb-${index + 1}`}
-                  onClick={() => setActiveSlideIndex(index)}
-                  aria-label={`View set ${index + 1}: ${thumb.label}`}
-                  className={`relative shrink-0 w-16 h-20 sm:w-20 sm:h-24 lg:w-22 lg:h-28 rounded-xs overflow-hidden transition-all duration-300 group cursor-pointer ${isActive
-                    ? 'ring-2 ring-[#D8B26E] ring-offset-2 ring-offset-black scale-105 opacity-100 shadow-xl badge-glowing'
-                    : 'opacity-65 hover:opacity-100 hover:scale-105 ring-1 ring-white/20'
-                    }`}
-                >
-                  <img
-                    src={thumb.image}
-                    alt={thumb.label}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <span className="absolute bottom-1 left-1 right-1 text-[8px] sm:text-[9px] font-sans tracking-wider text-white text-center truncate px-0.5">
-                    0{index + 1}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+      {/* Passive 5-Second Editorial Slide Progress Indicators (No Click to Change) */}
+      <div
+        id="hero-slide-progress-indicators"
+        aria-label="Editorial slide progression"
+        className="absolute bottom-6 left-6 sm:left-auto sm:right-8 z-30 flex items-center gap-2.5 pointer-events-none"
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[#D8B26E]/80 font-sans hidden sm:inline-block mr-1">
+          0{activeSlideIndex + 1} / 0{HERO_SLIDES.length}
+        </span>
+        {HERO_SLIDES.map((slide, idx) => {
+          const isActive = activeSlideIndex === idx;
+          return (
+            <div
+              key={slide.id}
+              className="relative h-1 w-8 sm:w-12 bg-white/20 rounded-full overflow-hidden"
+            >
+              {isActive ? (
+                <div
+                  key={`progress-${activeSlideIndex}`}
+                  className="h-full bg-[#D8B26E] rounded-full hero-slide-progress-active"
+                />
+              ) : (
+                <div
+                  className={`h-full ${
+                    idx < activeSlideIndex ? 'w-full bg-[#D8B26E]/40' : 'w-0'
+                  }`}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 };
+

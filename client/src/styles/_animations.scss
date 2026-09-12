@@ -634,6 +634,20 @@
   will-change: opacity, transform;
 }
 
+// 5-Second Hero Slide Progress Line
+@keyframes slide-progress-5s {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.hero-slide-progress-active {
+  animation: slide-progress-5s 5s linear infinite;
+}
+
 // Accessibility: Respect User's Reduced Motion Preferences
 @media (prefers-reduced-motion: reduce) {
 
