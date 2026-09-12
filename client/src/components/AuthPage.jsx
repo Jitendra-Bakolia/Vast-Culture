@@ -439,11 +439,10 @@ export const AuthPage = ({
                     onClick={() => {
                       handleSwitchMode('login');
                     }}
-                    className={`py-2.5 text-center transition-all rounded-xs cursor-pointer ${
-                      mode === 'login'
+                    className={`py-2.5 text-center transition-all rounded-xs cursor-pointer ${mode === 'login'
                         ? 'bg-[#D8B26E] text-[#141210] font-bold shadow-xs'
                         : 'text-[#6B6152] hover:text-[#141210]'
-                    }`}
+                      }`}
                   >
                     Sign In
                   </button>
@@ -453,11 +452,10 @@ export const AuthPage = ({
                     onClick={() => {
                       handleSwitchMode('register');
                     }}
-                    className={`py-2.5 text-center transition-all rounded-xs cursor-pointer ${
-                      mode === 'register'
+                    className={`py-2.5 text-center transition-all rounded-xs cursor-pointer ${mode === 'register'
                         ? 'bg-[#D8B26E] text-[#141210] font-bold shadow-xs'
                         : 'text-[#6B6152] hover:text-[#141210]'
-                    }`}
+                      }`}
                   >
                     Create Account
                   </button>

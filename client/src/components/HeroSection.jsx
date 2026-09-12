@@ -104,8 +104,8 @@ export const HeroSection = ({
                   onClick={() => setActiveSlideIndex(index)}
                   aria-label={`View set ${index + 1}: ${thumb.label}`}
                   className={`relative shrink-0 w-16 h-20 sm:w-20 sm:h-24 lg:w-22 lg:h-28 rounded-xs overflow-hidden transition-all duration-300 group cursor-pointer ${isActive
-                      ? 'ring-2 ring-[#D8B26E] ring-offset-2 ring-offset-black scale-105 opacity-100 shadow-xl badge-glowing'
-                      : 'opacity-65 hover:opacity-100 hover:scale-105 ring-1 ring-white/20'
+                    ? 'ring-2 ring-[#D8B26E] ring-offset-2 ring-offset-black scale-105 opacity-100 shadow-xl badge-glowing'
+                    : 'opacity-65 hover:opacity-100 hover:scale-105 ring-1 ring-white/20'
                     }`}
                 >
                   <img

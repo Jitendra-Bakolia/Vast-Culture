@@ -513,6 +513,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -522,6 +523,7 @@
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
@@ -531,6 +533,7 @@
   from {
     transform: translateX(-100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -540,6 +543,7 @@
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-100%);
   }
@@ -569,6 +573,7 @@
   from {
     transform: translateX(100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -578,6 +583,7 @@
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(100%);
   }
@@ -599,6 +605,7 @@
     opacity: 0;
     transform: scale(0.96);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -610,6 +617,7 @@
     opacity: 1;
     transform: scale(1);
   }
+
   to {
     opacity: 0;
     transform: scale(0.96);
